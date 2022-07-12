@@ -19,7 +19,7 @@ class error_window(QMainWindow):
 class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
-        uic.loadUi(r'C:\Users\Sandeep\OneDrive\Desktop\UTS Summer Intern\ML_GUI-master\ui_files\Mainwindow.ui', self)
+        uic.loadUi(r'ui_files\Mainwindow.ui', self)
  
         # find the widgets in the xml file
  
