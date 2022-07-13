@@ -3,12 +3,17 @@ import sys,pickle
 
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 from sklearn.preprocessing import LabelEncoder
-
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
+from PyQt5 import QtWidgets
 import linear_reg,svm_model,table_display,data_visualise,SVR,logistic_reg,RandomForest
 import KNN,mlp,pre_trained,add_steps,gaussian
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
+from PyQt5.uic import loadUi
+
+
 
 
 class error_window(QMainWindow):
@@ -16,6 +21,25 @@ class error_window(QMainWindow):
         super(error_window, self).__init__()
         #uic.loadUi("../ui_files/error.ui", self)
         #self.show()
+
+
+
+class home_screen(QDialog):
+    def __init__(self):
+        super(home_screen,self).__init__()
+        loadUi(r"ui_files/Front Page.ui",self)
+        self.Start = self.findChild(QPushButton, "Start")
+        self.Start.clicked.connect(self.StartButton)
+        
+        #  Help button connection
+
+
+
+    def StartButton(self):
+        pred = UI()
+        widget.addWidget(pred)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
 
 
 
@@ -283,8 +307,22 @@ class UI(QMainWindow):
         
 
 
- 
+# app = QApplication(sys.argv)
+# welcome = home_screen()
+# widget = QtWidgets.QStackedWidget()
+# widget.addWidget(welcome)
+# app.exec_()
+
+
+
 app = QApplication(sys.argv)
-window = UI()
-error_w=error_window()
-app.exec_()
+welcome = home_screen()
+widget = QtWidgets.QStackedWidget()
+widget.addWidget(welcome) 
+widget.setFixedHeight(920)
+widget.setFixedWidth(1408)
+widget.show()
+try:
+    sys.exit(app.exec())
+except:
+    print("exiting..")
