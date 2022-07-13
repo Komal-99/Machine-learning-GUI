@@ -6,6 +6,9 @@ from sklearn.preprocessing import LabelEncoder
 
 import linear_reg,svm_model,table_display,data_visualise,SVR,logistic_reg,RandomForest
 import KNN,mlp,pre_trained,add_steps,gaussian
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import matplotlib.pyplot as plt
 
 
 class error_window(QMainWindow):
@@ -33,16 +36,20 @@ class UI(QMainWindow):
 
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
+
+
+        self.wid_win = self.findChild(QListWidget,"plotwidget")
         
-        self.fillna_btn = self.findChild(QPushButton,"fill_na")
+        
+        # self.fillna_btn = self.findChild(QPushButton,"fill_na")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
-        self.emptycolumn=self.findChild(QComboBox,"empty_column")
+        # self.emptycolumn=self.findChild(QComboBox,"empty_column")
         self.cat_column=self.findChild(QComboBox,"cat_column")
         self.table = self.findChild(QTableView,"tableView")
         self.dropcolumns=self.findChild(QComboBox,"dropcolumn")
         self.data_shape = self.findChild(QLabel,"shape")
-        self.fillmean_btn = self.findChild(QPushButton,"fillmean")
+        # self.fillmean_btn = self.findChild(QPushButton,"fillmean")
         self.submit_btn = self.findChild(QPushButton,"Submit")
         self.target_col =self.findChild(QLabel,"target_col")
         self.model_select=self.findChild(QComboBox,"model_select")
@@ -55,11 +62,11 @@ class UI(QMainWindow):
         self.scatter_c=self.findChild(QComboBox,"scatter_c")
         self.scatter_btn = self.findChild(QPushButton,"scatterplot")
         
-        self.plot_x=self.findChild(QComboBox,"plot_x")
-        self.plot_y=self.findChild(QComboBox,"plot_y")
-        self.plot_mark=self.findChild(QComboBox,"plot_marker")
-        self.plot_c=self.findChild(QComboBox,"plot_c")
-        self.plot_btn = self.findChild(QPushButton,"lineplot")
+        # self.plot_x=self.findChild(QComboBox,"plot_x")
+        # self.plot_y=self.findChild(QComboBox,"plot_y")
+        # self.plot_mark=self.findChild(QComboBox,"plot_marker")
+        # self.plot_c=self.findChild(QComboBox,"plot_c")
+        # self.plot_btn = self.findChild(QPushButton,"lineplot")
 
         self.hist_column=self.findChild(QComboBox,"hist_column")
         self.hist_column_add=self.findChild(QComboBox,"hist_column_add")
@@ -68,15 +75,17 @@ class UI(QMainWindow):
         self.histogram_btn = self.findChild(QPushButton,"histogram")
 
         self.heatmap_btn = self.findChild(QPushButton,"heatmap")
+        self.plot_canvas= self.findChild(QListWidget,"splot")
 
         self.columns.clicked.connect(self.target)
         self.Browse.clicked.connect(self.getCSV)
         self.Drop_btn.clicked.connect(self.dropc)
         self.scatter_btn.clicked.connect(self.scatter_plot)
-        self.plot_btn.clicked.connect(self.line_plot)
+        # self.plot_btn.clicked.connect(self.line_plot)
         
-        self.fillna_btn.clicked.connect(self.fillna)
-        self.fillmean_btn.clicked.connect(self.fillme)
+        # self.fillna_btn.clicked.connect(self.fillna)
+        # self.fillmean_btn.clicked.connect(self.fillme)
+
         
         self.hist_add_btn.clicked.connect(self.hist_add_column)
         self.hist_remove_btn.clicked.connect(self.hist_remove_column)
@@ -127,11 +136,14 @@ class UI(QMainWindow):
         AllItems = [self.hist_column_add.itemText(i) for i in range(self.hist_column_add.count())]
         for i in AllItems:
             data.plot_histogram(self.df,i)
+            self.graphWidget.setBackground('w')
+            self.graphWidget.plot(self.df,i)
         
         
     def heatmap_gen(self):
 
-        data.plot_heatmap(self.df)
+         self.wid_win.plot(self.df)
+         data.plot_heatmap(self.df)
 
     def set_target(self):
 
@@ -163,8 +175,9 @@ class UI(QMainWindow):
         
         self.dropcolumns.clear()
         self.dropcolumns.addItems(self.column_list)
-        self.emptycolumn.clear()
-        self.emptycolumn.addItems(self.empty_list)
+        # self.emptycolumn.clear()
+        # self.emptycolumn.addItems(self.empty_list)
+
         self.cat_column.clear()
         self.cat_column.addItems(self.cat_col_list)
         self.scatter_x.clear()
@@ -173,8 +186,8 @@ class UI(QMainWindow):
         self.scatter_y.addItems(self.column_list)
         self.plot_x.clear()
         self.plot_x.addItems(self.column_list)
-        self.plot_y.clear()
-        self.plot_y.addItems(self.column_list)
+        # self.plot_y.clear()
+        # self.plot_y.addItems(self.column_list)
         self.hist_column.clear()
         self.hist_column.addItems(data.get_numeric(self.df))
         self.hist_column.addItem("All")
@@ -202,21 +215,21 @@ class UI(QMainWindow):
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
 
-    def fillna(self):
+    # def fillna(self):
 
-        self.df[self.emptycolumn.currentText()]=data.fillna(self.df,self.emptycolumn.currentText())
-        code="data['"+self.emptycolumn.currentText()+"'].fillna('"'Uknown'"',inplace=True)"
-        steps.add_code(code)
-        steps.add_text("Empty values of "+ self.emptycolumn.currentText() + " filled with Uknown")
-        self.filldetails()
+    #     self.df[self.emptycolumn.currentText()]=data.fillna(self.df,self.emptycolumn.currentText())
+    #     code="data['"+self.emptycolumn.currentText()+"'].fillna('"'Uknown'"',inplace=True)"
+    #     steps.add_code(code)
+    #     steps.add_text("Empty values of "+ self.emptycolumn.currentText() + " filled with Uknown")
+    #     self.filldetails()
 
-    def fillme(self):
+    # def fillme(self):
 
-        self.df[self.emptycolumn.currentText()]=data.fillmean(self.df,self.emptycolumn.currentText())
-        code="data['"+column+"'].fillna(data['"+self.emptycolumn.currentText()+"'].mean(),inplace=True)"
-        steps.add_code(code)
-        steps.add_text("Empty values of "+ self.emptycolumn.currentText() + " filled with mean value")
-        self.filldetails()
+    #     self.df[self.emptycolumn.currentText()]=data.fillmean(self.df,self.emptycolumn.currentText())
+    #     code="data['"+column+"'].fillna(data['"+self.emptycolumn.currentText()+"'].mean(),inplace=True)"
+    #     steps.add_code(code)
+    #     steps.add_text("Empty values of "+ self.emptycolumn.currentText() + " filled with mean value")
+    #     self.filldetails()
 
     def getCSV(self):
         self.filePath, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Downloads/ML Github/datasets',"csv(*.csv)")
@@ -249,9 +262,7 @@ class UI(QMainWindow):
 
         
 
-    def line_plot(self):
 
-        data.line_plot(df=self.df,x=self.plot_x.currentText(),y=self.plot_y.currentText(),c=self.plot_c.currentText(),marker=self.plot_mark.currentText())
      
     def train_func(self):
 
