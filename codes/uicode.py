@@ -28,7 +28,7 @@ class home_screen(QDialog):
     def __init__(self):
         super(home_screen,self).__init__()
         loadUi(r"ui_files/Front Page.ui",self)
-        self.Start = self.findChild(QPushButton, "Start")
+        self.Start = self.findChild(QPushButton, "pushButton")
         self.Start.clicked.connect(self.StartButton)
         
         #  Help button connection
