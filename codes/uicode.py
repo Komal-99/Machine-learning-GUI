@@ -62,7 +62,7 @@ class UI(QMainWindow):
         self.Drop_btn = self.findChild(QPushButton,"Drop")
 
 
-        self.wid_win = self.findChild(QListWidget,"plotwidget")
+        self.plot_win= self.findChild(QListWidget,"plotwidget")
         
         
         # self.fillna_btn = self.findChild(QPushButton,"fill_na")
@@ -99,7 +99,7 @@ class UI(QMainWindow):
         self.histogram_btn = self.findChild(QPushButton,"histogram")
 
         self.heatmap_btn = self.findChild(QPushButton,"heatmap")
-        self.plot_canvas= self.findChild(QListWidget,"splot")
+        # self.plot_canvas= self.findChild(QListWidget,"splot")
 
         self.columns.clicked.connect(self.target)
         self.Browse.clicked.connect(self.getCSV)
@@ -166,8 +166,9 @@ class UI(QMainWindow):
         
     def heatmap_gen(self):
 
-         self.wid_win.plot(self.df)
-         data.plot_heatmap(self.df)
+
+         #self.wid_win.plot(self.df)
+        data.plot_heatmap(self.df)
 
     def set_target(self):
 
@@ -208,10 +209,13 @@ class UI(QMainWindow):
         self.scatter_x.addItems(self.column_list)
         self.scatter_y.clear()
         self.scatter_y.addItems(self.column_list)
-        self.plot_x.clear()
-        self.plot_x.addItems(self.column_list)
+        # self.plot_x.clear()
+        # self.plot_x.addItems(self.column_list)
         # self.plot_y.clear()
         # self.plot_y.addItems(self.column_list)
+        color= ['red', 'green', 'blue', 'yellow']
+        self.scatter_c.clear()
+        self.scatter_c.addItems(color)
         self.hist_column.clear()
         self.hist_column.addItems(data.get_numeric(self.df))
         self.hist_column.addItem("All")
