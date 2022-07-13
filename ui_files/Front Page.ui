@@ -17,7 +17,7 @@
    <string notr="true">background-color:rgb(1, 78, 144)
 </string>
   </property>
-  <widget class="QPushButton" name="Start">
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -47,23 +47,27 @@ color: rgb(1, 78, 144);</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>260</y>
-     <width>1191</width>
+     <x>240</x>
+     <y>280</y>
+     <width>1401</width>
      <height>81</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Calibri</family>
-     <pointsize>48</pointsize>
-     <weight>75</weight>
+     <family>Times New Roman</family>
+     <pointsize>36</pointsize>
+     <weight>50</weight>
      <italic>false</italic>
-     <bold>true</bold>
+     <bold>false</bold>
     </font>
    </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Predictive Maintenance&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 255, 255)</string>
+    <string notr="true">color:rgb(255, 255, 255);
+font: 36pt &quot;Times New Roman&quot;;</string>
    </property>
    <property name="text">
     <string>PREDICTIVE MAINTENANCE</string>
@@ -72,7 +76,7 @@ color: rgb(1, 78, 144);</string>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>620</x>
+     <x>600</x>
      <y>390</y>
      <width>311</width>
      <height>71</height>
@@ -80,14 +84,16 @@ color: rgb(1, 78, 144);</string>
    </property>
    <property name="font">
     <font>
-     <family>Calibri</family>
-     <pointsize>48</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <family>Times New Roman</family>
+     <pointsize>36</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255)</string>
+    <string notr="true">color:rgb(255, 255, 255);
+font: 36pt &quot;Times New Roman&quot;;</string>
    </property>
    <property name="text">
     <string>MODEL</string>
@@ -104,6 +110,9 @@ color: rgb(1, 78, 144);</string>
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../../../Downloads/WhatsApp Image 2022-07-13 at 11.28.25 AM.jpeg</pixmap>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
