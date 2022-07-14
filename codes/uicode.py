@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
 import linear_reg,svm_model,table_display,data_visualise,SVR,logistic_reg,RandomForest
-import KNN,mlp,pre_trained,add_steps,gaussian
+import KNN,mlp,pre_trained,add_steps,gaussian, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
@@ -29,7 +29,7 @@ class home_screen(QDialog):
     def __init__(self):
         super(home_screen,self).__init__()
         loadUi("ui_files/Front Page.ui",self)
-        self.Start = self.findChild(QPushButton, "Start")
+        self.Start = self.findChild(QPushButton, "pushButton")
         self.Start.clicked.connect(self.StartButton)
         
         #  Help button connection
@@ -305,7 +305,7 @@ class help_screen(QDialog):
     def train_func(self):
 
         myDict={ "Linear Regression":linear_reg , "SVM  ":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
-        "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
+        "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian, "Predictive Maintenace":pred_mtnc}
         
         if(self.target_value!=""):
             
