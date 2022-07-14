@@ -8,6 +8,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.utils.validation import check_array
 import data_visualise
 import table_display
 import pandas as pd
@@ -16,20 +17,26 @@ import common
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
-        uic.loadUi(r'C:\Users\Sandeep\OneDrive\Desktop\UTS Summer Intern\ML_GUI-master\ui_files\LinearRegression.ui', self)
+        uic.loadUi(r'ui_files\LinearRegression.ui', self)
         self.user_act=user_actions
         global data 
         data=data_visualise.data_()
         steps=common.common_steps(df,target)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        self.target = self.findChild(QLabel,"target")
+        # self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")
-        self.test_size= self.findChild(QLabel,"test_size") 
+        # self.test_size= self.findChild(QLabel,"test_size") 
         self.setvalue()
 
-        self.train_size= self.findChild(QLabel,"train_size")
+        # self.train_size= self.findChild(QLabel,"train_size")
         
-        
+
+        self.list=self.findChild(QLineEdit,"list")
+        self.predict_val =self.findChild(QLabel,"predict_val")
+        self.predict_btn=self.findChild(QPushButton,"train_2")
+
+
+
         self.test_data=self.findChild(QLineEdit,"test_data")
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.fit_inter =self.findChild(QComboBox,"fit_inter")
@@ -37,7 +44,7 @@ class UI(QMainWindow):
         self.train_btn=self.findChild(QPushButton,"train")
         self.intercept=self.findChild(QLabel,"intercept")
         self.weights=self.findChild(QTextBrowser,"weights")
-        self.output_btn=self.findChild(QPushButton,"output")
+        # self.output_btn=self.findChild(QPushButton,"output")
         self.bar_plot_btn=self.findChild(QPushButton,"bar_plot")
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
@@ -46,18 +53,26 @@ class UI(QMainWindow):
 
         self.test_size_btn.clicked.connect(self.test_split)
         self.train_btn.clicked.connect(self.training)
-        self.output_btn.clicked.connect(self.output_)
+        # self.output_btn.clicked.connect(self.output_)
         self.bar_plot_btn.clicked.connect(self.barplot)
         self.dwnld.clicked.connect(self.download_model)
+        self.predict_btn.clicked.connect(self.set_valpred)
         self.show()
 
     def setvalue(self):
                
         
-        self.target.setText(self.target_value)
+        # self.target.setText(self.target_value)
         self.columns.clear()
         self.columns.addItems(self.column_list)
     
+    def set_valpred(self):
+        self.array = np.array(self.list.text()).reshape(1, -1)
+        self.ar=check_array(self.array)
+        self.pred  =(self.reg.predict(self.ar))
+        
+        self.predict_val.setText(self.pred)
+
     def download_model(self):
 
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/Desktop',"pickle(*.pkl)")
@@ -74,8 +89,8 @@ class UI(QMainWindow):
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=0)
         print(self.y_train.shape)
         print(self.y_test.shape)
-        self.train_size.setText(str(self.x_train.shape))
-        self.test_size.setText(str(self.x_test.shape))
+        # self.train_size.setText(str(self.x_train.shape))
+        # self.test_size.setText(str(self.x_test.shape))
 
     def training(self):
 
@@ -91,13 +106,14 @@ class UI(QMainWindow):
         self.mae.setText(str(metrics.mean_absolute_error(self.y_test,pre)))
         self.mse.setText(str(metrics.mean_squared_error(self.y_test,pre)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,pre))))
+        self.accuracy.setText(str(self.reg.score(self.x_test,self.y_test)))
 
-    def output_(self):
+    # def output_(self):
         
-        prediction = self.reg.predict(self.x_test)
-        plt.scatter(self.x_test, self.y_test,  color='gray')
-        plt.plot(self.x_test, prediction, color='red', linewidth=2)
-        plt.show()
+        # prediction = self.reg.predict(self.x_test)
+        # plt.scatter(self.x_test, self.y_test,  color='gray')
+        # plt.plot(self.x_test, prediction, color='red', linewidth=2)
+        # plt.show()
 
     def barplot(self):
 

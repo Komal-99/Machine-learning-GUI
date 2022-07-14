@@ -27,7 +27,7 @@ class UI(QMainWindow):
         steps=common.common_steps(df,target)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
         # self.target = self.findChild(QLabel,"target")
-        # self.columns= self.findChild(QListWidget,"columns")
+        self.columns= self.findChild(QListWidget,"columns")
         # self.test_size= self.findChild(QLabel,"test_size") 
         # self.target = self.findChild(QLabel,"target")
         # self.columns= self.findChild(QListWidget,"columns")
@@ -47,7 +47,9 @@ class UI(QMainWindow):
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mae_2")
         self.rmse=self.findChild(QLabel,"rmse")
+        self.output_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"acuracy_score")
+        self.output_btn.clicked.connect(self.output_)
      
         self.X_combo=self.findChild(QComboBox,"X_combo")
         self.Y_combo=self.findChild(QComboBox,"Y_combo")
@@ -60,10 +62,10 @@ class UI(QMainWindow):
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         self.dwnld.clicked.connect(self.download_model)
-        self.list=self.findChild(QLabel,"list")
+        
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_btn.clicked.connect(self.predict)
-        self.predict_val =self.findChild(QLabel,"predict_val")
+        
         self.setvalue()
         self.show()
 
@@ -74,7 +76,8 @@ class UI(QMainWindow):
         self.X_combo.addItems(self.column_list)
         self.Y_combo.addItems(self.column_list)
 
-
+    def output_(self):
+        self.accuracy.setText(float(self.lr.score(self.x_test,self.y_test)))
     def predict(self):
       
         self.array = np.array(self.list)
