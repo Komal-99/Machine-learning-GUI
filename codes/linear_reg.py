@@ -16,7 +16,7 @@ import common
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
-        uic.loadUi(r'C:\Users\Sandeep\OneDrive\Desktop\UTS Summer Intern\ML_GUI-master\ui_files\LinearRegression.ui', self)
+        uic.loadUi('ui_files\LinearRegression.ui', self)
         self.user_act=user_actions
         global data 
         data=data_visualise.data_()
@@ -52,8 +52,6 @@ class UI(QMainWindow):
         self.show()
 
     def setvalue(self):
-               
-        
         self.target.setText(self.target_value)
         self.columns.clear()
         self.columns.addItems(self.column_list)

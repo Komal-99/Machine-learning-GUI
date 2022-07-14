@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
-# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Help Centre.ui'
-=======
 # Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Help Centre.ui'
->>>>>>> 98440a80d656e0287525ed733eb8dee99f80497b
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -112,7 +108,7 @@ class Ui_Dialog(object):
         self.toolButton_2.setToolTip(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:16pt;\">FAQ\'s</span></p></body></html>"))
         self.toolButton_2.setText(_translate("Dialog", "For more information visit www.uts.com"))
         self.pushButton.setText(_translate("Dialog", "BACK"))
-        self.pushButton_2.setText(_translate("Dialog", "CONTINUE"))
+        self.pushButton_2.setText(_translate("Dialog", "START"))
         self.label_2.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">Getting Started</span></p></body></html>"))
         self.label_3.setToolTip(_translate("Dialog", "<html><head/><body><p><br/></p></body></html>"))
         self.label_3.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">Steps</span></p></body></html>"))

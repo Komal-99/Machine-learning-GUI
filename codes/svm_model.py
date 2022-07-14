@@ -21,7 +21,7 @@ import common
 class UI(QMainWindow):
 	def __init__(self,df,target,user_actions):
 		super(UI, self).__init__()
-		uic.loadUi("../ui_files/SVM.ui", self)
+		uic.loadUi("ui_files/SVM.ui", self)
 		self.user_act=user_actions
 		global data ,steps
 		data=data_visualise.data_()

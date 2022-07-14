@@ -174,7 +174,7 @@ class UI(QMainWindow):
 
 
     def hist_add_column(self):
-
+        
         self.hist_column_add.addItem(self.hist_column.currentText())
         self.hist_column.removeItem(self.hist_column.findText(self.hist_column.currentText()))
 
