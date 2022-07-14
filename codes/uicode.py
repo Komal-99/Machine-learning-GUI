@@ -31,6 +31,15 @@ class home_screen(QDialog):
         loadUi("ui_files/Front Page.ui",self)
         self.Start = self.findChild(QPushButton, "pushButton")
         self.Start.clicked.connect(self.StartButton)
+
+        self.help = self.findChild(QPushButton,"pushButton_3")
+        self.help.clicked.connect(self.helpButton)
+
+
+    def helpButton(self):
+        help = help_screen()
+        widget.addWidget(help)
+        widget.setCurrentIndex(widget.currentIndex()+1)
         
         #  Help button connection
 
@@ -39,8 +48,26 @@ class home_screen(QDialog):
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+class help_screen(QDialog):
+    def __init__(self):
+        super(help_screen,self).__init__()
+        loadUi(r"ui_files/Help Centre.ui",self)
 
+        self.Back = self.findChild(QPushButton, "pushButton")
+        self.Back.clicked.connect(self.backButton)
 
+        self.Continue = self.findChild(QPushButton,"pushButton_2")
+        self.Continue.clicked.connect(self.continueButton)
+
+    def backButton(self):
+        back = home_screen()
+        widget.addWidget(back)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def continueButton(self):
+        cont = UI()
+        widget.addWidget(cont)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 class UI(QMainWindow):
     def __init__(self):
