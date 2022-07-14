@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Front Page.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Front Page.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(1408, 920)
+        Dialog.resize(1353, 916)
         Dialog.setStyleSheet("background-color:rgb(1, 78, 144)\n"
 "")
         self.pushButton = QtWidgets.QPushButton(Dialog)
@@ -31,7 +31,7 @@ class Ui_Dialog(object):
 "color: rgb(1, 78, 144);")
         self.pushButton.setObjectName("pushButton")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(240, 280, 1401, 81))
+        self.label_2.setGeometry(QtCore.QRect(290, 260, 831, 81))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(36)
@@ -41,9 +41,10 @@ class Ui_Dialog(object):
         self.label_2.setFont(font)
         self.label_2.setStyleSheet("color:rgb(255, 255, 255);\n"
 "font: 36pt \"Times New Roman\";")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(600, 390, 311, 71))
+        self.label_3.setGeometry(QtCore.QRect(490, 380, 311, 71))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(36)
@@ -53,15 +54,13 @@ class Ui_Dialog(object):
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color:rgb(255, 255, 255);\n"
 "font: 36pt \"Times New Roman\";")
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(510, 40, 391, 121))
+        self.label.setGeometry(QtCore.QRect(500, 90, 291, 121))
         self.label.setText("")
-<<<<<<< HEAD
-        self.label.setPixmap(QtGui.QPixmap("c:\\Users\\jvish\\OneDrive\\Desktop\\UTS-Project\\ui_files\\../../../Downloads/WhatsApp Image 2022-07-13 at 11.28.25 AM.jpeg"))
-=======
-        self.label.setPixmap(QtGui.QPixmap("d:\\Users\\aaa\\OneDrive - The Northcap university\\Desktop\\UTS\\UTS-Project\\ui_files\\../../../Downloads/WhatsApp Image 2022-07-13 at 11.28.25 AM.jpeg"))
->>>>>>> 6ce6ac39b7ff6b50f7851fb9a9f4eedba2d9d9ee
+        self.label.setPixmap(QtGui.QPixmap("c:\\Users\\jvish\\OneDrive\\Desktop\\UTS-Project\\ui_files\\../photos/Logo.jpeg"))
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
         self.pushButton_3.setGeometry(QtCore.QRect(820, 650, 261, 71))

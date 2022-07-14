@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1408</width>
-    <height>920</height>
+    <width>1353</width>
+    <height>916</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,9 +47,9 @@ color: rgb(1, 78, 144);</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>280</y>
-     <width>1401</width>
+     <x>290</x>
+     <y>260</y>
+     <width>831</width>
      <height>81</height>
     </rect>
    </property>
@@ -72,12 +72,15 @@ font: 36pt &quot;Times New Roman&quot;;</string>
    <property name="text">
     <string>PREDICTIVE MAINTENANCE</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>390</y>
+     <x>490</x>
+     <y>380</y>
      <width>311</width>
      <height>71</height>
     </rect>
@@ -98,13 +101,16 @@ font: 36pt &quot;Times New Roman&quot;;</string>
    <property name="text">
     <string>MODEL</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>40</y>
-     <width>391</width>
+     <x>500</x>
+     <y>90</y>
+     <width>291</width>
      <height>121</height>
     </rect>
    </property>
@@ -112,7 +118,10 @@ font: 36pt &quot;Times New Roman&quot;;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../../Downloads/WhatsApp Image 2022-07-13 at 11.28.25 AM.jpeg</pixmap>
+    <pixmap>../photos/Logo.jpeg</pixmap>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
