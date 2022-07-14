@@ -12,6 +12,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
+from PyQt5.QtCore import QCoreApplication
 
 
 
@@ -27,13 +28,11 @@ class error_window(QMainWindow):
 class home_screen(QDialog):
     def __init__(self):
         super(home_screen,self).__init__()
-        loadUi(r"ui_files/Front Page.ui",self)
-        self.Start = self.findChild(QPushButton, "pushButton")
+        loadUi("ui_files/Front Page.ui",self)
+        self.Start = self.findChild(QPushButton, "Start")
         self.Start.clicked.connect(self.StartButton)
         
         #  Help button connection
-
-
 
     def StartButton(self):
         pred = UI()
@@ -47,6 +46,13 @@ class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi(r'ui_files\Mainwindow.ui', self)
+
+class help_screen(QDialog):
+    def __init__(self):
+        super(help_screen,self).__init__()
+        loadUi(r"ui_files/Front Page.ui",self)
+        self.Start = self.findChild(QPushButton, "Start")
+        self.Start.clicked.connect(self.StartButton)
  
         # find the widgets in the xml file
  
@@ -61,11 +67,15 @@ class UI(QMainWindow):
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
 
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
 
         self.plot_win= self.findChild(QListWidget,"plotwidget")
         
         
-        # self.fillna_btn = self.findChild(QPushButton,"fill_na")
+        # self.fillna_btn = self.findChild(QPushBut
+        # ton,"fill_na")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
         # self.emptycolumn=self.findChild(QComboBox,"empty_column")
@@ -294,7 +304,7 @@ class UI(QMainWindow):
      
     def train_func(self):
 
-        myDict={ "Linear Regression":linear_reg , "SVM":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+        myDict={ "Linear Regression":linear_reg , "SVM  ":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
         "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
         
         if(self.target_value!=""):
