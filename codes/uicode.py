@@ -69,7 +69,8 @@ class UI(QMainWindow):
         self.plot_win= self.findChild(QListWidget,"plotwidget")
         
         
-        # self.fillna_btn = self.findChild(QPushButton,"fill_na")
+        # self.fillna_btn = self.findChild(QPushBut
+        # ton,"fill_na")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
         # self.emptycolumn=self.findChild(QComboBox,"empty_column")
