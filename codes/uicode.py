@@ -46,6 +46,13 @@ class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi(r'ui_files\Mainwindow.ui', self)
+
+class help_screen(QDialog):
+    def __init__(self):
+        super(help_screen,self).__init__()
+        loadUi(r"ui_files/Front Page.ui",self)
+        self.Start = self.findChild(QPushButton, "Start")
+        self.Start.clicked.connect(self.StartButton)
  
         # find the widgets in the xml file
  
@@ -67,7 +74,8 @@ class UI(QMainWindow):
         self.plot_win= self.findChild(QListWidget,"plotwidget")
         
         
-        # self.fillna_btn = self.findChild(QPushButton,"fill_na")
+        # self.fillna_btn = self.findChild(QPushBut
+        # ton,"fill_na")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
         # self.emptycolumn=self.findChild(QComboBox,"empty_column")
