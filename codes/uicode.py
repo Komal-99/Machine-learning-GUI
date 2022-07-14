@@ -47,13 +47,6 @@ class UI(QMainWindow):
         super(UI, self).__init__()
         uic.loadUi(r'ui_files\Mainwindow.ui', self)
 
-class help_screen(QDialog):
-    def __init__(self):
-        super(help_screen,self).__init__()
-        loadUi(r"ui_files/Front Page.ui",self)
-        self.Start = self.findChild(QPushButton, "Start")
-        self.Start.clicked.connect(self.StartButton)
- 
         # find the widgets in the xml file
  
         #self.textedit = self.findChild(QTextEdit, "textEdit")
