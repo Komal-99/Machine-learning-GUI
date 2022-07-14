@@ -27,13 +27,11 @@ class error_window(QMainWindow):
 class home_screen(QDialog):
     def __init__(self):
         super(home_screen,self).__init__()
-        loadUi(r"ui_files/Front Page.ui",self)
+        loadUi("ui_files/Front Page.ui",self)
         self.Start = self.findChild(QPushButton, "Start")
         self.Start.clicked.connect(self.StartButton)
         
         #  Help button connection
-
-
 
     def StartButton(self):
         pred = UI()
