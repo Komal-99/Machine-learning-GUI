@@ -62,7 +62,7 @@ color: rgb(255, 255, 255)</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>630</y>
+      <y>670</y>
       <width>1411</width>
       <height>51</height>
      </rect>
@@ -92,7 +92,7 @@ color: rgb(255, 255, 255)</string>
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>720</y>
+      <y>760</y>
       <width>261</width>
       <height>71</height>
      </rect>
@@ -119,7 +119,7 @@ color: rgb(1, 78, 144);</string>
     <property name="geometry">
      <rect>
       <x>810</x>
-      <y>720</y>
+      <y>760</y>
       <width>261</width>
       <height>71</height>
      </rect>
@@ -145,8 +145,8 @@ color: rgb(1, 78, 144);</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>190</y>
+      <x>220</x>
+      <y>170</y>
       <width>431</width>
       <height>61</height>
      </rect>
@@ -171,7 +171,7 @@ color: rgb(255, 255, 255)</string>
     <property name="geometry">
      <rect>
       <x>820</x>
-      <y>190</y>
+      <y>170</y>
       <width>411</width>
       <height>61</height>
      </rect>
@@ -193,6 +193,72 @@ color: rgb(255, 255, 255)</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Steps&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>350</y>
+      <width>431</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>260</y>
+      <width>521</width>
+      <height>351</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(1, 78, 144);
+font: 9pt &quot;MS Shell Dlg 2&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Welcome to our Predictive Maintenance Model!
+
+As Industry 4.0 continues to generate media attention, many companies are struggling with the realities of AI implementation. Indeed, the benefits of predictive maintenance such as helping determine the condition of equipment and predicting when maintenance should be performed, are extremely strategic. Needless to say that the implementation of ML-based solutions can lead to major cost savings, higher predictability, and the increased availability of the systems.
+
+Our Model Enables you to perform these operations on your datasets easily and efficiently. You can upload your dataset then pre-process it if needed. Further can train a model using any machine learning algorithm based on your dataset and predict its failure or success.</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>270</y>
+      <width>481</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(1, 78, 144);
+font: 9pt &quot;MS Shell Dlg 2&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Step 1 -  Start.
+Step 2 - In data processing tab, browse your dataset.
+Step 3 – You can see set of rows of your dataset in right top corner and columns' description on left top corner.
+Step 4 – In column description, select the target column. Press the set target button.
+Step 5- Pre-process the data using functionalities like drop column, fill null values and then further scale your dataset as needed.
+Step 6 – You can visualize your data values with the help of different plots available in visualization tab like Histogram, Scatter Plot, Heatmap, etc. to analyse your dataset.
+Step 7 – Select the ML algorithm and train your model OR you can upload your already trained model(.sav format file) to use it for further process.
+</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
