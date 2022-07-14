@@ -12,6 +12,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
+from PyQt5.QtCore import QCoreApplication
 
 
 
@@ -61,6 +62,9 @@ class UI(QMainWindow):
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
 
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
 
         self.plot_win= self.findChild(QListWidget,"plotwidget")
         
@@ -294,7 +298,7 @@ class UI(QMainWindow):
      
     def train_func(self):
 
-        myDict={ "Linear Regression":linear_reg , "SVM":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+        myDict={ "Linear Regression":linear_reg , "SVM  ":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
         "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
         
         if(self.target_value!=""):

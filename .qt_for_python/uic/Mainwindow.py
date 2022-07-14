@@ -385,6 +385,19 @@ class Ui_MainWindow(object):
         self.plotwidget = QtWidgets.QWidget(self.centralwidget)
         self.plotwidget.setGeometry(QtCore.QRect(750, 460, 351, 371))
         self.plotwidget.setObjectName("plotwidget")
+        self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ExitButton.setGeometry(QtCore.QRect(1090, 780, 261, 71))
+        font = QtGui.QFont()
+        font.setFamily("Segoe Fluent Icons")
+        font.setPointSize(16)
+        font.setBold(False)
+        font.setWeight(50)
+        self.ExitButton.setFont(font)
+        self.ExitButton.setStyleSheet("background-color: rgb(200, 217, 231);\n"
+"border-radius: 35px;\n"
+"border-width: 2opx;\n"
+"color: rgb(1, 78, 144);")
+        self.ExitButton.setObjectName("ExitButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -464,5 +477,6 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Visualizations</span></p></body></html>"))
         self.label_30.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Data Preparation</span></p></body></html>"))
         self.label_31.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Train/Test</span></p></body></html>"))
+        self.ExitButton.setText(_translate("MainWindow", "Exit"))
         self.actionData_Visualisation.setText(_translate("MainWindow", "Data Visualisation"))
         self.actionTrain_Data.setText(_translate("MainWindow", "Train Data"))
