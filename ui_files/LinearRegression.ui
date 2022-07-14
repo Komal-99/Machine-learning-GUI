@@ -242,7 +242,7 @@ background-color: rgb(255, 255, 255);</string>
      <rect>
       <x>160</x>
       <y>280</y>
-      <width>121</width>
+      <width>71</width>
       <height>23</height>
      </rect>
     </property>
@@ -631,6 +631,25 @@ color: rgb(255, 255, 255);
     </property>
     <property name="text">
      <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="test_size_btn">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>280</y>
+      <width>71</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Set</string>
     </property>
    </widget>
   </widget>
