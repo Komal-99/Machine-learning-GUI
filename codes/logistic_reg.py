@@ -136,10 +136,10 @@ class UI(QMainWindow):
     
     def roc_plot(self):
         self.pre=self.lr.predict(self.x_test)
-        auc=roc_auc_score(self.y_test,self.pre)
-        fpr,tpr,threshold =roc_curve(self.y_test,self.pre)
-        plt.plot(fpr,tpr,color='red',label='ROC')
-        plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %auc)
+        self.auc=roc_auc_score(self.y_test,self.pre)
+        self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
+        plt.plot(self.fpr,self.tpr,color='red',label='ROC')
+        plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
         plt.xlabel("FPR")
         plt.ylabel("TPR")
         plt.title('Receiver Operating Characteristics Curve')
