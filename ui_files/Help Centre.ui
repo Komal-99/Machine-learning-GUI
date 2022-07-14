@@ -139,7 +139,7 @@ border-width: 2opx;
 color: rgb(1, 78, 144);</string>
     </property>
     <property name="text">
-     <string>CONTINUE</string>
+     <string>START</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
