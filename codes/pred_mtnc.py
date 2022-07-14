@@ -314,9 +314,3 @@ class Modelling:
     def model_3d_plot(self):
         fig= px.scatter_3d(data, x= 'Air temperature [K]', y='Rotational speed [rpm]', z='Torque [Nm]', color='Failure Type')
         return(fig.show())
-
-
-models_to_test= [rfc, lr, knn, svc, nb, dt]
-classification= Modelling(x_train, y_train, x_test, y_test, models_to_test)
-classification.fit()
-classification.results()

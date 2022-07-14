@@ -15,7 +15,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
 
 
-#testing the dfjaslkdfjlasdkfhlaskdjflksadjfioasdgsmalkdfj sadljfiosdj klasfds 
+# testing the dfjaslkdfjlasdkfhlaskdjflksadjfioasdgsmalkdfj sadljfiosdj klasfds 
 
 class error_window(QMainWindow):
     def __init__(self):
