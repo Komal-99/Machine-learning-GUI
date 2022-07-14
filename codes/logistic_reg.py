@@ -20,7 +20,7 @@ import common
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
-        uic.loadUi("../ui_files/LogisticRegression.ui", self)
+        uic.loadUi("ui_files/LogisticRegression.ui", self)
         self.user_act=user_actions
         global data ,steps
         data=data_visualise.data_()
@@ -35,8 +35,8 @@ class UI(QMainWindow):
         
         # self.c_=self.findChild(QLineEdit,"c_")
         # self.penalty=self.findChild(QComboBox,"penalty")
-        self.solver=self.findChild(QComboBox,"solver")        
         # self.dual=self.findChild(QComboBox,"dual")   
+        self.solver=self.findChild(QComboBox,"solver")        
         self.random=self.findChild(QLineEdit,"randomstate")     
         self.max_iter=self.findChild(QLineEdit,"max_iter")
         self.fit_inter=self.findChild(QComboBox,"fit_inter")  
@@ -47,9 +47,9 @@ class UI(QMainWindow):
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mae_2")
         self.rmse=self.findChild(QLabel,"rmse")
-        self.output_btn=self.findChild(QPushButton,"output")
+        # self.output_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"acuracy_score")
-        self.output_btn.clicked.connect(self.output_)
+        # self.output_btn.clicked.connect(self.output_)
      
         self.X_combo=self.findChild(QComboBox,"X_combo")
         self.Y_combo=self.findChild(QComboBox,"Y_combo")
@@ -61,10 +61,12 @@ class UI(QMainWindow):
         #self.roc_btn.clicked.connect(self.roc_plot)
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
-        self.dwnld.clicked.connect(self.download_model)
+        self.dwnld_2.clicked.connect(self.download_model)
         
+        self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
-        self.predict_btn.clicked.connect(self.predict)
+        self.predict_val =self.findChild(QLabel,"predict_val")
+        self.predict_btn.clicked.connect(self.set_predict)
         
         self.setvalue()
         self.show()
@@ -76,12 +78,17 @@ class UI(QMainWindow):
         self.X_combo.addItems(self.column_list)
         self.Y_combo.addItems(self.column_list)
 
-    def output_(self):
-        self.accuracy.setText(float(self.lr.score(self.x_test,self.y_test)))
-    def predict(self):
-      
-        self.array = np.array(self.list)
-        self.predict_val.setText(float(self.lr.predict(self.array)))
+   
+    def set_predict(self):
+        self.a = self.list.text()
+        self.ls = self.a.split(",")
+       
+        self.ls_updated = [float(x) for x in self.ls]
+        self.ls_array =  np.array(self.ls_updated)
+
+        self.pred  =self.reg.predict([self.ls_array])
+        self.predict_val.setText(str(self.pred))
+
 
     
     def test_split(self):
@@ -115,6 +122,7 @@ class UI(QMainWindow):
         self.acuracy_score.setText(str(accuracy_score(self.pre,self.y_test)))
         text=steps.classification_(self.y_test,self.pre)
         self.report.setPlainText(text)
+        self.accuracy_score.setText(str(self.lr.score(self.x_test,self.y_test)))
 
     def conf_matrix(self):
 
