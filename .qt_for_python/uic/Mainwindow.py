@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Mainwindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -195,9 +195,9 @@ class Ui_MainWindow(object):
         self.label_15.setFont(font)
         self.label_15.setWordWrap(False)
         self.label_15.setObjectName("label_15")
-        self.plot_x = QtWidgets.QComboBox(self.centralwidget)
-        self.plot_x.setGeometry(QtCore.QRect(100, 620, 81, 23))
-        self.plot_x.setObjectName("plot_x")
+        self.scatter_c = QtWidgets.QComboBox(self.centralwidget)
+        self.scatter_c.setGeometry(QtCore.QRect(100, 620, 81, 23))
+        self.scatter_c.setObjectName("scatter_c")
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(20, 400, 1341, 20))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
@@ -322,7 +322,7 @@ class Ui_MainWindow(object):
         self.label_29.setWordWrap(False)
         self.label_29.setObjectName("label_29")
         self.target_col = QtWidgets.QLabel(self.centralwidget)
-        self.target_col.setGeometry(QtCore.QRect(380, 130, 251, 61))
+        self.target_col.setGeometry(QtCore.QRect(460, 160, 201, 61))
         font = QtGui.QFont()
         font.setFamily("Ubuntu Condensed")
         font.setPointSize(17)
@@ -383,8 +383,21 @@ class Ui_MainWindow(object):
         self.label_31.setWordWrap(False)
         self.label_31.setObjectName("label_31")
         self.plotwidget = QtWidgets.QWidget(self.centralwidget)
-        self.plotwidget.setGeometry(QtCore.QRect(740, 420, 441, 411))
+        self.plotwidget.setGeometry(QtCore.QRect(750, 460, 351, 371))
         self.plotwidget.setObjectName("plotwidget")
+        self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ExitButton.setGeometry(QtCore.QRect(1090, 780, 261, 71))
+        font = QtGui.QFont()
+        font.setFamily("Segoe Fluent Icons")
+        font.setPointSize(16)
+        font.setBold(False)
+        font.setWeight(50)
+        self.ExitButton.setFont(font)
+        self.ExitButton.setStyleSheet("background-color: rgb(200, 217, 231);\n"
+"border-radius: 35px;\n"
+"border-width: 2opx;\n"
+"color: rgb(1, 78, 144);")
+        self.ExitButton.setObjectName("ExitButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -456,7 +469,7 @@ class Ui_MainWindow(object):
         self.pre_trained.setText(_translate("MainWindow", "Browse"))
         self.go_pre_trained.setText(_translate("MainWindow", "Go"))
         self.label_29.setText(_translate("MainWindow", "Target Set :"))
-        self.target_col.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Test Target</p></body></html>"))
+        self.target_col.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p><p align=\"center\"><br/></p></body></html>"))
         self.scale_btn.setText(_translate("MainWindow", "Scale Values"))
         self.scaler.setItemText(0, _translate("MainWindow", "StandardScale"))
         self.scaler.setItemText(1, _translate("MainWindow", "MinMaxScale"))
@@ -464,5 +477,6 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Visualizations</span></p></body></html>"))
         self.label_30.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Data Preparation</span></p></body></html>"))
         self.label_31.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Train/Test</span></p></body></html>"))
+        self.ExitButton.setText(_translate("MainWindow", "Exit"))
         self.actionData_Visualisation.setText(_translate("MainWindow", "Data Visualisation"))
         self.actionTrain_Data.setText(_translate("MainWindow", "Train Data"))

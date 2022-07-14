@@ -12,6 +12,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
+from PyQt5.QtCore import QCoreApplication
 
 
 
@@ -27,13 +28,16 @@ class error_window(QMainWindow):
 class home_screen(QDialog):
     def __init__(self):
         super(home_screen,self).__init__()
-        loadUi(r"ui_files/Front Page.ui",self)
+<<<<<<< HEAD
+        loadUi("ui_files/Front Page.ui",self)
         self.Start = self.findChild(QPushButton, "Start")
+=======
+        loadUi(r"ui_files/Front Page.ui",self)
+        self.Start = self.findChild(QPushButton, "pushButton")
+>>>>>>> ecdfa8d34cabf0843a7a2c5d0df55d33bd6ef3df
         self.Start.clicked.connect(self.StartButton)
         
         #  Help button connection
-
-
 
     def StartButton(self):
         pred = UI()
@@ -68,8 +72,11 @@ class help_screen(QDialog):
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
 
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
 
-        self.wid_win = self.findChild(QListWidget,"plotwidget")
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+
+        self.plot_win= self.findChild(QListWidget,"plotwidget")
         
         
         # self.fillna_btn = self.findChild(QPushButton,"fill_na")
@@ -106,7 +113,7 @@ class help_screen(QDialog):
         self.histogram_btn = self.findChild(QPushButton,"histogram")
 
         self.heatmap_btn = self.findChild(QPushButton,"heatmap")
-        self.plot_canvas= self.findChild(QListWidget,"splot")
+        # self.plot_canvas= self.findChild(QListWidget,"splot")
 
         self.columns.clicked.connect(self.target)
         self.Browse.clicked.connect(self.getCSV)
@@ -173,8 +180,9 @@ class help_screen(QDialog):
         
     def heatmap_gen(self):
 
-         self.wid_win.plot(self.df)
-         data.plot_heatmap(self.df)
+
+         #self.wid_win.plot(self.df)
+        data.plot_heatmap(self.df)
 
     def set_target(self):
 
@@ -215,10 +223,13 @@ class help_screen(QDialog):
         self.scatter_x.addItems(self.column_list)
         self.scatter_y.clear()
         self.scatter_y.addItems(self.column_list)
-        self.plot_x.clear()
-        self.plot_x.addItems(self.column_list)
+        # self.plot_x.clear()
+        # self.plot_x.addItems(self.column_list)
         # self.plot_y.clear()
         # self.plot_y.addItems(self.column_list)
+        color= ['red', 'green', 'blue', 'yellow']
+        self.scatter_c.clear()
+        self.scatter_c.addItems(color)
         self.hist_column.clear()
         self.hist_column.addItems(data.get_numeric(self.df))
         self.hist_column.addItem("All")
@@ -297,7 +308,7 @@ class help_screen(QDialog):
      
     def train_func(self):
 
-        myDict={ "Linear Regression":linear_reg , "SVM":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+        myDict={ "Linear Regression":linear_reg , "SVM  ":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
         "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
         
         if(self.target_value!=""):
