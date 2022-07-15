@@ -201,10 +201,18 @@ class UI(QMainWindow):
     def set_target(self):
         # if len(str(self.error.text())) == 0:
         #     self.error.setText("Enter Valid Target")
-
         self.target_value=str(self.item.text()).split()[0]
         steps.add_code("target=data['"+self.target_value+"']")
         self.target_col.setText(self.target_value)
+
+
+    def target(self):
+        # if len(self.columns.currentItem()) == None:
+        #     self.error.setText("Enter Valid Target")
+
+        self.item=self.columns.currentItem()
+        
+        
 
     def filldetails(self,flag=1):
          
@@ -299,11 +307,7 @@ class UI(QMainWindow):
             self.filldetails(0)
 
 
-    def target(self):
-        if len(self.columns.currentItem()) == None:
-            self.error.setText("Enter Valid Target")
 
-        # self.item=self.columns.currentItem()
         
      
  

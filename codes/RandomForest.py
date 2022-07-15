@@ -126,18 +126,6 @@ class UI(QMainWindow):
 
 
     
-<<<<<<< HEAD
-    def roc_plot(self):
-        # self.pre=self.lr.predict(self.x_test)
-        # self.auc=roc_auc_score(self.y_test,self.pre)
-        # self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
-        # plt.plot(self.fpr,self.tpr,color='red',label='ROC')
-        # plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
-        # plt.xlabel("FPR")
-        # plt.ylabel("TPR")
-        # plt.title('Receiver Operating Characteristics Curve')
-        # plt.legend()
-=======
     # def roc_plot(self):
     #     self.pre=self.lr.predict(self.x_test)
     #     self.auc=roc_auc_score(self.y_test,self.pre)
@@ -211,69 +199,4 @@ class UI(QMainWindow):
         # plt.ylabel("True Positive Rate")
         # plt.title("Some extension of Receiver operating characteristic to multiclass")
         # plt.legend(loc="lower right")
->>>>>>> 1781d03003aba47ecb612809bd8685e83e45e07c
         # plt.show()
-        self.fpr = dict()
-        self.tpr = dict()
-        self.roc_auc = dict()
-        # self.y_score = self.lr.fit(self.x_train, self.y_train).decision_function(self.x_test)
-        # self.y_score = self.lr.predict_proba(self.x_test)
-        self.y=self.X[self.target_value]
-        for i in range(self.n_classes):
-            self.fpr[i], self.tpr[i], _ = roc_curve(self.y_test[:, i],self.y_score[:, i])
-            self.roc_auc[i] = auc(self.fpr[i], self.tpr[i])
-        # First aggregate all false positive rates
-        all_fpr = np.unique(np.concatenate([self.fpr[i] for i in range(self.n_classes)]))
-
-        # Then interpolate all ROC curves at this points
-        mean_tpr = np.zeros_like(all_fpr)
-        for i in range(self.n_classes):
-            mean_tpr += np.interp(all_fpr, self.fpr[i], self.tpr[i])
-
-        # Finally average it and compute AUC
-        mean_tpr /= self.n_classes
-
-        self.fpr["macro"] = all_fpr
-        self.tpr["macro"] = mean_tpr
-        self.roc_auc["macro"] = auc(self.fpr["macro"], self.tpr["macro"])
-
-        # Plot all ROC curves
-        plt.figure()
-        plt.plot(
-            self.fpr["micro"],
-            self.tpr["micro"],
-            label="micro-average ROC curve (area = {0:0.2f})".format(self.roc_auc["micro"]),
-            color="deeppink",
-            linestyle=":",
-            linewidth=4,
-        )
-
-        plt.plot(
-            self.fpr["macro"],
-            self.tpr["macro"],
-            label="macro-average ROC curve (area = {0:0.2f})".format(self.roc_auc["macro"]),
-            color="navy",
-            linestyle=":",
-            linewidth=4,
-        )
-        lw = 2
-        colors = cycle(["aqua", "darkorange", "cornflowerblue"])
-        for i, color in zip(range(self.n_classes), colors):
-            plt.plot(
-                self.fpr[i],
-                self.tpr[i],
-                color=color,
-                lw=lw,
-                label="ROC curve of class {0} (area = {1:0.2f})".format(i, self.roc_auc[i]),
-            )
-
-        plt.plot([0, 1], [0, 1], "k--", lw=lw)
-        plt.xlim([0.0, 1.0])
-        plt.ylim([0.0, 1.05])
-        plt.xlabel("False Positive Rate")
-        plt.ylabel("True Positive Rate")
-        plt.title("Some extension of Receiver operating characteristic to multiclass")
-        plt.legend(loc="lower right")
-        plt.show()
-
-    
