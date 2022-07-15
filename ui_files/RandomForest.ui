@@ -72,25 +72,6 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="roc">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>380</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Visualize Boundary</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="mse">
     <property name="geometry">
      <rect>
@@ -373,10 +354,10 @@
    <widget class="QPushButton" name="conf_mat">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>320</y>
-      <width>181</width>
-      <height>31</height>
+      <x>750</x>
+      <y>340</y>
+      <width>191</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">

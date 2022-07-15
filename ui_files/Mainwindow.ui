@@ -787,6 +787,11 @@
     </item>
     <item>
      <property name="text">
+      <string>Logistic Regression</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Predictive Maintenance</string>
      </property>
     </item>
@@ -797,32 +802,12 @@
     </item>
     <item>
      <property name="text">
-      <string>SVR</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Logistic Regression</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
       <string>Random Forest</string>
      </property>
     </item>
     <item>
      <property name="text">
       <string>K-Nearest Neighbour</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Gaussian NB</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Multi Layer Perceptron</string>
      </property>
     </item>
    </widget>
@@ -1174,7 +1159,7 @@ color: rgb(1, 78, 144);</string>
      <x>0</x>
      <y>0</y>
      <width>1408</width>
-     <height>31</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
