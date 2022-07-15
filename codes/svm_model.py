@@ -35,7 +35,7 @@ class UI(QMainWindow):
 		self.kernel=self.findChild(QComboBox,"kernel")
 		self.degree=self.findChild(QLineEdit,"degree")
 		self.gamma=self.findChild(QComboBox,"gamma")
-		self.custom_gamma=self.findChild(QLineEdit,"custom_gamma")
+		# self.custom_gamma=self.findChild(QLineEdit,"custom_gamma")
 		self.coef=self.findChild(QLineEdit,"coef")
 		self.max_iter=self.findChild(QLineEdit,"max_iter")
 		self.dec_func=self.findChild(QComboBox,"dec_func")  

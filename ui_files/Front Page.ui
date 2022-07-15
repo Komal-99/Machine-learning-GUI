@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1353</width>
-    <height>916</height>
+    <width>1408</width>
+    <height>920</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,33 +17,6 @@
    <string notr="true">background-color:rgb(1, 78, 144)
 </string>
   </property>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>650</y>
-     <width>261</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Segoe Fluent Icons</family>
-     <pointsize>16</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(200, 217, 231);
-border-radius: 35px;
-border-width: 2opx;
-color: rgb(1, 78, 144);</string>
-   </property>
-   <property name="text">
-    <string>START</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
@@ -149,6 +122,33 @@ color: rgb(1, 78, 144);</string>
    </property>
    <property name="text">
     <string>HELP</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>650</y>
+     <width>261</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe Fluent Icons</family>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(200, 217, 231);
+border-radius: 35px;
+border-width: 2opx;
+color: rgb(1, 78, 144);</string>
+   </property>
+   <property name="text">
+    <string>START</string>
    </property>
   </widget>
  </widget>

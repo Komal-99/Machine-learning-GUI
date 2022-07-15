@@ -7,15 +7,12 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
 import linear_reg,svm_model,table_display,data_visualise,SVR,logistic_reg,RandomForest
-import KNN,mlp,pre_trained,add_steps,gaussian, pred_mtnc
+import KNN,mlp,pre_trained,add_steps,gaussian
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
-
-
-# testing the dfjaslkdfjlasdkfhlaskdjflksadjfioasdgsmalkdfj sadljfiosdj klasfds 
 
 class error_window(QMainWindow):
     def __init__(self):
@@ -94,8 +91,7 @@ class UI(QMainWindow):
         self.plot_win= self.findChild(QListWidget,"plotwidget")
         
         
-        # self.fillna_btn = self.findChild(QPushBut
-        # ton,"fill_na")
+        # self.fillna_btn = self.findChild(QPushButton,"fill_na")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
         # self.emptycolumn=self.findChild(QComboBox,"empty_column")
@@ -325,7 +321,7 @@ class UI(QMainWindow):
     def train_func(self):
 
         myDict={ "Linear Regression":linear_reg , "SVM  ":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
-        "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian, "Predictive Maintenace":pred_mtnc}
+        "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
         
         if(self.target_value!=""):
             
