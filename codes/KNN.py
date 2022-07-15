@@ -1,5 +1,5 @@
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser, QDialog
 import sys ,pickle
 import data_visualise
 import table_display
@@ -8,17 +8,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
 from sklearn import metrics
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier as KNC
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score , confusion_matrix , roc_curve, roc_auc_score
 import pandas as pd
 import seaborn as sns
-from sklearn.linear_model import LogisticRegression
+
 from sklearn.metrics import accuracy_score
 import common
 
-
-
-class UI(QMainWindow):
+class UI(QDialog):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
         uic.loadUi("ui_files/KNN.ui", self)
@@ -44,10 +43,10 @@ class UI(QMainWindow):
         # self.tol=self.findChild(QLineEdit,"tol")
         self.train_btn=self.findChild(QPushButton,"train")
         
-        self.mae=self.findChild(QLabel,"mae")
-        self.mse=self.findChild(QLabel,"mae_2")
+        self.mae=self.findChild(QLabel,"mae_2")
+        self.mse=self.findChild(QLabel,"mae_4")
         self.rmse=self.findChild(QLabel,"rmse")
-        self.roc_btn=self.findChild(QPushButton,"output")
+        # self.roc_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"accuracy_score")
         
         # self.X_combo=self.findChild(QComboBox,"X_combo")
@@ -57,7 +56,7 @@ class UI(QMainWindow):
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.train_btn.clicked.connect(self.training)
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
-        self.roc_btn.clicked.connect(self.roc_plot)
+        # self.roc_btn.clicked.connect(self.roc_plot)
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         self.dwnld_2.clicked.connect(self.download_model)
@@ -85,8 +84,8 @@ class UI(QMainWindow):
         self.ls_updated = [float(x) for x in self.ls]
         self.ls_array =  np.array(self.ls_updated)
 
-        self.pred  =self.lr.predict([self.ls_array])
-        self.predict_val.setText(int(self.pred))
+        self.pred  =self.knn.predict([self.ls_array])
+        self.predict_val.setText(np.str_(self.pred))
 
 
     
@@ -105,24 +104,22 @@ class UI(QMainWindow):
         
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.lr, file)  
+            pickle.dump(self.knn, file)  
         
         self.user_act.save_file(pkl_filename)  
 
     def training(self):
-
-        self.lr = LogisticRegression(max_iter=int(self.max_iter.text()),random_state=1,solver=self.solver.currentText(),multi_class=self.multi_class.currentText())
-        self.lr.fit(self.x_train,self.y_train)
-        
-        self.pre=self.lr.predict(self.x_test)
+        self.knn = KNC(n_neighbors=int(self.neighbours.text()),weights=self.weights.currentText(),algorithm=self.algorithm.currentText())
+        self.knn.fit(self.x_train,self.y_train)
+        self.pre=self.knn.predict(self.x_test)
         self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
-        self.mae_2.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
-        self.accuracy_score.setText(str(accuracy_score(self.pre,self.y_test)))
-        self.text=steps.classification_(self.y_test,self.pre)
-        self.report.setPlainText(self.text)
-        self.accuracy_score.setText(str(self.lr.score(self.x_test,self.y_test)))
+        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
 
+        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
+        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))
+
+        text=steps.classification_(self.y_test,self.pre)
+        self.report.setPlainText(text)
 
     def conf_matrix(self):
 
@@ -133,15 +130,4 @@ class UI(QMainWindow):
         sns.heatmap(confusion_matrix, annot=True)
         plt.show()
 
-    
-    def roc_plot(self):
-        self.pre=self.lr.predict(self.x_test)
-        self.auc=roc_auc_score(self.y_test,self.pre)
-        self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
-        plt.plot(self.fpr,self.tpr,color='red',label='ROC')
-        plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
-        plt.xlabel("FPR")
-        plt.ylabel("TPR")
-        plt.title('Receiver Operating Characteristics Curve')
-        plt.legend()
-        plt.show()
+   

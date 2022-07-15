@@ -15,7 +15,7 @@ import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import common
-
+from PyQt5.QtCore import QCoreApplication
 
 
 class UI(QMainWindow):
@@ -49,6 +49,11 @@ class UI(QMainWindow):
         self.rmse=self.findChild(QLabel,"rmse")
         self.roc_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"accuracy_score")
+
+
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         
         # self.X_combo=self.findChild(QComboBox,"X_combo")
         # self.Y_combo=self.findChild(QComboBox,"Y_combo")
@@ -78,15 +83,6 @@ class UI(QMainWindow):
         # self.Y_combo.addItems(self.column_list)
 
    
-    def set_predict(self):
-        self.a = self.list.text()
-        self.ls = self.a.split(",")
-       
-        self.ls_updated = [float(x) for x in self.ls]
-        self.ls_array =  np.array(self.ls_updated)
-
-        self.pred  =self.lr.predict([self.ls_array])
-        self.predict_val.setText(int(self.pred))
 
 
     
@@ -108,6 +104,15 @@ class UI(QMainWindow):
             pickle.dump(self.lr, file)  
         
         self.user_act.save_file(pkl_filename)  
+
+    def set_predict(self):
+        self.a = self.list.text() 
+        self.ls = self.a.split(",")
+       
+        self.ls_updated = [float(x) for x in self.ls]
+        self.ls_array =  np.array(self.ls_updated)
+        self.pred  =self.lr.predict([self.ls_array])
+        self.predict_val.setText(str(self.pred))
 
     def training(self):
 

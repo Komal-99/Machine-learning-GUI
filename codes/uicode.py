@@ -17,10 +17,12 @@ from PyQt5.QtCore import QCoreApplication
 class error_window(QMainWindow):
     def __init__(self):
         super(error_window, self).__init__()
-        #uic.loadUi("../ui_files/error.ui", self)
-        #self.show()
+        uic.loadUi("ui_files/error.ui", self)
+        
 
-
+        # app.exec_()
+        
+        self.show()
 
 class home_screen(QDialog):
     def __init__(self):
@@ -197,10 +199,20 @@ class UI(QMainWindow):
         data.plot_heatmap(self.df)
 
     def set_target(self):
-
+        # if len(str(self.error.text())) == 0:
+        #     self.error.setText("Enter Valid Target")
         self.target_value=str(self.item.text()).split()[0]
         steps.add_code("target=data['"+self.target_value+"']")
         self.target_col.setText(self.target_value)
+
+
+    def target(self):
+        # if len(self.columns.currentItem()) == None:
+        #     self.error.setText("Enter Valid Target")
+
+        self.item=self.columns.currentItem()
+        
+        
 
     def filldetails(self,flag=1):
          
@@ -295,8 +307,6 @@ class UI(QMainWindow):
             self.filldetails(0)
 
 
-    def target(self):
-        self.item=self.columns.currentItem()
         
      
  
@@ -327,12 +337,6 @@ class UI(QMainWindow):
         if(self.target_value!=""):
             
             self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)
-            
-                    
-        
-
-        
-
 
 # app = QApplication(sys.argv)
 # welcome = home_screen()

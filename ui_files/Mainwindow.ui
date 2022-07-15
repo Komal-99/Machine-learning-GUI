@@ -303,10 +303,7 @@
      </font>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select Training Model:&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="wordWrap">
-     <bool>true</bool>
+     <string>Select Training Model:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="scatterplot">
@@ -792,12 +789,12 @@
     </item>
     <item>
      <property name="text">
-      <string>Predictive Maintenance</string>
+      <string>SVR</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>SVM</string>
+      <string>Logistic Regression</string>
      </property>
     </item>
     <item>
@@ -808,6 +805,16 @@
     <item>
      <property name="text">
       <string>K-Nearest Neighbour</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Gaussian NB</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Multi Layer Perceptron</string>
      </property>
     </item>
    </widget>
@@ -1149,6 +1156,22 @@ color: rgb(1, 78, 144);</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Select Columns:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="error">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>270</y>
+      <width>211</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Select a Target from the Columns</string>
     </property>
    </widget>
   </widget>
