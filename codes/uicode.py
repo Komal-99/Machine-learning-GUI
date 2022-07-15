@@ -14,9 +14,6 @@ import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
 
-
-
-
 class error_window(QMainWindow):
     def __init__(self):
         super(error_window, self).__init__()
