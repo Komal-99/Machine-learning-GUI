@@ -21,7 +21,11 @@ import common
 class UI(QMainWindow):
 	def __init__(self,df,target,user_actions):
 		super(UI, self).__init__()
+<<<<<<< HEAD
 		uic.loadUi("ui_files/SVM.ui", self)
+=======
+		uic.loadUi("/ui_files/SVM.ui", self)
+>>>>>>> 506ba7c25befcfcef77c02bbc1fe3d8de6fbb42c
 		self.user_act=user_actions
 		global data ,steps
 		data=data_visualise.data_()
@@ -32,10 +36,11 @@ class UI(QMainWindow):
 		self.test_size= self.findChild(QLabel,"test_size") 
 	  
 		self.c_=self.findChild(QLineEdit,"c_")
+		self.random=self.findChild(QLineEdit,"randomstate")
 		self.kernel=self.findChild(QComboBox,"kernel")
 		self.degree=self.findChild(QLineEdit,"degree")
 		self.gamma=self.findChild(QComboBox,"gamma")
-		self.custom_gamma=self.findChild(QLineEdit,"custom_gamma")
+		# self.custom_gamma=self.findChild(QLineEdit,"custom_gamma")
 		self.coef=self.findChild(QLineEdit,"coef")
 		self.max_iter=self.findChild(QLineEdit,"max_iter")
 		self.dec_func=self.findChild(QComboBox,"dec_func")  
@@ -78,7 +83,7 @@ class UI(QMainWindow):
 
 	def test_split(self):
 
-		self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=0)
+		self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
 		print(self.y_train.shape)
 		print(self.y_test.shape)
 		self.train_size.setText(str(self.x_train.shape))

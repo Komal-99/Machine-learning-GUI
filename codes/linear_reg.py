@@ -65,11 +65,22 @@ class UI(QMainWindow):
         self.columns.addItems(self.column_list)
     
     def set_valpred(self):
+<<<<<<< HEAD
         self.array = np.array(self.list.text()).reshape(1, -1)
         # self.ar=check_array(self.array)
         self.pred  =(self.reg.predict(self.array))
         
         self.predict_val.setText(self.pred)
+=======
+        self.a = self.list.text()
+        self.ls = self.a.split(",")
+       
+        self.ls_updated = [float(x) for x in self.ls]
+        self.ls_array =  np.array(self.ls_updated)
+
+        self.pred  =self.reg.predict([self.ls_array])
+        self.predict_val.setText(str(self.pred))
+>>>>>>> 506ba7c25befcfcef77c02bbc1fe3d8de6fbb42c
 
     def download_model(self):
 
