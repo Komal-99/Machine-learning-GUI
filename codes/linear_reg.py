@@ -17,11 +17,7 @@ import common
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
-<<<<<<< HEAD
         uic.loadUi('ui_files\LinearRegression.ui', self)
-=======
-        uic.loadUi(r'ui_files\LinearRegression.ui', self)
->>>>>>> d042babe0127dd1259911b7df188519ecf295f6f
         self.user_act=user_actions
         global data 
         data=data_visualise.data_()
@@ -64,20 +60,14 @@ class UI(QMainWindow):
         self.show()
 
     def setvalue(self):
-<<<<<<< HEAD
         self.target.setText(self.target_value)
-=======
-               
-        
-        # self.target.setText(self.target_value)
->>>>>>> d042babe0127dd1259911b7df188519ecf295f6f
         self.columns.clear()
         self.columns.addItems(self.column_list)
     
     def set_valpred(self):
         self.array = np.array(self.list.text()).reshape(1, -1)
-        self.ar=check_array(self.array)
-        self.pred  =(self.reg.predict(self.ar))
+        # self.ar=check_array(self.array)
+        self.pred  =(self.reg.predict(self.array))
         
         self.predict_val.setText(self.pred)
 

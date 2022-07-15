@@ -781,6 +781,11 @@
     </item>
     <item>
      <property name="text">
+      <string>Predictive Maintenance</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>SVM</string>
      </property>
     </item>
