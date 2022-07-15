@@ -20,8 +20,6 @@ class error_window(QMainWindow):
         #uic.loadUi("../ui_files/error.ui", self)
         #self.show()
 
-
-
 class home_screen(QDialog):
     def __init__(self):
         super(home_screen,self).__init__()
