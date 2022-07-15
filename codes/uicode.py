@@ -6,8 +6,8 @@ from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
-import linear_reg,svm_model,table_display,data_visualise,SVR,logistic_reg,RandomForest
-import KNN,mlp,pre_trained,add_steps,gaussian, pred_mtnc
+import linear_reg,svm_model,table_display,data_visualise,logistic_reg,RandomForest
+import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
@@ -43,9 +43,43 @@ class home_screen(QDialog):
         #  Help button connection
 
     def StartButton(self):
+        Model_type=model()
+        widget.addWidget(Model_type)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+       
+
+class model(QDialog):
+    def __init__(self):
+        super(model,self).__init__()
+        loadUi("ui_files/modeltype.ui",self)
+        self.New_model = self.findChild(QPushButton, "newmodel")
+        self.New_model.clicked.connect(self.new)
+
+        self.Trainedmodel = self.findChild(QPushButton,"trainedmodel")
+        self.Trainedmodel.clicked.connect(self.trained)
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+    def new(self):
         pred = UI()
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def trained(self):
+        train = trained()
+        widget.addWidget(train)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+class trained(QMainWindow):
+    def __init__(self):
+        super(trained,self).__init__()
+        loadUi(r"ui_files/pre_trained.ui",self)
+        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")
+        with open(self.filePath_pre, 'rb') as file:
+            self.pickle_model = pickle.load(file)
+        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+
+
 
 class help_screen(QDialog):
     def __init__(self):
@@ -152,8 +186,8 @@ class UI(QMainWindow):
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
         
-        self.pre_trained.clicked.connect(self.upload_model)
-        self.go_pre_trained.clicked.connect(self.test_pretrained)
+        # self.pre_trained.clicked.connect(self.upload_model)
+        # self.go_pre_trained.clicked.connect(self.test_pretrained)
         self.show()
 
     def scale_value(self):
@@ -264,14 +298,7 @@ class UI(QMainWindow):
         x=table_display.DataFrameModel(self.df)
         self.table.setModel(x)
         
-    def upload_model(self):
-        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")
-        with open(self.filePath_pre, 'rb') as file:
-            self.pickle_model = pickle.load(file)
-        
-    def test_pretrained(self):
 
-        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
 
     def con_cat(self):
         
