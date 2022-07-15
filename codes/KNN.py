@@ -46,7 +46,7 @@ class UI(QDialog):
         self.mae=self.findChild(QLabel,"mae_2")
         self.mse=self.findChild(QLabel,"mae_4")
         self.rmse=self.findChild(QLabel,"rmse")
-        self.roc_btn=self.findChild(QPushButton,"output")
+        # self.roc_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"accuracy_score")
         
         # self.X_combo=self.findChild(QComboBox,"X_combo")
@@ -56,7 +56,7 @@ class UI(QDialog):
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.train_btn.clicked.connect(self.training)
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
-        self.roc_btn.clicked.connect(self.roc_plot)
+        # self.roc_btn.clicked.connect(self.roc_plot)
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         self.dwnld_2.clicked.connect(self.download_model)
@@ -85,7 +85,7 @@ class UI(QDialog):
         self.ls_array =  np.array(self.ls_updated)
 
         self.pred  =self.knn.predict([self.ls_array])
-        self.predict_val.setText(int(self.pred))
+        self.predict_val.setText(np.str_(self.pred))
 
 
     
@@ -130,15 +130,4 @@ class UI(QDialog):
         sns.heatmap(confusion_matrix, annot=True)
         plt.show()
 
-    
-    def roc_plot(self):
-        self.pre=self.knn.predict(self.x_test)
-        self.auc=roc_auc_score(self.y_test,self.pre)
-        self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
-        plt.plot(self.fpr,self.tpr,color='red',label='ROC')
-        plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
-        plt.xlabel("FPR")
-        plt.ylabel("TPR")
-        plt.title('Receiver Operating Characteristics Curve')
-        plt.legend()
-        plt.show()
+   
