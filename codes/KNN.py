@@ -1,5 +1,5 @@
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser, QDialog
 import sys ,pickle
 import data_visualise
 import table_display
@@ -16,12 +16,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import common
 
-
-
-class UI(QMainWindow):
+class UI(QDialog):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
-        uic.loadUi("ui_files/LogisticRegression.ui", self)
+        uic.loadUi("ui_files/KNN.ui", self)
         self.user_act=user_actions
         global data ,steps
         data=data_visualise.data_()
@@ -44,8 +42,8 @@ class UI(QMainWindow):
         # self.tol=self.findChild(QLineEdit,"tol")
         self.train_btn=self.findChild(QPushButton,"train")
         
-        self.mae=self.findChild(QLabel,"mae")
-        self.mse=self.findChild(QLabel,"mae_2")
+        self.mae=self.findChild(QLabel,"mae_2")
+        self.mse=self.findChild(QLabel,"mae_4")
         self.rmse=self.findChild(QLabel,"rmse")
         self.roc_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"accuracy_score")
@@ -115,8 +113,8 @@ class UI(QMainWindow):
         self.lr.fit(self.x_train,self.y_train)
         
         self.pre=self.lr.predict(self.x_test)
-        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
-        self.mae_2.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
+        self.mae_2.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
+        self.mae_4.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
         self.accuracy_score.setText(str(accuracy_score(self.pre,self.y_test)))
         self.text=steps.classification_(self.y_test,self.pre)
