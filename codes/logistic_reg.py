@@ -78,15 +78,6 @@ class UI(QMainWindow):
         self.Y_combo.addItems(self.column_list)
 
    
-    def set_predict(self):
-        self.a = self.list.text()
-        self.ls = self.a.split(",")
-       
-        self.ls_updated = [float(x) for x in self.ls]
-        self.ls_array =  np.array(self.ls_updated)
-
-        self.pred  =self.reg.predict([self.ls_array])
-        self.predict_val.setText(int(self.pred))
 
 
     
@@ -108,6 +99,15 @@ class UI(QMainWindow):
             pickle.dump(self.lr, file)  
         
         self.user_act.save_file(pkl_filename)  
+
+    def set_predict(self):
+        self.a = self.list.text() 
+        self.ls = self.a.split(",")
+       
+        self.ls_updated = [float(x) for x in self.ls]
+        self.ls_array =  np.array(self.ls_updated)
+        self.pred  =self.lr.predict([self.ls_array])
+        self.predict_val.setText(str(self.pred))
 
     def training(self):
 

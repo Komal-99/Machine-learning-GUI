@@ -14,22 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(1353, 916)
+        Dialog.resize(1408, 920)
         Dialog.setStyleSheet("background-color:rgb(1, 78, 144)\n"
 "")
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(330, 650, 261, 71))
-        font = QtGui.QFont()
-        font.setFamily("Segoe Fluent Icons")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setWeight(50)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("background-color: rgb(200, 217, 231);\n"
-"border-radius: 35px;\n"
-"border-width: 2opx;\n"
-"color: rgb(1, 78, 144);")
-        self.pushButton.setObjectName("pushButton")
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(290, 260, 831, 81))
         font = QtGui.QFont()
@@ -75,6 +62,19 @@ class Ui_Dialog(object):
 "border-width: 2opx;\n"
 "color: rgb(1, 78, 144);")
         self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton = QtWidgets.QPushButton(Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(330, 650, 261, 71))
+        font = QtGui.QFont()
+        font.setFamily("Segoe Fluent Icons")
+        font.setPointSize(16)
+        font.setBold(False)
+        font.setWeight(50)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("background-color: rgb(200, 217, 231);\n"
+"border-radius: 35px;\n"
+"border-width: 2opx;\n"
+"color: rgb(1, 78, 144);")
+        self.pushButton.setObjectName("pushButton")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -82,8 +82,8 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "START"))
         self.label_2.setToolTip(_translate("Dialog", "<html><head/><body><p align=\"justify\">Predictive Maintenance</p></body></html>"))
         self.label_2.setText(_translate("Dialog", "PREDICTIVE MAINTENANCE"))
         self.label_3.setText(_translate("Dialog", "MODEL"))
         self.pushButton_3.setText(_translate("Dialog", "HELP"))
+        self.pushButton.setText(_translate("Dialog", "START"))
