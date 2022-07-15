@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
-# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Help Centre.ui'
-=======
 # Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Help Centre.ui'
->>>>>>> 98440a80d656e0287525ed733eb8dee99f80497b
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -41,7 +37,7 @@ class Ui_Dialog(object):
 "color: rgb(255, 255, 255)")
         self.label.setObjectName("label")
         self.toolButton_2 = QtWidgets.QToolButton(self.widget)
-        self.toolButton_2.setGeometry(QtCore.QRect(0, 630, 1411, 51))
+        self.toolButton_2.setGeometry(QtCore.QRect(0, 670, 1411, 51))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(11)
@@ -54,7 +50,7 @@ class Ui_Dialog(object):
 "color: rgb(255, 255, 255)")
         self.toolButton_2.setObjectName("toolButton_2")
         self.pushButton = QtWidgets.QPushButton(self.widget)
-        self.pushButton.setGeometry(QtCore.QRect(390, 720, 261, 71))
+        self.pushButton.setGeometry(QtCore.QRect(390, 760, 261, 71))
         font = QtGui.QFont()
         font.setFamily("Segoe Fluent Icons")
         font.setPointSize(16)
@@ -67,7 +63,7 @@ class Ui_Dialog(object):
 "color: rgb(1, 78, 144);")
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.widget)
-        self.pushButton_2.setGeometry(QtCore.QRect(810, 720, 261, 71))
+        self.pushButton_2.setGeometry(QtCore.QRect(810, 760, 261, 71))
         font = QtGui.QFont()
         font.setFamily("Segoe Fluent Icons")
         font.setPointSize(16)
@@ -80,7 +76,7 @@ class Ui_Dialog(object):
 "color: rgb(1, 78, 144);")
         self.pushButton_2.setObjectName("pushButton_2")
         self.label_2 = QtWidgets.QLabel(self.widget)
-        self.label_2.setGeometry(QtCore.QRect(130, 190, 431, 61))
+        self.label_2.setGeometry(QtCore.QRect(220, 170, 431, 61))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(28)
@@ -91,7 +87,7 @@ class Ui_Dialog(object):
 "color: rgb(255, 255, 255)")
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.widget)
-        self.label_3.setGeometry(QtCore.QRect(820, 190, 411, 61))
+        self.label_3.setGeometry(QtCore.QRect(820, 170, 411, 61))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(28)
@@ -101,6 +97,24 @@ class Ui_Dialog(object):
         self.label_3.setStyleSheet("background-color:rgb(1, 78, 144);\n"
 "color: rgb(255, 255, 255)")
         self.label_3.setObjectName("label_3")
+        self.label_5 = QtWidgets.QLabel(self.widget)
+        self.label_5.setGeometry(QtCore.QRect(220, 350, 431, 31))
+        self.label_5.setText("")
+        self.label_5.setObjectName("label_5")
+        self.label_4 = QtWidgets.QLabel(self.widget)
+        self.label_4.setGeometry(QtCore.QRect(220, 260, 521, 351))
+        self.label_4.setStyleSheet("color: rgb(1, 78, 144);\n"
+"font: 9pt \"MS Shell Dlg 2\";\n"
+"")
+        self.label_4.setWordWrap(True)
+        self.label_4.setObjectName("label_4")
+        self.label_6 = QtWidgets.QLabel(self.widget)
+        self.label_6.setGeometry(QtCore.QRect(820, 270, 481, 361))
+        self.label_6.setStyleSheet("color: rgb(1, 78, 144);\n"
+"font: 9pt \"MS Shell Dlg 2\";\n"
+"")
+        self.label_6.setWordWrap(True)
+        self.label_6.setObjectName("label_6")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -112,7 +126,20 @@ class Ui_Dialog(object):
         self.toolButton_2.setToolTip(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:16pt;\">FAQ\'s</span></p></body></html>"))
         self.toolButton_2.setText(_translate("Dialog", "For more information visit www.uts.com"))
         self.pushButton.setText(_translate("Dialog", "BACK"))
-        self.pushButton_2.setText(_translate("Dialog", "CONTINUE"))
+        self.pushButton_2.setText(_translate("Dialog", "START"))
         self.label_2.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">Getting Started</span></p></body></html>"))
         self.label_3.setToolTip(_translate("Dialog", "<html><head/><body><p><br/></p></body></html>"))
         self.label_3.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">Steps</span></p></body></html>"))
+        self.label_4.setText(_translate("Dialog", "Welcome to our Predictive Maintenance Model!\n"
+"\n"
+"As Industry 4.0 continues to generate media attention, many companies are struggling with the realities of AI implementation. Indeed, the benefits of predictive maintenance such as helping determine the condition of equipment and predicting when maintenance should be performed, are extremely strategic. Needless to say that the implementation of ML-based solutions can lead to major cost savings, higher predictability, and the increased availability of the systems.\n"
+"\n"
+"Our Model Enables you to perform these operations on your datasets easily and efficiently. You can upload your dataset then pre-process it if needed. Further can train a model using any machine learning algorithm based on your dataset and predict its failure or success."))
+        self.label_6.setText(_translate("Dialog", "Step 1 -  Start.\n"
+"Step 2 - In data processing tab, browse your dataset.\n"
+"Step 3 – You can see set of rows of your dataset in right top corner and columns\' description on left top corner.\n"
+"Step 4 – In column description, select the target column. Press the set target button.\n"
+"Step 5- Pre-process the data using functionalities like drop column, fill null values and then further scale your dataset as needed.\n"
+"Step 6 – You can visualize your data values with the help of different plots available in visualization tab like Histogram, Scatter Plot, Heatmap, etc. to analyse your dataset.\n"
+"Step 7 – Select the ML algorithm and train your model OR you can upload your already trained model(.sav format file) to use it for further process.\n"
+""))

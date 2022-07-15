@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
 import linear_reg,svm_model,table_display,data_visualise,SVR,logistic_reg,RandomForest
-import KNN,mlp,pre_trained,add_steps,gaussian
+import KNN,mlp,pre_trained,add_steps,gaussian, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
@@ -170,7 +170,7 @@ class UI(QMainWindow):
 
 
     def hist_add_column(self):
-
+        
         self.hist_column_add.addItem(self.hist_column.currentText())
         self.hist_column.removeItem(self.hist_column.findText(self.hist_column.currentText()))
 
@@ -321,7 +321,7 @@ class UI(QMainWindow):
     def train_func(self):
 
         myDict={ "Linear Regression":linear_reg , "SVM  ":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
-        "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
+        "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian, "Predictive Maintenance":pred_mtnc}
         
         if(self.target_value!=""):
             
