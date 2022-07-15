@@ -50,8 +50,8 @@ class UI(QMainWindow):
         self.roc_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"accuracy_score")
         
-        self.X_combo=self.findChild(QComboBox,"X_combo")
-        self.Y_combo=self.findChild(QComboBox,"Y_combo")
+        # self.X_combo=self.findChild(QComboBox,"X_combo")
+        # self.Y_combo=self.findChild(QComboBox,"Y_combo")
 
         self.test_data=self.findChild(QLineEdit,"test_data")
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
@@ -74,10 +74,22 @@ class UI(QMainWindow):
         # self.target.setText(self.target_value)
         # self.columns.clear()
         self.columns.addItems(self.column_list)
-        self.X_combo.addItems(self.column_list)
-        self.Y_combo.addItems(self.column_list)
+        # self.X_combo.addItems(self.column_list)
+        # self.Y_combo.addItems(self.column_list)
 
    
+<<<<<<< HEAD
+=======
+    def set_predict(self):
+        self.a = self.list.text()
+        self.ls = self.a.split(",")
+       
+        self.ls_updated = [float(x) for x in self.ls]
+        self.ls_array =  np.array(self.ls_updated)
+
+        self.pred  =self.lr.predict([self.ls_array])
+        self.predict_val.setText(int(self.pred))
+>>>>>>> 158d63f833c8d283d0cb5d7c7de1668da32f784a
 
 
     
