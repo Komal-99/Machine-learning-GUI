@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Mainwindow.ui'
+# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -481,7 +481,7 @@ class Ui_MainWindow(object):
         self.label_26.setText(_translate("MainWindow", "Figsize_y :"))
         self.train.setText(_translate("MainWindow", "Train"))
         self.model_select.setItemText(0, _translate("MainWindow", "Linear Regression"))
-        self.model_select.setItemText(1, _translate("MainWindow", "SVM"))
+        self.model_select.setItemText(1, _translate("MainWindow", "Logistic Regression"))
         self.model_select.setItemText(2, _translate("MainWindow", "SVR"))
         self.model_select.setItemText(3, _translate("MainWindow", "Logistic Regression"))
         self.model_select.setItemText(4, _translate("MainWindow", "Random Forest"))

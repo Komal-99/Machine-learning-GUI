@@ -784,11 +784,7 @@
     </item>
     <item>
      <property name="text">
-<<<<<<< HEAD
       <string>Logistic Regression</string>
-=======
-      <string>SVM</string>
->>>>>>> a1e48266713e49e393a2a1727ae7d3d1485d20ad
      </property>
     </item>
     <item>
@@ -798,11 +794,7 @@
     </item>
     <item>
      <property name="text">
-<<<<<<< HEAD
-      <string>SVM</string>
-=======
       <string>Logistic Regression</string>
->>>>>>> a1e48266713e49e393a2a1727ae7d3d1485d20ad
      </property>
     </item>
     <item>
