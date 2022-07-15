@@ -8,11 +8,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
 from sklearn import metrics
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier as KNC
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score , confusion_matrix , roc_curve, roc_auc_score
 import pandas as pd
 import seaborn as sns
-from sklearn.linear_model import LogisticRegression
+
 from sklearn.metrics import accuracy_score
 import common
 
@@ -85,7 +86,7 @@ class UI(QMainWindow):
         self.ls_updated = [float(x) for x in self.ls]
         self.ls_array =  np.array(self.ls_updated)
 
-        self.pred  =self.lr.predict([self.ls_array])
+        self.pred  =self.knn.predict([self.ls_array])
         self.predict_val.setText(int(self.pred))
 
 
@@ -105,24 +106,22 @@ class UI(QMainWindow):
         
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.lr, file)  
+            pickle.dump(self.knn, file)  
         
         self.user_act.save_file(pkl_filename)  
 
     def training(self):
-
-        self.lr = LogisticRegression(max_iter=int(self.max_iter.text()),random_state=1,solver=self.solver.currentText(),multi_class=self.multi_class.currentText())
-        self.lr.fit(self.x_train,self.y_train)
+        self.knn = KNC(n_neighbors=int(self.neighbours.text()),weights=self.weights.currentText(),algorithm=self.algorithm.currentText())
+        self.knn.fit(self.x_train,self.y_train)
         
-        self.pre=self.lr.predict(self.x_test)
+        self.pre=self.knn.predict(self.x_test)
         self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
-        self.mae_2.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
+        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
-        self.accuracy_score.setText(str(accuracy_score(self.pre,self.y_test)))
-        self.text=steps.classification_(self.y_test,self.pre)
-        self.report.setPlainText(self.text)
-        self.accuracy_score.setText(str(self.lr.score(self.x_test,self.y_test)))
+        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))
 
+        text=steps.classification_(self.y_test,self.pre)
+        self.report.setPlainText(text)
 
     def conf_matrix(self):
 
@@ -135,7 +134,7 @@ class UI(QMainWindow):
 
     
     def roc_plot(self):
-        self.pre=self.lr.predict(self.x_test)
+        self.pre=self.knn.predict(self.x_test)
         self.auc=roc_auc_score(self.y_test,self.pre)
         self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
         plt.plot(self.fpr,self.tpr,color='red',label='ROC')
