@@ -78,18 +78,6 @@ class UI(QMainWindow):
         # self.Y_combo.addItems(self.column_list)
 
    
-<<<<<<< HEAD
-=======
-    def set_predict(self):
-        self.a = self.list.text()
-        self.ls = self.a.split(",")
-       
-        self.ls_updated = [float(x) for x in self.ls]
-        self.ls_array =  np.array(self.ls_updated)
-
-        self.pred  =self.lr.predict([self.ls_array])
-        self.predict_val.setText(int(self.pred))
->>>>>>> 158d63f833c8d283d0cb5d7c7de1668da32f784a
 
 
     
