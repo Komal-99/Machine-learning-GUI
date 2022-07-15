@@ -327,12 +327,6 @@ class UI(QMainWindow):
         if(self.target_value!=""):
             
             self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)
-            
-                    
-        
-
-        
-
 
 # app = QApplication(sys.argv)
 # welcome = home_screen()

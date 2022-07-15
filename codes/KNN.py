@@ -1,5 +1,5 @@
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser, QDialog
 import sys ,pickle
 import data_visualise
 import table_display
@@ -17,9 +17,7 @@ import seaborn as sns
 from sklearn.metrics import accuracy_score
 import common
 
-
-
-class UI(QMainWindow):
+class UI(QDialog):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
         uic.loadUi("ui_files/KNN.ui", self)
@@ -45,8 +43,8 @@ class UI(QMainWindow):
         # self.tol=self.findChild(QLineEdit,"tol")
         self.train_btn=self.findChild(QPushButton,"train")
         
-        self.mae=self.findChild(QLabel,"mae")
-        self.mse=self.findChild(QLabel,"mae_2")
+        self.mae=self.findChild(QLabel,"mae_2")
+        self.mse=self.findChild(QLabel,"mae_4")
         self.rmse=self.findChild(QLabel,"rmse")
         self.roc_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"accuracy_score")
@@ -113,10 +111,10 @@ class UI(QMainWindow):
     def training(self):
         self.knn = KNC(n_neighbors=int(self.neighbours.text()),weights=self.weights.currentText(),algorithm=self.algorithm.currentText())
         self.knn.fit(self.x_train,self.y_train)
-        
         self.pre=self.knn.predict(self.x_test)
         self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
         self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
+
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
         self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))
 
