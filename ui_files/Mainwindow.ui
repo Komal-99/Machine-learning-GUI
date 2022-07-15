@@ -789,11 +789,6 @@
     </item>
     <item>
      <property name="text">
-      <string>SVR</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
       <string>Logistic Regression</string>
      </property>
     </item>
@@ -809,12 +804,7 @@
     </item>
     <item>
      <property name="text">
-      <string>Gaussian NB</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Multi Layer Perceptron</string>
+      <string>Predictive Maintenace</string>
      </property>
     </item>
    </widget>
