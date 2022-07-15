@@ -307,7 +307,6 @@ class UI(QMainWindow):
             self.filldetails(0)
 
 
-
         
      
  

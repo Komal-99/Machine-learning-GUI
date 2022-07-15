@@ -252,6 +252,11 @@ class Ui_LinearRegression(object):
         self.label_8.setStyleSheet("background-color: rgb(1, 78, 144);\n"
 "color: rgb(255, 255, 255);")
         self.label_8.setObjectName("label_8")
+        self.error = QtWidgets.QLabel(self.centralwidget)
+        self.error.setGeometry(QtCore.QRect(230, 500, 141, 16))
+        self.error.setStyleSheet("color: rgb(255, 0, 4);")
+        self.error.setText("")
+        self.error.setObjectName("error")
         LinearRegression.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(LinearRegression)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
