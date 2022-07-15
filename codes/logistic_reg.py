@@ -15,7 +15,7 @@ import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import common
-
+from PyQt5.QtCore import QCoreApplication
 
 
 class UI(QMainWindow):
@@ -49,6 +49,11 @@ class UI(QMainWindow):
         self.rmse=self.findChild(QLabel,"rmse")
         self.roc_btn=self.findChild(QPushButton,"output")
         self.accuracy=self.findChild(QLabel,"accuracy_score")
+
+
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         
         # self.X_combo=self.findChild(QComboBox,"X_combo")
         # self.Y_combo=self.findChild(QComboBox,"Y_combo")

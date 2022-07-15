@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
 # Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\SVM.ui'
-=======
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\SVM.ui'
->>>>>>> f905c890f6c6c695843e51229bc145b4b47e36a3
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -287,19 +283,19 @@ class Ui_MainWindow(object):
         self.predict_val.setStyleSheet("color: rgb(83, 255, 71);\n"
 "background-color: rgb(255, 255, 255);")
         self.predict_val.setObjectName("predict_val")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(890, 630, 91, 31))
+        self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ExitButton.setGeometry(QtCore.QRect(890, 630, 91, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe Fluent Icons")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("\n"
+        self.ExitButton.setFont(font)
+        self.ExitButton.setStyleSheet("\n"
 "background-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        self.pushButton.setObjectName("pushButton")
+        self.ExitButton.setObjectName("ExitButton")
         self.label_22 = QtWidgets.QLabel(self.centralwidget)
         self.label_22.setGeometry(QtCore.QRect(790, 470, 191, 31))
         font = QtGui.QFont()
@@ -374,6 +370,6 @@ class Ui_MainWindow(object):
         self.predict.setText(_translate("MainWindow", "Predict"))
         self.label_16.setText(_translate("MainWindow", "Enter List for Prediction :"))
         self.predict_val.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
-        self.pushButton.setText(_translate("MainWindow", "Exit"))
+        self.ExitButton.setText(_translate("MainWindow", "Exit"))
         self.label_22.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted Value</span></p></body></html>"))
         self.label_17.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Visualization</p><p align=\"center\"><br/></p></body></html>"))

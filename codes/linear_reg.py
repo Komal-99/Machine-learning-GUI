@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys,pickle
-
+from PyQt5.QtCore import QCoreApplication
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -29,6 +29,10 @@ class UI(QMainWindow):
         self.setvalue()
 
         # self.train_size= self.findChild(QLabel,"train_size")
+
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         
 
         self.list=self.findChild(QLineEdit,"list")

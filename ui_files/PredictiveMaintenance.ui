@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1055</width>
-    <height>668</height>
+    <width>1057</width>
+    <height>674</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -538,7 +538,7 @@ color: rgb(255, 255, 255);
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="ExitButton">
     <property name="geometry">
      <rect>
       <x>930</x>
@@ -833,7 +833,7 @@ color: rgb(255, 255, 255);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1055</width>
+     <width>1057</width>
      <height>26</height>
     </rect>
    </property>

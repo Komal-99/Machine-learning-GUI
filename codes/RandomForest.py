@@ -142,7 +142,7 @@ class UI(QMainWindow):
         self.fpr = dict()
         self.tpr = dict()
         self.roc_auc = dict()
-        self.y_score = self.lr.fit(self.x_train, self.y_train).decision_function(self.x_test)
+        # self.y_score = self.lr.fit(self.x_train, self.y_train).decision_function(self.x_test)
         # self.y_score = self.lr.predict_proba(self.x_test)
         self.y=self.X[self.target_value]
         for i in range(self.n_classes):

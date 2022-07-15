@@ -213,19 +213,19 @@ class Ui_LinearRegression(object):
         self.predict_val.setStyleSheet("color:rgb(1, 78, 144);\n"
 "background-color: rgb(255, 255, 255);")
         self.predict_val.setObjectName("predict_val")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(870, 510, 91, 31))
+        self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ExitButton.setGeometry(QtCore.QRect(870, 510, 91, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe Fluent Icons")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("\n"
+        self.ExitButton.setFont(font)
+        self.ExitButton.setStyleSheet("\n"
 "background-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        self.pushButton.setObjectName("pushButton")
+        self.ExitButton.setObjectName("ExitButton")
         self.test_size_btn = QtWidgets.QPushButton(self.centralwidget)
         self.test_size_btn.setGeometry(QtCore.QRect(240, 280, 71, 23))
         font = QtGui.QFont()
@@ -288,7 +288,7 @@ class Ui_LinearRegression(object):
         self.label_14.setText(_translate("LinearRegression", "Enter List for Prediction :"))
         self.label_15.setText(_translate("LinearRegression", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted Value</span></p></body></html>"))
         self.predict_val.setText(_translate("LinearRegression", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
-        self.pushButton.setText(_translate("LinearRegression", "Exit"))
+        self.ExitButton.setText(_translate("LinearRegression", "Exit"))
         self.test_size_btn.setText(_translate("LinearRegression", "Set"))
         self.label_16.setText(_translate("LinearRegression", "Accuracy"))
         self.list.setText(_translate("LinearRegression", "0.1"))

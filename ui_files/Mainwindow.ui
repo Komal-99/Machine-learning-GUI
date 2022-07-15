@@ -303,10 +303,7 @@
      </font>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select Training Model:&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="wordWrap">
-     <bool>true</bool>
+     <string>Select Training Model:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="scatterplot">
@@ -787,11 +784,6 @@
     </item>
     <item>
      <property name="text">
-      <string>Predictive Maintenance</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
       <string>SVM</string>
      </property>
     </item>
@@ -1174,7 +1166,7 @@ color: rgb(1, 78, 144);</string>
      <x>0</x>
      <y>0</y>
      <width>1408</width>
-     <height>31</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
