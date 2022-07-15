@@ -784,17 +784,20 @@
     </item>
     <item>
      <property name="text">
-      <string>SVM</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>SVR</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
+<<<<<<< HEAD
+=======
       <string>Logistic Regression</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Predictive Maintenance</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+>>>>>>> 1781d03003aba47ecb612809bd8685e83e45e07c
+      <string>SVM</string>
      </property>
     </item>
     <item>
@@ -805,16 +808,6 @@
     <item>
      <property name="text">
       <string>K-Nearest Neighbour</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Gaussian NB</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Multi Layer Perceptron</string>
      </property>
     </item>
    </widget>

@@ -24,8 +24,6 @@ class error_window(QMainWindow):
         
         self.show()
 
-
-
 class home_screen(QDialog):
     def __init__(self):
         super(home_screen,self).__init__()
@@ -329,19 +327,13 @@ class UI(QMainWindow):
      
     def train_func(self):
 
-        myDict={ "Linear Regression":linear_reg , "SVM":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
-        "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
+        myDict={ "Linear Regression":linear_reg , "SVM":svm_model , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+        "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}
 
         
         if(self.target_value!=""):
             
             self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)
-            
-                    
-        
-
-        
-
 
 # app = QApplication(sys.argv)
 # welcome = home_screen()
