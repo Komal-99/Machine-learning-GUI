@@ -64,6 +64,11 @@ class UI(QMainWindow):
         self.dwnld.clicked.connect(self.download_model) #
         self.visualize.clicked.connect(self.plt3d) 
         #self.acc.clicked.connect(self.accuracy) #
+
+        self.list=self.findChild(QLineEdit,"list")
+        self.predict_btn=self.findChild(QPushButton,"predict")
+        self.predict_val =self.findChild(QLabel,"predict_val")
+        self.predict_btn.clicked.connect(self.set_predict)
         self.setvalue()
         self.show()
 
@@ -79,7 +84,9 @@ class UI(QMainWindow):
         self.Z_combo.addItems(self.column_list)
         self.color_combo.clear()
         self.color_combo.addItems(self.column_list)
-        
+
+
+   
 # self.scatter_x=self.findChild(QComboBox,"scatter_x")
 # self.scatter_x.clear()
 #         self.scatter_x.addItems(self.column_list)
@@ -205,22 +212,34 @@ class UI(QMainWindow):
             def model_3d_plot(self):
                 fig= px.scatter_3d(data, x= 'Air temperature [K]', y='Rotational speed [rpm]', z='Torque [Nm]', color='Failure Type')
                 return(fig.show())
-            def best_predict(self):
-                return self.best.predict(self.x_test)
+            def best_predict(self, x_testp):
+                return self.best.predict(x_testp)
 
-        models_to_test= [rfc, lr, knn, svc, nb, dt]
-        classification= Modelling(self.x_train, self.y_train, self.x_test, self.y_test, models_to_test)
-        classification.fit()
-        classification.results()
+        self.models_to_test= [rfc, lr, knn, svc, nb, dt]
+        self.classification= Modelling(self.x_train, self.y_train, self.x_test, self.y_test, self.models_to_test)
+        self.classification.fit()
+        self.classification.results()
         
         
-        self.y_pred= classification.best_predict()
+        self.y_pred= self.classification.best_predict(self.x_test)
         self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.y_pred)))
         self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.y_pred)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.y_pred))))
         self.acc_sc.setText(str(metrics.accuracy_score(self.y_test, self.y_pred)))
         text=steps.classification_(self.y_test,self.y_pred)
         self.report.setPlainText(text)
+
+    def set_predict(self):
+        self.a = self.list.text()
+        self.ls = self.a.split(",")
+       
+        self.ls_updated = [float(x) for x in self.ls]
+        self.ls_array =  np.array(self.ls_updated) 
+        # self.pred = self.lr.predict([self.ls_array])
+        self.pred = self.classification.best_predict([self.ls_array])
+        # model= self.training().Modelling(self.x_train, self.y_train, self.x_test, self.y_test, models_to_test)
+        self.predict_val.setText(str(self.pred))
+        
 
     def plt3d(self):
         pio.renderers.default= 'browser'
