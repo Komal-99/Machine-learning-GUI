@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Front Page.ui'
+# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Front Page.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -46,7 +46,7 @@ class Ui_Dialog(object):
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(500, 90, 291, 121))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("c:\\Users\\jvish\\OneDrive\\Desktop\\UTS-Project\\ui_files\\../photos/Logo.jpeg"))
+        self.label.setPixmap(QtGui.QPixmap("d:\\Users\\aaa\\OneDrive - The Northcap university\\Desktop\\UTS\\UTS-Project\\ui_files\\../photos/Logo.jpeg"))
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)

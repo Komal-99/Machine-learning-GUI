@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
+<<<<<<< HEAD
 # Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Help Centre.ui'
+=======
+# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Help Centre.ui'
+>>>>>>> f905c890f6c6c695843e51229bc145b4b47e36a3
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
