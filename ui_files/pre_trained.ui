@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>704</width>
-    <height>459</height>
+    <width>900</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QLabel" name="target">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>160</y>
+      <x>410</x>
+      <y>60</y>
       <width>181</width>
       <height>21</height>
      </rect>
@@ -29,35 +29,19 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>291</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Testing Model</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_26">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>190</y>
-      <width>91</width>
+      <x>610</x>
+      <y>60</y>
+      <width>101</width>
       <height>21</height>
      </rect>
     </property>
@@ -74,8 +58,8 @@
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>160</y>
+      <x>330</x>
+      <y>60</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -93,8 +77,8 @@
    <widget class="QLabel" name="data_shape">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>190</y>
+      <x>720</x>
+      <y>60</y>
       <width>151</width>
       <height>21</height>
      </rect>
@@ -105,6 +89,9 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
@@ -113,19 +100,19 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
-      <width>271</width>
-      <height>91</height>
+      <y>60</y>
+      <width>311</width>
+      <height>141</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="test">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>370</y>
+      <x>730</x>
+      <y>300</y>
       <width>151</width>
-      <height>31</height>
+      <height>35</height>
      </rect>
     </property>
     <property name="font">
@@ -143,36 +130,17 @@
      <rect>
       <x>10</x>
       <y>250</y>
-      <width>271</width>
-      <height>111</height>
+      <width>311</width>
+      <height>161</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_27">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>220</y>
-      <width>91</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Model:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_20">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>20</y>
-      <width>151</width>
+      <x>330</x>
+      <y>90</y>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -189,10 +157,10 @@
    <widget class="QLabel" name="accuracy">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>110</y>
-      <width>251</width>
-      <height>16</height>
+      <x>520</x>
+      <y>180</y>
+      <width>255</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -200,6 +168,9 @@
       <family>Ubuntu Condensed</family>
       <pointsize>11</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
@@ -208,10 +179,10 @@
    <widget class="QLabel" name="mae">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>20</y>
-      <width>251</width>
-      <height>16</height>
+      <x>520</x>
+      <y>90</y>
+      <width>255</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -220,6 +191,9 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -227,8 +201,8 @@
    <widget class="QLabel" name="label_24">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>110</y>
+      <x>330</x>
+      <y>180</y>
       <width>151</width>
       <height>21</height>
      </rect>
@@ -246,10 +220,10 @@
    <widget class="QLabel" name="mse">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>50</y>
-      <width>251</width>
-      <height>16</height>
+      <x>520</x>
+      <y>120</y>
+      <width>255</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -258,6 +232,9 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -265,9 +242,9 @@
    <widget class="QLabel" name="label_19">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>80</y>
-      <width>151</width>
+      <x>330</x>
+      <y>150</y>
+      <width>171</width>
       <height>21</height>
      </rect>
     </property>
@@ -284,9 +261,9 @@
    <widget class="QLabel" name="label_18">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>50</y>
-      <width>151</width>
+      <x>330</x>
+      <y>120</y>
+      <width>171</width>
       <height>21</height>
      </rect>
     </property>
@@ -303,10 +280,10 @@
    <widget class="QLabel" name="rmse">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>80</y>
-      <width>251</width>
-      <height>16</height>
+      <x>520</x>
+      <y>150</y>
+      <width>255</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -315,6 +292,9 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -322,10 +302,10 @@
    <widget class="QPushButton" name="conf_mat">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>160</y>
-      <width>131</width>
-      <height>31</height>
+      <x>730</x>
+      <y>250</y>
+      <width>151</width>
+      <height>35</height>
      </rect>
     </property>
     <property name="font">
@@ -341,20 +321,20 @@
    <widget class="QPlainTextEdit" name="user_actions">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>360</x>
       <y>250</y>
       <width>331</width>
-      <height>151</height>
+      <height>161</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_28">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>220</y>
-      <width>231</width>
-      <height>21</height>
+      <x>380</x>
+      <y>210</y>
+      <width>281</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -363,8 +343,87 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(1, 78, 144);
+color: rgb(255, 255, 255);
+</string>
+    </property>
     <property name="text">
-     <string>Steps performed during training:</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Steps performed during training:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>901</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(1, 78, 144);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Pre Trained Model&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>210</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(1, 78, 144);
+color: rgb(255, 255, 255);
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Model &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>400</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe Fluent Icons</family>
+      <pointsize>11</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);
+</string>
+    </property>
+    <property name="text">
+     <string>Exit</string>
     </property>
    </widget>
   </widget>
@@ -373,8 +432,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>704</width>
-     <height>20</height>
+     <width>900</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
