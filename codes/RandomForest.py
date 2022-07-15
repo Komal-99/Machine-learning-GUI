@@ -50,8 +50,6 @@ class UI(QMainWindow):
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.train_btn.clicked.connect(self.training)
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
-
-
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
