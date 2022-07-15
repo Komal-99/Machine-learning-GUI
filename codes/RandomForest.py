@@ -18,8 +18,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score,auc
 import common
 
-
-
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
@@ -45,26 +43,46 @@ class UI(QMainWindow):
         self.rmse=self.findChild(QLabel,"rmse")
         self.accuracy=self.findChild(QLabel,"accuracy")
         self.roc_btn=self.findChild(QPushButton,"roc")
-        self.X_combo=self.findChild(QComboBox,"X_combo")
-        self.Y_combo=self.findChild(QComboBox,"Y_combo")
+        # self.X_combo=self.findChild(QComboBox,"X_combo")
+        # self.Y_combo=self.findChild(QComboBox,"Y_combo")
 
         self.test_data=self.findChild(QLineEdit,"test_data")
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.train_btn.clicked.connect(self.training)
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
+
+
+        self.list=self.findChild(QLineEdit,"list")
+        self.predict_btn=self.findChild(QPushButton,"predict")
+        self.predict_val =self.findChild(QLabel,"predict_val")
+        self.predict_btn.clicked.connect(self.set_predict)
+
         self.roc_btn.clicked.connect(self.roc_plot)
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
+        
         self.dwnld.clicked.connect(self.download_model)
         self.setvalue()
         self.show()
+
+       
+    def set_predict(self):
+        self.a = self.list.text()
+        self.ls = self.a.split(",")
+       
+        self.ls_updated = [float(x) for x in self.ls]
+        self.ls_array =  np.array(self.ls_updated)
+
+        self.pred  =self.lr.predict([self.ls_array])
+        self.predict_val.setText(int(self.pred))
+
 
     def setvalue(self):
         # self.target.setText(self.target_value)
         # self.columns.clear()
         self.columns.addItems(self.column_list)
-        self.X_combo.addItems(self.column_list)
-        self.Y_combo.addItems(self.column_list)
+        # self.X_combo.addItems(self.column_list)
+        # self.Y_combo.addItems(self.column_list)
 
     def download_model(self):
 
