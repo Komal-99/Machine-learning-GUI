@@ -499,7 +499,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>320</y>
+      <y>330</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -512,25 +512,6 @@
     </property>
     <property name="text">
      <string>Confusion Matrix</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="visualize">
-    <property name="geometry">
-     <rect>
-      <x>790</x>
-      <y>390</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Visualize Boundary</string>
     </property>
    </widget>
    <widget class="QPushButton" name="dwnld">
@@ -854,6 +835,25 @@ color: rgb(255, 255, 255);</string>
       <width>541</width>
       <height>31</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="plot">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>380</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Decission Regions</string>
     </property>
    </widget>
   </widget>

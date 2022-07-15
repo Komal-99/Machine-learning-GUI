@@ -42,7 +42,7 @@ class UI(QMainWindow):
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
         self.accuracy=self.findChild(QLabel,"accuracy")
-        self.roc_btn=self.findChild(QPushButton,"roc")
+        # self.roc_btn=self.findChild(QPushButton,"roc")
         # self.X_combo=self.findChild(QComboBox,"X_combo")
         # self.Y_combo=self.findChild(QComboBox,"Y_combo")
 
@@ -50,14 +50,12 @@ class UI(QMainWindow):
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.train_btn.clicked.connect(self.training)
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
-
-
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
         self.predict_btn.clicked.connect(self.set_predict)
 
-        self.roc_btn.clicked.connect(self.roc_plot)
+        # self.roc_btn.clicked.connect(self.roc_plot)
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         
@@ -128,17 +126,17 @@ class UI(QMainWindow):
 
 
     
-    def roc_plot(self):
-        self.pre=self.lr.predict(self.x_test)
-        self.auc=roc_auc_score(self.y_test,self.pre)
-        self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
-        plt.plot(self.fpr,self.tpr,color='red',label='ROC')
-        plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
-        plt.xlabel("FPR")
-        plt.ylabel("TPR")
-        plt.title('Receiver Operating Characteristics Curve')
-        plt.legend()
-        plt.show()
+    # def roc_plot(self):
+    #     self.pre=self.lr.predict(self.x_test)
+    #     self.auc=roc_auc_score(self.y_test,self.pre)
+    #     self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
+    #     plt.plot(self.fpr,self.tpr,color='red',label='ROC')
+    #     plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
+    #     plt.xlabel("FPR")
+    #     plt.ylabel("TPR")
+    #     plt.title('Receiver Operating Characteristics Curve')
+    #     plt.legend()
+    #     plt.show()
         # self.fpr = dict()
         # self.tpr = dict()
         # self.roc_auc = dict()
