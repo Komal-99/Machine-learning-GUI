@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,Q
 import sys,pickle
 from PyQt5.QtCore import QCoreApplication
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
+from pyparsing import null_debug_action
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -48,6 +49,8 @@ class UI(QMainWindow):
         self.train_btn=self.findChild(QPushButton,"train")
         self.intercept=self.findChild(QLabel,"intercept")
         self.weights=self.findChild(QTextBrowser,"weights")
+
+        self.error = self.findChild(QLabel,"error")
         # self.output_btn=self.findChild(QPushButton,"output")
         self.bar_plot_btn=self.findChild(QPushButton,"bar_plot")
         self.mae=self.findChild(QLabel,"mae")
@@ -69,11 +72,16 @@ class UI(QMainWindow):
         self.columns.addItems(self.column_list)
     
     def set_valpred(self):
-        self.array = np.array(self.list.text()).reshape(1, -1)
-        # self.ar=check_array(self.array)
-        self.pred  =(self.reg.predict(self.array))
-        
-        self.predict_val.setText(self.pred)
+
+        pred = str(self.list.text())
+        if len(pred) == 0:
+            self.error.setText("Enter Values to Predict!")
+        else:
+            self.array = np.array(self.list.text()).reshape(1, -1)
+            # self.ar=check_array(self.array)
+            self.pred  =(self.reg.predict(self.array))
+
+            self.predict_val.setText(self.pred)
 
     def download_model(self):
 

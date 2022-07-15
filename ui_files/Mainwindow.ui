@@ -784,20 +784,17 @@
     </item>
     <item>
      <property name="text">
-<<<<<<< HEAD
-=======
-      <string>Logistic Regression</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Predictive Maintenance</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
->>>>>>> 1781d03003aba47ecb612809bd8685e83e45e07c
       <string>SVM</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>SVR</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Logistic Regression</string>
      </property>
     </item>
     <item>
@@ -808,6 +805,16 @@
     <item>
      <property name="text">
       <string>K-Nearest Neighbour</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Gaussian NB</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Multi Layer Perceptron</string>
      </property>
     </item>
    </widget>
@@ -1154,17 +1161,17 @@ color: rgb(1, 78, 144);</string>
    <widget class="QLabel" name="error">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>430</x>
       <y>270</y>
-      <width>191</width>
-      <height>16</height>
+      <width>211</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(255, 0, 0);</string>
     </property>
     <property name="text">
-     <string/>
+     <string>Select a Target from the Columns</string>
     </property>
    </widget>
   </widget>

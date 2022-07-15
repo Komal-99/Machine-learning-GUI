@@ -300,10 +300,10 @@ class UI(QMainWindow):
 
 
     def target(self):
-        if len(self.columns.currentItem()) == None:
-            self.error.setText("Enter Valid Target")
+        # if len(self.columns.currentItem()) == None:
+        #     self.error.setText("Enter Valid Target")
 
-        # self.item=self.columns.currentItem()
+        self.item=self.columns.currentItem()
         
      
  
