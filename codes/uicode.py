@@ -320,7 +320,7 @@ class UI(QMainWindow):
      
     def train_func(self):
 
-        myDict={ "Linear Regression":linear_reg , "SVM  ":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+        myDict={ "Linear Regression":linear_reg , "SVM":svm_model ,"SVR":SVR , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
         "K-Nearest Neighbour":KNN ,"Multi Layer Perceptron":mlp ,"Gaussian NB":gaussian}
         
         if(self.target_value!=""):
