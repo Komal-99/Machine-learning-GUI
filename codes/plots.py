@@ -7,7 +7,6 @@ class plot_boundary:
 	
 	def __init__(self,x1,x2,y):
 
-		
 		plt.figure()
 		self.plot_dataset(x1,x2,y,title='P2 Training set')
 		

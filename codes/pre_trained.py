@@ -27,9 +27,7 @@ class UI(QMainWindow):
         self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")
         self.test_size= self.findChild(QLabel,"test_size") 
-        self.model=pickle_model       
-        
-
+        self.model=pickle_model      #load the model
         self.conf_mat.clicked.connect(self.conf_matrix)
         self.test.clicked.connect(self.test_model)
         self.setvalue()
@@ -48,9 +46,7 @@ class UI(QMainWindow):
         text=open('summary.txt').read()
         self.model_details.setPlainText(text)
         os.remove('summary.txt')
-
         x=self.path.split(".")
-        
         text=open(x[0]+".txt").read()
         self.user_actions.setPlainText(text)
         
