@@ -77,16 +77,13 @@ class model(QMainWindow):
         train = trained()
         widget.addWidget(train)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        
         self.close()
 
 class trained(QMainWindow):
     def __init__(self):
         super(trained,self).__init__()
         loadUi(r"ui_files/pre_trained.ui",self)
-        # self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '\UTS SUMMER INTERN',"pkl(*.pkl)")
-        # with open(self.filePath_pre, 'rb') as file:
-        #     self.pickle_model = pickle.load(file)
-        # self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
 
         self.upload_model()
         self.test_pretrained()
@@ -179,6 +176,7 @@ class UI(QMainWindow):
         self.submit_btn.clicked.connect(self.set_target)
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
+        
         self.nullbtn.clicked.connect(self.fillme)
    
         self.show()
