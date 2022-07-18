@@ -1,4 +1,5 @@
 
+from base64 import decode
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 from PyQt5.QtCore import QCoreApplication
@@ -15,7 +16,7 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
-import uicode
+from uicode import UI
 
 
 
@@ -229,9 +230,11 @@ class UI(QMainWindow):
         self.ls_array =  np.array(self.ls_updated) 
         self.pred = self.classification.best_predict([self.ls_array])
         self.predict_val.setText(str(self.pred))
+        self.dict_val  = UI.decode()
+        print(self.dict_val)
         
-        uicode.decode(float(self.pred))
-        
+    
+    
 
     def plt3d(self):
         pio.renderers.default= 'browser'

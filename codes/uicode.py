@@ -119,10 +119,13 @@ class help_screen(QDialog):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
 class UI(QMainWindow):
+    # global dict_val
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi(r'ui_files\Mainwindow.ui', self)
-        global data,steps
+        global data,steps, dict_val
+
+        
         data=data_visualise.data_()
         steps=add_steps.add_steps()
 
@@ -285,21 +288,17 @@ class UI(QMainWindow):
         # print(self.df2.iloc[:,0])
         self.df[a],func_name =data.convert_category(self.df,a)
         self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
-        
+        print(self.dict_val)
         steps.add_text("Column "+ a + " converted using Lab elEncoder")
-        # print(self.dict_val)
+        # print(self.dict_val)    
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
 
 
-
-    def decode(self,key):
-        a = str(self.cat_column.currentText())
-        self.df2 = self.df[[a]].copy()
-        # print(self.df2.iloc[:,0])
-        self.df[a],func_name =data.convert_category(self.df,a)
-        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
-        print(self.dict_val.get(key))
+    def decode(self):
+        return self.dict_val
+    
+    
 
 
 
