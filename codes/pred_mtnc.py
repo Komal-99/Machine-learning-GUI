@@ -81,8 +81,8 @@ class UI(QMainWindow):
 
     def setvalue(self):
       
-        self.columns.clear()
-        self.column_list= data.get_column_list(self.df)
+        self.columns.addItems(self.column_list)
+        # self.column_list= data.get_column_list(self.df)
         self.X_combo.clear()
         self.X_combo.addItems(self.column_list)
         self.Y_combo.clear()

@@ -61,7 +61,7 @@ class model(QMainWindow):
         self.New_model.clicked.connect(self.new)
 
         self.Trainedmodel = self.findChild(QPushButton,"trainedmodel")
-        self.Trainedmodel.clicked.connect(self.trained)
+        self.Trainedmodel.clicked.connect(self.train)
 
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
@@ -73,28 +73,19 @@ class model(QMainWindow):
         self.close()
         
 
-    def trained(self):
-        train = trained()
-        widget.addWidget(train)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-        
-        self.close()
-
-class trained(QMainWindow):
-    def __init__(self):
-        super(trained,self).__init__()
-        loadUi(r"ui_files/pre_trained.ui",self)
-
-        self.upload_model()
-        self.test_pretrained()
-        
-    def upload_model(self):
+    def train(self):
         self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)
-    
-    def test_pretrained(self):
         self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+        # loadUi(r"ui_files/pre_trained.ui",self)
+        
+        self.close()
+
+# class trained(QMainWindow):
+#     def __init__(self):
+#         super(trained,self).__init__()
+#         s
 
  #  Help button connection
 class help_screen(QDialog):
@@ -176,7 +167,7 @@ class UI(QMainWindow):
         self.submit_btn.clicked.connect(self.set_target)
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
-        
+
         self.nullbtn.clicked.connect(self.fillme)
    
         self.show()
