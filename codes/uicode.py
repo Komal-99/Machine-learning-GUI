@@ -136,7 +136,7 @@ class UI(QMainWindow):
         self.null_btn=self.findChild(QPushButton,"null_btn")
         self.null_btn.clicked.connect(self.fillme)
 
-        self.columns.clicked.connect(self.target)
+        
         self.Browse.clicked.connect(self.getCSV)
         self.Drop_btn.clicked.connect(self.dropc)
         self.scatter_btn.clicked.connect(self.scatter_plot)
@@ -145,6 +145,7 @@ class UI(QMainWindow):
         self.histogram_btn.clicked.connect(self.histogram_plot)
         self.heatmap_btn.clicked.connect(self.heatmap_gen)
         self.con_btn.clicked.connect(self.con_cat)
+        self.columns.clicked.connect(self.target)
         self.submit_btn.clicked.connect(self.set_target)
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
