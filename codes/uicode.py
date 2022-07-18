@@ -13,6 +13,8 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
+import plotly.express as px
+import plotly.io as pio
 
 class error_window(QMainWindow):
     def __init__(self):
@@ -147,7 +149,13 @@ class UI(QMainWindow):
         self.null_column=self.findChild(QComboBox,"null_column")
         self.nullbtn=self.findChild(QPushButton,"null_2")
 
-        
+
+        self.X_combo=self.findChild(QComboBox,"X_combo")
+        self.Y_combo=self.findChild(QComboBox,"Y_combo")
+        self.Z_combo=self.findChild(QComboBox,"Z_combo")
+        self.color_combo=self.findChild(QComboBox,"color_combo")
+        self.plot3d_btn= self.findChild(QPushButton,"visualize")
+
         self.Browse.clicked.connect(self.getCSV)
         self.Drop_btn.clicked.connect(self.dropc)
         self.scatter_btn.clicked.connect(self.scatter_plot)
@@ -155,6 +163,7 @@ class UI(QMainWindow):
         self.hist_remove_btn.clicked.connect(self.hist_remove_column)
         self.histogram_btn.clicked.connect(self.histogram_plot)
         self.heatmap_btn.clicked.connect(self.heatmap_gen)
+        self.visualize.clicked.connect(self.plt3d)
         self.con_btn.clicked.connect(self.con_cat)
         self.columns.clicked.connect(self.target)
         self.submit_btn.clicked.connect(self.set_target)
@@ -197,7 +206,12 @@ class UI(QMainWindow):
             self.graphWidget.setBackground('w')
             self.graphWidget.plot(self.df,i)
         
-        
+
+    def plt3d(self):
+        pio.renderers.default= 'browser'
+        fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
+        return(pio.show(fig))        
+
     def heatmap_gen(self):
         data.plot_heatmap(self.df)
 
