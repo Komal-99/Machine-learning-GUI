@@ -28,6 +28,9 @@ class home_screen(QDialog):
         self.Start.clicked.connect(self.StartButton)
         self.help = self.findChild(QPushButton,"pushButton_3")
         self.help.clicked.connect(self.helpButton)
+        
+
+
 
 
     def helpButton(self):
@@ -35,35 +38,44 @@ class home_screen(QDialog):
         widget.addWidget(help)
         widget.setCurrentIndex(widget.currentIndex()+1)
         
+        
        
 
     def StartButton(self):
-        Model_type=model()
-        widget.addWidget(Model_type)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        self.w =model()
+        self.w.show()
+
 
        
 
 class model(QMainWindow):
     def __init__(self):
         super(model,self).__init__()
+        
+        # self.setFixedSize(780, 690)
+
         loadUi("ui_files/modeltype.ui",self)
         self.New_model = self.findChild(QPushButton, "newmodel")
         self.New_model.clicked.connect(self.new)
 
         self.Trainedmodel = self.findChild(QPushButton,"trainedmodel")
         self.Trainedmodel.clicked.connect(self.trained)
+
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+
     def new(self):
         pred = UI()
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        self.close()
+        
 
     def trained(self):
         train = trained()
         widget.addWidget(train)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        self.close()
 
 class trained(QMainWindow):
     def __init__(self):
