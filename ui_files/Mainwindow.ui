@@ -1167,21 +1167,6 @@ color: rgb(1, 78, 144);</string>
       <pointsize>10</pointsize>
      </font>
     </property>
-    <item>
-     <property name="text">
-      <string>StandardScale</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>MinMaxScale</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>PowerScale</string>
-     </property>
-    </item>
    </widget>
    <widget class="QPushButton" name="null_2">
     <property name="geometry">

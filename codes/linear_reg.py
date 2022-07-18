@@ -23,35 +23,37 @@ class UI(QMainWindow):
         data=data_visualise.data_()
         steps=common.common_steps(df,target)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
+
+
         self.columns= self.findChild(QListWidget,"columns")
         self.split_done= self.findChild(QLabel,"split")
-        self.exitbutton = self.findChild(QPushButton,"ExitButton")
-        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
-        
         self.list=self.findChild(QLineEdit,"list")
-        self.predict_val =self.findChild(QLabel,"predict_val")
-        self.target=self.findChild(QLabel,"target")
-        self.predict_btn=self.findChild(QPushButton,"train_2")
         self.test_data=self.findChild(QLineEdit,"test_data")
-        self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
-        self.fit_inter =self.findChild(QComboBox,"fit_inter")
-        self.normalize=self.findChild(QComboBox,"normalize")
-        self.train_btn=self.findChild(QPushButton,"train")
+        self.predict_val =self.findChild(QLabel,"predict_val")
         self.intercept=self.findChild(QLabel,"intercept")
-        self.weights=self.findChild(QTextBrowser,"weights")
-
         self.error = self.findChild(QLabel,"error")
-        self.bar_plot_btn=self.findChild(QPushButton,"bar_plot")
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
+        self.target=self.findChild(QLabel,"target")
+        self.fit_inter =self.findChild(QComboBox,"fit_inter")
+        self.normalize=self.findChild(QComboBox,"normalize")
+        self.predict_btn=self.findChild(QPushButton,"train_2")
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+        self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
+        self.bar_plot_btn=self.findChild(QPushButton,"bar_plot")
+        self.train_btn=self.findChild(QPushButton,"train")
+        self.weights=self.findChild(QTextBrowser,"weights")
 
 
+
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         self.test_size_btn.clicked.connect(self.test_split)
         self.train_btn.clicked.connect(self.training)
         self.bar_plot_btn.clicked.connect(self.barplot)
         self.dwnld.clicked.connect(self.download_model)
         self.predict_btn.clicked.connect(self.set_valpred)
+
         self.train_btn.setStyleSheet(
                              "QPushButton::pressed"
                              "{"
@@ -82,11 +84,10 @@ class UI(QMainWindow):
 
     def download_model(self):
 
-        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/Desktop',"pickle(*.pkl)")
+        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
             pickle.dump(self.reg, file)  
-        
         self.user_act.save_file(pkl_filename)  
 
     def test_split(self):

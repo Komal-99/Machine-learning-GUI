@@ -1,0 +1,5 @@
+
+File C:/Users/Sandeep/OneDrive/Desktop/UTS Summer Intern/insurance.csv read
+Column sex converted using LabelEncoder
+Column smoker converted using LabelEncoder
+Column region dropped
