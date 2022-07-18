@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Front Page.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Front Page.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -18,7 +18,7 @@ class Ui_Dialog(object):
         Dialog.setStyleSheet("background-color:rgb(1, 78, 144)\n"
 "")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(290, 260, 831, 81))
+        self.label_2.setGeometry(QtCore.QRect(0, 260, 1401, 81))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(36)
@@ -31,7 +31,7 @@ class Ui_Dialog(object):
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(490, 380, 311, 71))
+        self.label_3.setGeometry(QtCore.QRect(10, 380, 1391, 71))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(36)
@@ -44,9 +44,9 @@ class Ui_Dialog(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(500, 90, 291, 121))
+        self.label.setGeometry(QtCore.QRect(10, 90, 1391, 121))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("d:\\Users\\aaa\\OneDrive - The Northcap university\\Desktop\\UTS\\UTS-Project\\ui_files\\../photos/Logo.jpeg"))
+        self.label.setPixmap(QtGui.QPixmap("c:\\Users\\jvish\\OneDrive\\Desktop\\UTS-Project\\ui_files\\../photos/Logo.jpeg"))
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
@@ -83,7 +83,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label_2.setToolTip(_translate("Dialog", "<html><head/><body><p align=\"justify\">Predictive Maintenance</p></body></html>"))
-        self.label_2.setText(_translate("Dialog", "PREDICTIVE MAINTENANCE"))
+        self.label_2.setText(_translate("Dialog", "MACHINE LEARNING"))
         self.label_3.setText(_translate("Dialog", "MODEL"))
         self.pushButton_3.setText(_translate("Dialog", "HELP"))
         self.pushButton.setText(_translate("Dialog", "START"))

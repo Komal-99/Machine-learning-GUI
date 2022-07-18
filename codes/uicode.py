@@ -28,6 +28,9 @@ class home_screen(QDialog):
         self.Start.clicked.connect(self.StartButton)
         self.help = self.findChild(QPushButton,"pushButton_3")
         self.help.clicked.connect(self.helpButton)
+        
+
+
 
 
     def helpButton(self):
@@ -35,35 +38,44 @@ class home_screen(QDialog):
         widget.addWidget(help)
         widget.setCurrentIndex(widget.currentIndex()+1)
         
+        
        
 
     def StartButton(self):
-        Model_type=model()
-        widget.addWidget(Model_type)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        self.w =model()
+        self.w.show()
+
 
        
 
 class model(QMainWindow):
     def __init__(self):
         super(model,self).__init__()
+        
+        # self.setFixedSize(780, 690)
+
         loadUi("ui_files/modeltype.ui",self)
         self.New_model = self.findChild(QPushButton, "newmodel")
         self.New_model.clicked.connect(self.new)
 
         self.Trainedmodel = self.findChild(QPushButton,"trainedmodel")
         self.Trainedmodel.clicked.connect(self.trained)
+
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+
     def new(self):
         pred = UI()
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        self.close()
+        
 
     def trained(self):
         train = trained()
         widget.addWidget(train)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        self.close()
 
 class trained(QMainWindow):
     def __init__(self):
@@ -105,7 +117,7 @@ class UI(QMainWindow):
         data=data_visualise.data_()
         steps=add_steps.add_steps()
 
-
+        
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
@@ -132,6 +144,8 @@ class UI(QMainWindow):
         self.histogram_btn = self.findChild(QPushButton,"histogram")
         self.train=self.findChild(QPushButton,"train")
         self.heatmap_btn = self.findChild(QPushButton,"heatmap")
+        self.null_column=self.findChild(QComboBox,"null_column")
+        self.nullbtn=self.findChild(QPushButton,"null_2")
 
         
         self.Browse.clicked.connect(self.getCSV)
@@ -146,6 +160,7 @@ class UI(QMainWindow):
         self.submit_btn.clicked.connect(self.set_target)
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
+        self.nullbtn.clicked.connect(self.fillme)
    
         self.show()
 
@@ -213,7 +228,7 @@ class UI(QMainWindow):
             
 
         self.fill_combo_box() 
-        shape_df="Shape:  Rows:"+ str(data.get_shape(self.df)[0])+"  Columns: "+str(data.get_shape(self.df)[1])
+        shape_df="Shape:  Rows:"+ str(data.get_shape(self.df)[0])+" ,  Columns: "+str(data.get_shape(self.df)[1])
         self.data_shape.setText(shape_df)
 
     def fill_combo_box(self):
@@ -226,6 +241,8 @@ class UI(QMainWindow):
         self.scatter_x.addItems(self.column_list)
         self.scatter_y.clear()
         self.scatter_y.addItems(self.column_list)
+        self.null_column.clear()
+        self.null_column.addItems(self.column_list)
        
         color= ['red', 'green', 'blue', 'yellow']
         self.scatter_c.clear()
@@ -247,13 +264,13 @@ class UI(QMainWindow):
         self.filldetails()
 
 
-    # def fillme(self):
+    def fillme(self):
 
-    #     self.df[self.emptycolumn.currentText()]=data.fillmean(self.df,self.emptycolumn.currentText())
-    #     code="data['"+column+"'].fillna(data['"+self.emptycolumn.currentText()+"'].mean(),inplace=True)"
-    #     steps.add_code(code)
-    #     steps.add_text("Empty values of "+ self.emptycolumn.currentText() + " filled with mean value")
-    #     self.filldetails()
+        self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())
+        code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"
+        steps.add_code(code)
+        steps.add_text("No Empty Values")
+        self.filldetails()
 
     def getCSV(self):
         self.filePath, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Downloads/ML Github/datasets',"csv(*.csv)")
