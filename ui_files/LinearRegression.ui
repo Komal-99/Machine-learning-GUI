@@ -505,8 +505,10 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="font">
      <font>
-      <family>Ubuntu Condensed</family>
+      <family>MS Shell Dlg 2</family>
       <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -698,7 +700,7 @@ color: rgb(255, 255, 255);</string>
     <property name="font">
      <font>
       <family>MS Shell Dlg 2</family>
-      <pointsize>11</pointsize>
+      <pointsize>14</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
