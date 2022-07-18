@@ -215,13 +215,21 @@ class UI(QMainWindow):
         data.plot_heatmap(self.df)
 
     def set_target(self):
-        self.target_value=str(self.item.text()).split()[0]
-        steps.add_code("target=data['"+self.target_value+"']")
-        self.target_col.setText(self.target_value)
+        try:
+            self.target_value=str(self.item.text()).split()[0]
+            steps.add_code("target=data['"+self.target_value+"']")
+            self.target_col.setText(self.target_value)
+        except:
+                self.w =error_window()
+                self.w.show()
+
 
 
     def target(self):
-        self.item=self.columns.currentItem()
+        
+            self.item=self.columns.currentItem()
+        
+            print('exiting')    
         
         
 
@@ -293,7 +301,7 @@ class UI(QMainWindow):
 
     def decode(self):
         return self.dict_val
-    
+
     
 
 

@@ -16,7 +16,6 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
-from uicode import UI
 
 
 
