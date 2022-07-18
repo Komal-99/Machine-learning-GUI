@@ -132,6 +132,9 @@ class UI(QMainWindow):
         self.histogram_btn = self.findChild(QPushButton,"histogram")
         self.train=self.findChild(QPushButton,"train")
         self.heatmap_btn = self.findChild(QPushButton,"heatmap")
+        self.null_column=self.findChild(QComboBox,"null_column")
+        self.null_btn=self.findChild(QPushButton,"null_btn")
+        self.null_btn.clicked.connect(self.fillme)
 
         self.columns.clicked.connect(self.target)
         self.Browse.clicked.connect(self.getCSV)
@@ -212,7 +215,7 @@ class UI(QMainWindow):
             
 
         self.fill_combo_box() 
-        shape_df="Shape:  Rows:"+ str(data.get_shape(self.df)[0])+"  Columns: "+str(data.get_shape(self.df)[1])
+        shape_df="Shape:  Rows:"+ str(data.get_shape(self.df)[0])+" ,  Columns: "+str(data.get_shape(self.df)[1])
         self.data_shape.setText(shape_df)
 
     def fill_combo_box(self):
@@ -225,6 +228,8 @@ class UI(QMainWindow):
         self.scatter_x.addItems(self.column_list)
         self.scatter_y.clear()
         self.scatter_y.addItems(self.column_list)
+        self.null_column.clear()
+        self.null_column.addItems(self.column_list)
        
         color= ['red', 'green', 'blue', 'yellow']
         self.scatter_c.clear()
@@ -246,13 +251,13 @@ class UI(QMainWindow):
         self.filldetails()
 
 
-    # def fillme(self):
+    def fillme(self):
 
-    #     self.df[self.emptycolumn.currentText()]=data.fillmean(self.df,self.emptycolumn.currentText())
-    #     code="data['"+column+"'].fillna(data['"+self.emptycolumn.currentText()+"'].mean(),inplace=True)"
-    #     steps.add_code(code)
-    #     steps.add_text("Empty values of "+ self.emptycolumn.currentText() + " filled with mean value")
-    #     self.filldetails()
+        self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())
+        code="data['"+column+"'].fillna(data['"+self.emptycolumn.currentText()+"'].mean(),inplace=True)"
+        steps.add_code(code)
+        steps.add_text("No Empty Values")
+        self.filldetails()
 
     def getCSV(self):
         self.filePath, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Downloads/ML Github/datasets',"csv(*.csv)")

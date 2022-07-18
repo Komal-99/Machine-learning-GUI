@@ -8,9 +8,9 @@ class add_steps:
 		self.text=""
 		self.code=""
 
-	def delete_text(self):
+	# def delete_text(self):
 
-		self.text=""
+	# 	self.text=""
 
 	def add_text(self,text):
 
