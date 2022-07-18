@@ -16,19 +16,22 @@ import common
 from sklearn.preprocessing import OrdinalEncoder
 
 
-encoder = OrdinalEncoder()
-
+# MainWindow of the Linear Regression Model
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
         uic.loadUi('ui_files\LinearRegression.ui', self)
         self.user_act=user_actions
         global data 
+        #Calling the data_ class from data_visualise.py
         data=data_visualise.data_()
+        #Calling the common class from common_steps.py
         steps=common.common_steps(df,target)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
 
 
+
+        #Identifying the required Buttons from QTDesigner
         self.columns= self.findChild(QListWidget,"columns")
         self.split_done= self.findChild(QLabel,"split")
         self.list=self.findChild(QLineEdit,"list")
@@ -50,7 +53,7 @@ class UI(QMainWindow):
         self.weights=self.findChild(QTextBrowser,"weights")
 
 
-
+        #Connecting the buttons with the coresponding functions
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         self.test_size_btn.clicked.connect(self.test_split)
         self.train_btn.clicked.connect(self.training)
@@ -67,11 +70,12 @@ class UI(QMainWindow):
         self.show()
         self.setvalue()
 
+    # Setting the the columns value
     def setvalue(self):
         self.columns.addItems(self.column_list)
     
+    # Prediction for a Specific Value
     def set_valpred(self):
-
         pred = str(self.list.text())
         if len(pred) == 0:
             self.error.setText("Enter Values to Predict!")
@@ -84,23 +88,23 @@ class UI(QMainWindow):
             self.ls_array =  np.array(self.ls_updated)
             self.pred  =self.reg.predict([self.ls_array])
             self.predict_val.setText(str(self.pred))
-            self.decode = encoder.categories_[self.predict_val]
 
+    #Downloading a Trained Model
     def download_model(self):
-
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
             pickle.dump(self.reg, file)  
         self.user_act.save_file(pkl_filename)  
 
+    #Splitting the Model
     def test_split(self):
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=0)
         print(self.y_train.shape)
         print(self.y_test.shape)
         self.split_done.setText(str("Split Done"))
      
-
+    #Training the Model
     def training(self):
 
         self.reg=LinearRegression().fit(self.x_train,self.y_train)
@@ -109,6 +113,7 @@ class UI(QMainWindow):
         self.intercept.setText(str(self.reg.intercept_))
         self.weights.setText(coef)
 
+        #Various Parameters for the trained model
         pre=self.reg.predict(self.x_test)
         self.mae.setText(str(metrics.mean_absolute_error(self.y_test,pre)))
         self.mse.setText(str(metrics.mean_squared_error(self.y_test,pre)))
@@ -117,7 +122,7 @@ class UI(QMainWindow):
         
 
 
-
+    #plotting the Bar Graph
     def barplot(self):
 
         y_pred = self.reg.predict(self.x_test)

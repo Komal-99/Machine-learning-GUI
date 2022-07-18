@@ -17,6 +17,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
 import plotly.express as px
 import plotly.io as pio
+import plotly.graph_objects as go
 
 
 class error_window(QMainWindow):
@@ -203,23 +204,32 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.graphWidget.plot(self.df,i)    #plotting the histogram
         
 
-    def plt3d(self):    #3d plot function
-        pio.renderers.default= 'browser'    #setting the default renderer to browser
-          #plotting the 3d scatter plot
-        fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())  
-        return(pio.show(fig))           #returning the 3d plot
+    def plt3d(self):
+        # pio.renderers.default= 'chrome'
+        # fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
+        # return(pio.show(fig))    
+        fig= go.Figure(data= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())) 
+        return(fig.show())
 
     def heatmap_gen(self):
         data.plot_heatmap(self.df)  #calling the function from data class to plot the heatmap
 
-    def set_target(self):   #setting the target value
-        self.target_value=str(self.item.text()).split()[0]  #splitting the text to get the target value
-        steps.add_code("target=data['"+self.target_value+"']")  #adding the code to the steps
-        self.target_col.setText(self.target_value)  #setting the target value to the target column
+    def set_target(self):
+        try:
+            self.target_value=str(self.item.text()).split()[0]
+            steps.add_code("target=data['"+self.target_value+"']")
+            self.target_col.setText(self.target_value)
+        except:
+                self.w =error_window()
+                self.w.show()
 
 
-    def target(self):   #target column function
-        self.item=self.columns.currentItem()    #getting the current item
+
+    def target(self):
+        
+            self.item=self.columns.currentItem()
+        
+            print('exiting')    
         
         
 
@@ -255,6 +265,15 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.null_column.clear()
         self.null_column.addItems(self.column_list)  #adding the columns to the null column combo box
        
+        self.X_combo.clear()
+        self.X_combo.addItems(self.column_list)
+        self.Y_combo.clear()
+        self.Y_combo.addItems(self.column_list)
+        self.Z_combo.clear()
+        self.Z_combo.addItems(self.column_list)
+        self.color_combo.clear()
+        self.color_combo.addItems(self.column_list)
+       
         color= ['red', 'green', 'blue', 'yellow']   #list of colors
         self.scatter_c.clear()  #clearing the scatter color combo box
         self.scatter_c.addItems(color)  #adding the colors to the scatter color combo box
@@ -287,6 +306,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.df[a],func_name =data.convert_category(self.df,a)
         self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
         print(self.dict_val.get(key))   #getting the key from the dictionary
+        print(self.dict_val)
 
 
 
