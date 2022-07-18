@@ -1,4 +1,4 @@
-
+# importing Libraries
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys,pickle
 import data_visualise
@@ -15,15 +15,21 @@ import seaborn as sns
 from sklearn.metrics import accuracy_score,auc
 import common
 
-class UI(QMainWindow):
-    def __init__(self,df,target,user_actions):
+class UI(QMainWindow):  # inherit from QMainWindow  
+    def __init__(self,df,target,user_actions):  # constructor
         super(UI, self).__init__()
-        uic.loadUi("ui_files/RandomForest.ui", self)
-        self.user_act=user_actions
-        global data ,steps
-        data=data_visualise.data_()
-        steps=common.common_steps(df,target)
-        self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
+        uic.loadUi("ui_files/RandomForest.ui", self)    # load the UI
+        self.user_act=user_actions  # user_actions is the object of class User_Actions
+        global data ,steps  # data is the dataframe
+        data=data_visualise.data_() # data is the dataframe
+        steps=common.common_steps(df,target)    # steps is the object of class Common_steps
+        self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()    # X is the dataframe    
+        # n_classes is the number of classes  
+        # target_value is the target value    
+        # df is the dataframe    
+        # column_list is the list of columns   of the dataframe
+
+        # defining the functions and its labels
         self.columns= self.findChild(QListWidget,"columns")
         self.random=self.findChild(QLineEdit,"randomstate")
         self.estimators=self.findChild(QLineEdit,"estimators")
@@ -58,64 +64,65 @@ class UI(QMainWindow):
                              "{"
                              "background-color : green;"
                              "}"
-                             )
+                             )  # setting the style of the button
         
-        self.dwnld.clicked.connect(self.download_model)
-        self.setvalue()
-        self.show()
+        self.dwnld.clicked.connect(self.download_model) # download the model
+        self.setvalue() # set the values of the columns
+        self.show()     # show the window
 
-    def exit(self):
+    def exit(self): # exit function
         sys.exit()
-    def set_predict(self):
-        self.a = self.list.text()
-        self.ls = self.a.split(",")
-        self.target.setText(str(self.target_value))
-        self.ls_updated = [float(x) for x in self.ls]
-        self.ls_array =  np.array(self.ls_updated)
+    def set_predict(self):  # function to predict the value
+        self.a = self.list.text()   # a is the value of the list
+        self.ls = self.a.split(",") # ls is the list of the values
+        self.target.setText(str(self.target_value)) # set the target value
+        self.ls_updated = [float(x) for x in self.ls]   # converting the list to float
+        self.ls_array =  np.array(self.ls_updated)  # converting the list to array
 
-        self.pred  =self.lr.predict([self.ls_array])
-        self.predict_val.setText(str(self.pred))
+        self.pred  =self.lr.predict([self.ls_array])    # pred is the predicted value
+        self.predict_val.setText(str(self.pred))    # set the predicted value
 
 
-    def setvalue(self):
-        self.columns.addItems(self.column_list)
-    
+    def setvalue(self): # function to set the values of the columns
+        self.columns.addItems(self.column_list) # add the columns to the list
 
-    def download_model(self):
+
+    def download_model(self):   # function to download the model
 
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
-        pkl_filename = name[0]
-        with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.lr, file)  
-        
+        pkl_filename = name[0]      # pkl_filename is the name of the file
+        with open(pkl_filename, 'wb') as file:  # open the file
+            pickle.dump(self.lr, file)      # dump the model in the file
+
         self.user_act.save_file(pkl_filename)  
     
-    def test_split(self):
+    def test_split(self):   # function to split the data
 
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
-        print(self.y_train.shape)
+        print(self.y_train.shape)   # print the shape of the train and test data
         print(self.y_test.shape)
-        self.split_done.setText(str("Split Done"))
+        self.split_done.setText(str("Split Done"))  # set the text of the label
         
-    def training(self):
+    def training(self):  # function to train the model
 
-        self.lr = RFC(n_estimators=int(self.estimators.text()),criterion=self.criterion.currentText(),max_depth=None,min_samples_split=int(self.min_sample_split.text()),bootstrap=self.bootstrap.currentText()=='True',random_state=1)
-        self.lr.fit(self.x_train,self.y_train)
+        self.lr = RFC(n_estimators=int(self.estimators.text()),criterion=self.criterion.currentText(),max_depth=None,min_samples_split=int(self.min_sample_split.text()),bootstrap=self.bootstrap.currentText()=='True',random_state=1) # create the model of Randomm forest
+
+        self.lr.fit(self.x_train,self.y_train)  # fit the model
         
-        self.pre=self.lr.predict(self.x_test)
-        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
-        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
-        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))
-        text=steps.classification_(self.y_test,self.pre)
-        self.report.setPlainText(text)
+        self.pre=self.lr.predict(self.x_test)   # predict the value
+        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))    # set the mae
+        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))   # set the mse
+        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))   # set the rmse
+        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))    # set the accuracy
+        text=steps.classification_(self.y_test,self.pre)    # get the classification report
+        self.report.setPlainText(text)  
 
     def conf_matrix(self):
 
-        data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }
-        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted'])
-        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
-        plt.figure()
-        sns.heatmap(confusion_matrix, annot=True)
-        plt.show()
+        data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }      # create the dataframe
+        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) 
+        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])  # create the confusion matrix
+        plt.figure()    
+        sns.heatmap(confusion_matrix, annot=True)   # plot the confusion matrix
+        plt.show()  # show the plot
 
