@@ -1,4 +1,5 @@
 
+from re import X
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 import data_visualise
@@ -15,10 +16,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import common
 from PyQt5.QtCore import QCoreApplication
+import uicode
 
 
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
+        
         super(UI, self).__init__()
         uic.loadUi("ui_files/LogisticRegression.ui", self)
         self.user_act=user_actions
@@ -94,6 +97,8 @@ class UI(QMainWindow):
         self.ls_array =  np.array(self.ls_updated)
         self.pred  =self.lr.predict([self.ls_array])
         self.predict_val.setText(str(self.pred))
+        
+        
 
     def training(self):
 

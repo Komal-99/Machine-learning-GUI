@@ -257,11 +257,28 @@ class UI(QMainWindow):
 
     def con_cat(self):
         
-        a=self.cat_column.currentText()
+        a = str(self.cat_column.currentText())
+
+        self.df2 = self.df[[a]].copy()
+        # print(self.df2.iloc[:,0])
         self.df[a],func_name =data.convert_category(self.df,a)
-        steps.add_text("Column "+ a + " converted using LabelEncoder")
+        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+        
+        steps.add_text("Column "+ a + " converted using Lab elEncoder")
+        # print(self.dict_val)
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
+
+
+
+    def decode(self,key):
+        a = str(self.cat_column.currentText())
+        self.df2 = self.df[[a]].copy()
+        # print(self.df2.iloc[:,0])
+        self.df[a],func_name =data.convert_category(self.df,a)
+        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+        print(self.dict_val.get(key))
+
 
 
     def fillme(self):

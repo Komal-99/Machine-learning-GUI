@@ -15,6 +15,8 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
+import uicode
+
 
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
@@ -36,7 +38,8 @@ class UI(QMainWindow):
         self.fit_inter=self.findChild(QComboBox,"fit_inter")  
         self.multi_class=self.findChild(QComboBox,"multi_class")
         self.train_btn=self.findChild(QPushButton,"train")
-        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+        self.exitbutton = self.findChild(QPushButton,"pushButton")
+
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
@@ -215,6 +218,8 @@ class UI(QMainWindow):
         self.ls_array =  np.array(self.ls_updated) 
         self.pred = self.classification.best_predict([self.ls_array])
         self.predict_val.setText(str(self.pred))
+        
+        uicode.decode(float(self.pred))
         
 
     def plt3d(self):
