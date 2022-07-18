@@ -145,8 +145,7 @@ class UI(QMainWindow):
         self.train=self.findChild(QPushButton,"train")
         self.heatmap_btn = self.findChild(QPushButton,"heatmap")
         self.null_column=self.findChild(QComboBox,"null_column")
-        self.null_btn=self.findChild(QPushButton,"null_btn")
-        self.null_btn.clicked.connect(self.fillme)
+        self.nullbtn=self.findChild(QPushButton,"null_2")
 
         
         self.Browse.clicked.connect(self.getCSV)
@@ -161,6 +160,7 @@ class UI(QMainWindow):
         self.submit_btn.clicked.connect(self.set_target)
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
+        self.nullbtn.clicked.connect(self.fillme)
    
         self.show()
 
@@ -267,7 +267,7 @@ class UI(QMainWindow):
     def fillme(self):
 
         self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())
-        code="data['"+column+"'].fillna(data['"+self.emptycolumn.currentText()+"'].mean(),inplace=True)"
+        code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"
         steps.add_code(code)
         steps.add_text("No Empty Values")
         self.filldetails()
