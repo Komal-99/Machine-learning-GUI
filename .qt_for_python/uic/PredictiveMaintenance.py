@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\PredictiveMaintenance.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\PredictiveMaintenance.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1031, 674)
+        MainWindow.resize(1055, 668)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.visualize = QtWidgets.QPushButton(self.centralwidget)
@@ -200,19 +200,19 @@ class Ui_MainWindow(object):
         self.X_combo = QtWidgets.QComboBox(self.centralwidget)
         self.X_combo.setGeometry(QtCore.QRect(800, 320, 79, 23))
         self.X_combo.setObjectName("X_combo")
-        self.ExitButton = QtWidgets.QPushButton(self.centralwidget)
-        self.ExitButton.setGeometry(QtCore.QRect(930, 580, 91, 31))
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(930, 580, 91, 31))
         font = QtGui.QFont()
         font.setFamily("Segoe Fluent Icons")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.ExitButton.setFont(font)
-        self.ExitButton.setStyleSheet("\n"
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("\n"
 "background-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);\n"
 "")
-        self.ExitButton.setObjectName("ExitButton")
+        self.pushButton.setObjectName("pushButton")
         self.predict = QtWidgets.QPushButton(self.centralwidget)
         self.predict.setGeometry(QtCore.QRect(420, 570, 151, 41))
         font = QtGui.QFont()
@@ -314,7 +314,7 @@ class Ui_MainWindow(object):
         self.label_10.setObjectName("label_10")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1031, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1055, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -352,7 +352,7 @@ class Ui_MainWindow(object):
         self.label_7.setText(_translate("MainWindow", "Max_Iter:"))
         self.randomstate.setText(_translate("MainWindow", "1.0"))
         self.label_13.setText(_translate("MainWindow", "Mean Square Error:"))
-        self.ExitButton.setText(_translate("MainWindow", "Exit"))
+        self.pushButton.setText(_translate("MainWindow", "Exit"))
         self.predict.setText(_translate("MainWindow", "Predict"))
         self.label_15.setText(_translate("MainWindow", "Mean Absolute Error:"))
         self.label_8.setText(_translate("MainWindow", "<html><head/><body><p>Test Train Split</p></body></html>"))
