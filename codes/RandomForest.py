@@ -3,8 +3,6 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,Q
 import sys,pickle
 import data_visualise
 from itertools import cycle
-
-import table_display
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 from sklearn.metrics import accuracy_score , confusion_matrix , roc_curve, roc_auc_score
 from sklearn.model_selection import train_test_split
@@ -14,7 +12,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score,auc
 import common
 
@@ -27,9 +24,7 @@ class UI(QMainWindow):
         data=data_visualise.data_()
         steps=common.common_steps(df,target)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        # self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")
-        # self.test_size= self.findChild(QLabel,"test_size")  
         self.random=self.findChild(QLineEdit,"randomstate")
         self.estimators=self.findChild(QLineEdit,"estimators")
         self.criterion=self.findChild(QComboBox,"criterion")
@@ -42,9 +37,6 @@ class UI(QMainWindow):
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
         self.accuracy=self.findChild(QLabel,"accuracy")
-        # self.roc_btn=self.findChild(QPushButton,"roc")
-        # self.X_combo=self.findChild(QComboBox,"X_combo")
-        # self.Y_combo=self.findChild(QComboBox,"Y_combo")
 
         self.test_data=self.findChild(QLineEdit,"test_data")
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
@@ -54,8 +46,6 @@ class UI(QMainWindow):
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
         self.predict_btn.clicked.connect(self.set_predict)
-
-        # self.roc_btn.clicked.connect(self.roc_plot)
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         
@@ -76,17 +66,12 @@ class UI(QMainWindow):
 
 
     def setvalue(self):
-        # self.target.setText(self.target_value)
-        # self.columns.clear()
         self.columns.addItems(self.column_list)
-        # self.X_combo.addItems(self.column_list)
-        # self.Y_combo.addItems(self.column_list)
+    
 
     def download_model(self):
 
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
-        #file = open(name[0],'w')
-        
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
             pickle.dump(self.lr, file)  
@@ -98,9 +83,7 @@ class UI(QMainWindow):
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
         print(self.y_train.shape)
         print(self.y_test.shape)
-        # self.train_size.setText(str(self.x_train.shape))
-        # self.test_size.setText(str(self.x_test.shape))
-
+        
     def training(self):
 
         self.lr = RFC(n_estimators=int(self.estimators.text()),criterion=self.criterion.currentText(),max_depth=None,min_samples_split=int(self.min_sample_split.text()),bootstrap=self.bootstrap.currentText()=='True',random_state=1)
@@ -111,7 +94,6 @@ class UI(QMainWindow):
         self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
         self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))
-
         text=steps.classification_(self.y_test,self.pre)
         self.report.setPlainText(text)
 

@@ -27,28 +27,17 @@ class UI(QMainWindow):
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
         self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")
-        #self.test_size= self.findChild(QLabel,"test_data") 
         self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")
-        #self.test_size= self.findChild(QLabel,"test_size")  
-        
-        # self.c_=self.findChild(QLineEdit,"c_")
-        # self.penalty=self.findChild(QComboBox,"penalty")
         self.solver=self.findChild(QComboBox,"solver")        
-        # self.dual=self.findChild(QComboBox,"dual")       
+   
         self.max_iter=self.findChild(QLineEdit,"max_iter")
         self.random_state=self.findChild(QLineEdit,"randomstate")
         self.fit_inter=self.findChild(QComboBox,"fit_inter")  
         self.multi_class=self.findChild(QComboBox,"multi_class")
-        # self.tol=self.findChild(QLineEdit,"tol")
         self.train_btn=self.findChild(QPushButton,"train")
-        # self.accuracy= self.findChild(QPushButton,"output")
-        
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
-
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
-
-
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
@@ -63,13 +52,13 @@ class UI(QMainWindow):
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
         self.plot3d_btn= self.findChild(QPushButton,"visualize")
-        #self.roc_btn.clicked.connect(self.roc_plot)
-        self.train_btn.clicked.connect(self.training) #
-        self.conf_mat_btn.clicked.connect(self.conf_matrix) #
-        self.test_size_btn.clicked.connect(self.test_split) #
-        self.dwnld.clicked.connect(self.download_model) #
+        
+        self.train_btn.clicked.connect(self.training) 
+        self.conf_mat_btn.clicked.connect(self.conf_matrix) 
+        self.test_size_btn.clicked.connect(self.test_split) 
+        self.dwnld.clicked.connect(self.download_model)
         self.visualize.clicked.connect(self.plt3d) 
-        #self.acc.clicked.connect(self.accuracy) #
+        #self.acc.clicked.connect(self.accuracy) 
 
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
@@ -79,7 +68,7 @@ class UI(QMainWindow):
         self.show()
 
     def setvalue(self):
-        # self.target.setText(self.target_value)
+      
         self.columns.clear()
         self.column_list= data.get_column_list(self.df)
         self.X_combo.clear()
@@ -91,31 +80,18 @@ class UI(QMainWindow):
         self.color_combo.clear()
         self.color_combo.addItems(self.column_list)
 
-
-   
-# self.scatter_x=self.findChild(QComboBox,"scatter_x")
-# self.scatter_x.clear()
-#         self.scatter_x.addItems(self.column_list)
-
-
-    
     def test_split(self):
 
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=0)
         print(self.y_train.shape)
         print(self.y_test.shape)
-        # self.train_size.setText(str(self.x_train.shape))
-        # self.test_size.setText(str(self.x_test.shape))
 
     def download_model(self):
 
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
-        #file = open(name[0],'w')
-        
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.lr, file)  
-        
+            pickle.dump(self.lr, file)  # this will dump the object to a file
         self.user_act.save_file(pkl_filename)  
 
     def training(self):
@@ -182,7 +158,6 @@ class UI(QMainWindow):
                     model_acc.append(metrics.accuracy_score(self.y_test, i.predict(self.x_test)))
                     stop= time.time()
                     model_time.append((stop-start))
-                    #print(i, 'has been fit')
                 self.models_output= pd.DataFrame({'Models': self.models, 'Accuracy': model_acc, 'Runtime (s)': model_time})
             
             def results(self):
@@ -205,19 +180,17 @@ class UI(QMainWindow):
             
             def best_model_runtime(self):
                 return(round(self.models_output_cleaned['Runtime (s)'][0], 3))
-
-            # def best_model_predict(self, x_test):
-            #     x_test= scaler.transform(x_test)
-            #     return(self.best.predict(x_test))
-
+                
             def best_model_confusion_matrix(self):
                 return(metrics.confusion_matrix(self.y_test, self.best.predict(self.x_test)))
 
             def best_model_clmatrix(self):
                 return(metrics.classification_report(self.y_test, self.best.predict(self.x_test)))
+
             def model_3d_plot(self):
                 fig= px.scatter_3d(data, x= 'Air temperature [K]', y='Rotational speed [rpm]', z='Torque [Nm]', color='Failure Type')
                 return(fig.show())
+
             def best_predict(self, x_testp):
                 return self.best.predict(x_testp)
 
@@ -238,12 +211,9 @@ class UI(QMainWindow):
     def set_predict(self):
         self.a = self.list.text()
         self.ls = self.a.split(",")
-       
         self.ls_updated = [float(x) for x in self.ls]
         self.ls_array =  np.array(self.ls_updated) 
-        # self.pred = self.lr.predict([self.ls_array])
         self.pred = self.classification.best_predict([self.ls_array])
-        # model= self.training().Modelling(self.x_train, self.y_train, self.x_test, self.y_test, models_to_test)
         self.predict_val.setText(str(self.pred))
         
 
@@ -251,8 +221,7 @@ class UI(QMainWindow):
         pio.renderers.default= 'browser'
         fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
         return(pio.show(fig))
-        # return(fig.show(renderer='svg'))
-        # return
+        
 
     def conf_matrix(self):
 

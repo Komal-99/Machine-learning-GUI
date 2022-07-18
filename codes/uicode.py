@@ -6,8 +6,8 @@ from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
-import linear_reg,svm_model,table_display,data_visualise,SVR,logistic_reg,RandomForest
-import KNN,mlp,pre_trained,add_steps,gaussian, pred_mtnc
+import linear_reg,svm_model,table_display,data_visualise,logistic_reg,RandomForest
+import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
@@ -18,10 +18,6 @@ class error_window(QMainWindow):
     def __init__(self):
         super(error_window, self).__init__()
         uic.loadUi("ui_files/error.ui", self)
-        
-
-        # app.exec_()
-        
         self.show()
 
 class home_screen(QDialog):
@@ -30,7 +26,6 @@ class home_screen(QDialog):
         loadUi("ui_files/Front Page.ui",self)
         self.Start = self.findChild(QPushButton, "pushButton")
         self.Start.clicked.connect(self.StartButton)
-
         self.help = self.findChild(QPushButton,"pushButton_3")
         self.help.clicked.connect(self.helpButton)
 
@@ -40,13 +35,47 @@ class home_screen(QDialog):
         widget.addWidget(help)
         widget.setCurrentIndex(widget.currentIndex()+1)
         
-        #  Help button connection
+       
 
     def StartButton(self):
+        Model_type=model()
+        widget.addWidget(Model_type)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+       
+
+class model(QDialog):
+    def __init__(self):
+        super(model,self).__init__()
+        loadUi("ui_files/modeltype.ui",self)
+        self.New_model = self.findChild(QPushButton, "newmodel")
+        self.New_model.clicked.connect(self.new)
+
+        self.Trainedmodel = self.findChild(QPushButton,"trainedmodel")
+        self.Trainedmodel.clicked.connect(self.trained)
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+    def new(self):
         pred = UI()
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def trained(self):
+        train = trained()
+        widget.addWidget(train)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+class trained(QMainWindow):
+    def __init__(self):
+        super(trained,self).__init__()
+        loadUi(r"ui_files/pre_trained.ui",self)
+        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")
+        with open(self.filePath_pre, 'rb') as file:
+            self.pickle_model = pickle.load(file)
+        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+
+
+ #  Help button connection
 class help_screen(QDialog):
     def __init__(self):
         super(help_screen,self).__init__()
@@ -72,12 +101,6 @@ class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi(r'ui_files\Mainwindow.ui', self)
-
-        # find the widgets in the xml file
- 
-        #self.textedit = self.findChild(QTextEdit, "textEdit")
-        #self.button = self.findChild(QPushButton, "pushButton")
-        #self.button.clicked.connect(self.clickedBtn)
         global data,steps
         data=data_visualise.data_()
         steps=add_steps.add_steps()
@@ -85,80 +108,47 @@ class UI(QMainWindow):
 
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
-
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
-
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
-
         self.plot_win= self.findChild(QListWidget,"plotwidget")
-        
-        
-        # self.fillna_btn = self.findChild(QPushButton,"fill_na")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
-        # self.emptycolumn=self.findChild(QComboBox,"empty_column")
         self.cat_column=self.findChild(QComboBox,"cat_column")
         self.table = self.findChild(QTableView,"tableView")
         self.dropcolumns=self.findChild(QComboBox,"dropcolumn")
         self.data_shape = self.findChild(QLabel,"shape")
-        # self.fillmean_btn = self.findChild(QPushButton,"fillmean")
         self.submit_btn = self.findChild(QPushButton,"Submit")
         self.target_col =self.findChild(QLabel,"target_col")
         self.model_select=self.findChild(QComboBox,"model_select")
-        #self.describe=self.findChild(QPlainTextEdit,"describe")
-        #self.describe= self.findChild(QTextEdit,"Describe")
-        
         self.scatter_x=self.findChild(QComboBox,"scatter_x")
         self.scatter_y=self.findChild(QComboBox,"scatter_y")
         self.scatter_mark=self.findChild(QComboBox,"scatter_mark")
         self.scatter_c=self.findChild(QComboBox,"scatter_c")
         self.scatter_btn = self.findChild(QPushButton,"scatterplot")
-        
-        # self.plot_x=self.findChild(QComboBox,"plot_x")
-        # self.plot_y=self.findChild(QComboBox,"plot_y")
-        # self.plot_mark=self.findChild(QComboBox,"plot_marker")
-        # self.plot_c=self.findChild(QComboBox,"plot_c")
-        # self.plot_btn = self.findChild(QPushButton,"lineplot")
-
         self.hist_column=self.findChild(QComboBox,"hist_column")
         self.hist_column_add=self.findChild(QComboBox,"hist_column_add")
         self.hist_add_btn = self.findChild(QPushButton,"hist_add_btn")
         self.hist_remove_btn = self.findChild(QPushButton,"hist_remove_btn")
         self.histogram_btn = self.findChild(QPushButton,"histogram")
-
+        self.train=self.findChild(QPushButton,"train")
         self.heatmap_btn = self.findChild(QPushButton,"heatmap")
-        # self.plot_canvas= self.findChild(QListWidget,"splot")
 
         self.columns.clicked.connect(self.target)
         self.Browse.clicked.connect(self.getCSV)
         self.Drop_btn.clicked.connect(self.dropc)
         self.scatter_btn.clicked.connect(self.scatter_plot)
-        # self.plot_btn.clicked.connect(self.line_plot)
-        
-        # self.fillna_btn.clicked.connect(self.fillna)
-        # self.fillmean_btn.clicked.connect(self.fillme)
-
-        
         self.hist_add_btn.clicked.connect(self.hist_add_column)
         self.hist_remove_btn.clicked.connect(self.hist_remove_column)
         self.histogram_btn.clicked.connect(self.histogram_plot)
-
         self.heatmap_btn.clicked.connect(self.heatmap_gen)
-
         self.con_btn.clicked.connect(self.con_cat)
         self.submit_btn.clicked.connect(self.set_target)
-
-        self.train=self.findChild(QPushButton,"train")
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
-        
-        self.pre_trained.clicked.connect(self.upload_model)
-        self.go_pre_trained.clicked.connect(self.test_pretrained)
+   
         self.show()
 
     def scale_value(self):
-
-        #my_dict={"StandardScaler":standard_scale ,"MinMaxScaler":min_max, "PowerScaler":power_scale}
         if self.scaler.currentText()=='StandardScale':
             self.df,func_name = data.StandardScale(self.df,self.target_value)
         elif self.scaler.currentText()=='MinMaxScale':
@@ -193,23 +183,15 @@ class UI(QMainWindow):
         
         
     def heatmap_gen(self):
-
-
-         #self.wid_win.plot(self.df)
         data.plot_heatmap(self.df)
 
     def set_target(self):
-        # if len(str(self.error.text())) == 0:
-        #     self.error.setText("Enter Valid Target")
         self.target_value=str(self.item.text()).split()[0]
         steps.add_code("target=data['"+self.target_value+"']")
         self.target_col.setText(self.target_value)
 
 
     def target(self):
-        # if len(self.columns.currentItem()) == None:
-        #     self.error.setText("Enter Valid Target")
-
         self.item=self.columns.currentItem()
         
         
@@ -217,7 +199,6 @@ class UI(QMainWindow):
     def filldetails(self,flag=1):
          
         if(flag==0):  
-            
             self.df = data.read_file(str(self.filePath))
         
         
@@ -238,40 +219,23 @@ class UI(QMainWindow):
         
         self.dropcolumns.clear()
         self.dropcolumns.addItems(self.column_list)
-        # self.emptycolumn.clear()
-        # self.emptycolumn.addItems(self.empty_list)
-
         self.cat_column.clear()
         self.cat_column.addItems(self.cat_col_list)
         self.scatter_x.clear()
         self.scatter_x.addItems(self.column_list)
         self.scatter_y.clear()
         self.scatter_y.addItems(self.column_list)
-        # self.plot_x.clear()
-        # self.plot_x.addItems(self.column_list)
-        # self.plot_y.clear()
-        # self.plot_y.addItems(self.column_list)
+       
         color= ['red', 'green', 'blue', 'yellow']
         self.scatter_c.clear()
         self.scatter_c.addItems(color)
         self.hist_column.clear()
         self.hist_column.addItems(data.get_numeric(self.df))
         self.hist_column.addItem("All")
-
-        
-        #self.describe.setText(data.get_describe(self.df))
-        
         x=table_display.DataFrameModel(self.df)
         self.table.setModel(x)
         
-    def upload_model(self):
-        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")
-        with open(self.filePath_pre, 'rb') as file:
-            self.pickle_model = pickle.load(file)
-        
-    def test_pretrained(self):
 
-        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
 
     def con_cat(self):
         
@@ -281,13 +245,6 @@ class UI(QMainWindow):
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
 
-    # def fillna(self):
-
-    #     self.df[self.emptycolumn.currentText()]=data.fillna(self.df,self.emptycolumn.currentText())
-    #     code="data['"+self.emptycolumn.currentText()+"'].fillna('"'Uknown'"',inplace=True)"
-    #     steps.add_code(code)
-    #     steps.add_text("Empty values of "+ self.emptycolumn.currentText() + " filled with Uknown")
-    #     self.filldetails()
 
     # def fillme(self):
 
@@ -306,10 +263,6 @@ class UI(QMainWindow):
         if(self.filePath!=""):
             self.filldetails(0)
 
-
-        
-     
- 
     def dropc(self):
 
         if (self.dropcolumns.currentText() == self.target_value):
@@ -323,10 +276,6 @@ class UI(QMainWindow):
     def scatter_plot(self):
 
         data.scatter_plot(df=self.df,x=self.scatter_x.currentText(),y=self.scatter_y.currentText(),c=self.scatter_c.currentText(),marker=self.scatter_mark.currentText())
-
-        
-
-
      
     def train_func(self):
 
@@ -337,13 +286,6 @@ class UI(QMainWindow):
         if(self.target_value!=""):
             
             self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)
-
-# app = QApplication(sys.argv)
-# welcome = home_screen()
-# widget = QtWidgets.QStackedWidget()
-# widget.addWidget(welcome)
-# app.exec_()
-
 
 
 app = QApplication(sys.argv)

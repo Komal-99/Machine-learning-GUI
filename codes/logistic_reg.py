@@ -2,7 +2,6 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 import data_visualise
-import table_display
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
@@ -27,21 +26,11 @@ class UI(QMainWindow):
         data=data_visualise.data_()
         steps=common.common_steps(df,target)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        # self.target = self.findChild(QLabel,"target")
-        self.columns= self.findChild(QListWidget,"columns")
-        # self.test_size= self.findChild(QLabel,"test_size") 
-        # self.target = self.findChild(QLabel,"target")
-        # self.columns= self.findChild(QListWidget,"columns")
-        # self.test_size= self.findChild(QLabel,"test_size")  
-        
-        # self.c_=self.findChild(QLineEdit,"c_")
-        # self.penalty=self.findChild(QComboBox,"penalty")
-        # self.dual=self.findChild(QComboBox,"dual")   
+        self.columns= self.findChild(QListWidget,"columns") 
         self.solver=self.findChild(QComboBox,"solver")        
         self.random=self.findChild(QLineEdit,"randomstate")     
         self.max_iter=self.findChild(QLineEdit,"max_iter")  
         self.multi_class=self.findChild(QComboBox,"multi_class")
-        # self.tol=self.findChild(QLineEdit,"tol")
         self.train_btn=self.findChild(QPushButton,"train")
         
         self.mae=self.findChild(QLabel,"mae")
@@ -54,10 +43,6 @@ class UI(QMainWindow):
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
 
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
-        
-        # self.X_combo=self.findChild(QComboBox,"X_combo")
-        # self.Y_combo=self.findChild(QComboBox,"Y_combo")
-
         self.test_data=self.findChild(QLineEdit,"test_data")
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.train_btn.clicked.connect(self.training)
@@ -66,7 +51,13 @@ class UI(QMainWindow):
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         self.dwnld_2.clicked.connect(self.download_model)
-        
+        self.train_btn.setStyleSheet(
+                             "QPushButton::pressed"
+                             "{"
+                             "background-color : green;"
+                             "}"
+                             )
+        self.split_done= self.findChild(QLabel,"split")
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
@@ -76,29 +67,19 @@ class UI(QMainWindow):
         self.show()
 
     def setvalue(self):
-        # self.target.setText(self.target_value)
-        # self.columns.clear()
         self.columns.addItems(self.column_list)
-        # self.X_combo.addItems(self.column_list)
-        # self.Y_combo.addItems(self.column_list)
 
-   
-
-
-    
     def test_split(self):
 
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
         print(self.y_train.shape)
         print(self.y_test.shape)
-        # self.train_size.setText(str(self.x_train.shape))
-        # self.test_size.setText(str(self.x_test.shape))
+        self.split_done.setText(str("Split Done"))
 
     def download_model(self):
 
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
-        #file = open(name[0],'w')
-        
+       
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
             pickle.dump(self.lr, file)  
@@ -108,7 +89,7 @@ class UI(QMainWindow):
     def set_predict(self):
         self.a = self.list.text() 
         self.ls = self.a.split(",")
-       
+        self.target.setText(str(self.target_value))
         self.ls_updated = [float(x) for x in self.ls]
         self.ls_array =  np.array(self.ls_updated)
         self.pred  =self.lr.predict([self.ls_array])
