@@ -44,7 +44,7 @@ class home_screen(QDialog):
 
        
 
-class model(QDialog):
+class model(QMainWindow):
     def __init__(self):
         super(model,self).__init__()
         loadUi("ui_files/modeltype.ui",self)

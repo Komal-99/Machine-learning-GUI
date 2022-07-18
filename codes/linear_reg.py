@@ -78,7 +78,7 @@ class UI(QMainWindow):
             self.ls_array =  np.array(self.ls_updated)
             self.pred  =self.reg.predict([self.ls_array])
             self.predict_val.setText(str(self.pred))
-            self.predict_val.setText(self.pred)
+         
 
     def download_model(self):
 

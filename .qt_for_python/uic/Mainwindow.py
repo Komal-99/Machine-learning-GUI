@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\Mainwindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\Mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -287,8 +287,6 @@ class Ui_MainWindow(object):
         self.model_select.addItem("")
         self.model_select.addItem("")
         self.model_select.addItem("")
-        self.model_select.addItem("")
-        self.model_select.addItem("")
         self.label_27 = QtWidgets.QLabel(self.centralwidget)
         self.label_27.setGeometry(QtCore.QRect(1120, 610, 81, 21))
         font = QtGui.QFont()
@@ -482,12 +480,10 @@ class Ui_MainWindow(object):
         self.train.setText(_translate("MainWindow", "Train"))
         self.model_select.setItemText(0, _translate("MainWindow", "Linear Regression"))
         self.model_select.setItemText(1, _translate("MainWindow", "Logistic Regression"))
-        self.model_select.setItemText(2, _translate("MainWindow", "SVR"))
-        self.model_select.setItemText(3, _translate("MainWindow", "Logistic Regression"))
-        self.model_select.setItemText(4, _translate("MainWindow", "Random Forest"))
-        self.model_select.setItemText(5, _translate("MainWindow", "K-Nearest Neighbour"))
-        self.model_select.setItemText(6, _translate("MainWindow", "Gaussian NB"))
-        self.model_select.setItemText(7, _translate("MainWindow", "Multi Layer Perceptron"))
+        self.model_select.setItemText(2, _translate("MainWindow", "Logistic Regression"))
+        self.model_select.setItemText(3, _translate("MainWindow", "Random Forest"))
+        self.model_select.setItemText(4, _translate("MainWindow", "K-Nearest Neighbour"))
+        self.model_select.setItemText(5, _translate("MainWindow", "Predictive Maintenace"))
         self.label_27.setText(_translate("MainWindow", "Or"))
         self.label_28.setText(_translate("MainWindow", "Use a Pre-Trained Model :"))
         self.pre_trained.setText(_translate("MainWindow", "Browse"))
