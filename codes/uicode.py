@@ -62,7 +62,7 @@ class model(QMainWindow):
         self.New_model.clicked.connect(self.new)
 
         self.Trainedmodel = self.findChild(QPushButton,"trainedmodel")
-        self.Trainedmodel.clicked.connect(self.trained)
+        self.Trainedmodel.clicked.connect(self.train)
 
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
         self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
@@ -74,22 +74,7 @@ class model(QMainWindow):
         self.close()
         
 
-    def trained(self):
-        train = trained()
-        widget.addWidget(train)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-        
-        self.close()
-
-class trained(QMainWindow):
-    def __init__(self):
-        super(trained,self).__init__()
-        loadUi(r"ui_files/pre_trained.ui",self)
-
-        self.upload_model()
-        self.test_pretrained()
-        
-    def upload_model(self):
+    def train(self):
         self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)
@@ -177,7 +162,7 @@ class UI(QMainWindow):
         self.submit_btn.clicked.connect(self.set_target)
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
-        
+
         self.nullbtn.clicked.connect(self.fillme)
    
         self.show()
@@ -290,11 +275,28 @@ class UI(QMainWindow):
 
     def con_cat(self):
         
-        a=self.cat_column.currentText()
+        a = str(self.cat_column.currentText())
+
+        self.df2 = self.df[[a]].copy()
+        # print(self.df2.iloc[:,0])
         self.df[a],func_name =data.convert_category(self.df,a)
-        steps.add_text("Column "+ a + " converted using LabelEncoder")
+        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+        
+        steps.add_text("Column "+ a + " converted using Lab elEncoder")
+        # print(self.dict_val)
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
+
+
+
+    def decode(self,key):
+        a = str(self.cat_column.currentText())
+        self.df2 = self.df[[a]].copy()
+        # print(self.df2.iloc[:,0])
+        self.df[a],func_name =data.convert_category(self.df,a)
+        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+        print(self.dict_val.get(key))
+
 
 
     def fillme(self):

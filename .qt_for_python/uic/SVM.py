@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\SVM.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\SVM.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -106,7 +106,7 @@ class Ui_MainWindow(object):
         self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setGeometry(QtCore.QRect(760, 260, 20, 241))
+        self.line_2.setGeometry(QtCore.QRect(740, 270, 20, 241))
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
@@ -290,7 +290,7 @@ class Ui_MainWindow(object):
 "")
         self.ExitButton.setObjectName("ExitButton")
         self.label_22 = QtWidgets.QLabel(self.centralwidget)
-        self.label_22.setGeometry(QtCore.QRect(790, 470, 191, 31))
+        self.label_22.setGeometry(QtCore.QRect(760, 480, 111, 31))
         font = QtGui.QFont()
         font.setFamily("Ubuntu Condensed")
         font.setPointSize(11)
@@ -315,6 +315,24 @@ class Ui_MainWindow(object):
         font.setPointSize(11)
         self.plot.setFont(font)
         self.plot.setObjectName("plot")
+        self.split = QtWidgets.QLabel(self.centralwidget)
+        self.split.setGeometry(QtCore.QRect(880, 130, 141, 21))
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu Condensed")
+        font.setPointSize(11)
+        self.split.setFont(font)
+        self.split.setStyleSheet("color: rgb(1, 78, 144);")
+        self.split.setText("")
+        self.split.setObjectName("split")
+        self.target = QtWidgets.QLabel(self.centralwidget)
+        self.target.setGeometry(QtCore.QRect(880, 480, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.target.setFont(font)
+        self.target.setObjectName("target")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
@@ -370,6 +388,7 @@ class Ui_MainWindow(object):
         self.label_16.setText(_translate("MainWindow", "Enter List for Prediction :"))
         self.predict_val.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
         self.ExitButton.setText(_translate("MainWindow", "Exit"))
-        self.label_22.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted Value</span></p></body></html>"))
+        self.label_22.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted</span></p></body></html>"))
         self.label_17.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Visualization</p><p align=\"center\"><br/></p></body></html>"))
         self.plot.setText(_translate("MainWindow", "Decission Regions"))
+        self.target.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt;\"><br/></span></p></body></html>"))

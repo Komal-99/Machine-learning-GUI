@@ -15,6 +15,8 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
+import uicode
+
 
 
 class UI(QMainWindow):
@@ -37,8 +39,9 @@ class UI(QMainWindow):
         self.fit_inter=self.findChild(QComboBox,"fit_inter")  
         self.multi_class=self.findChild(QComboBox,"multi_class")
         self.train_btn=self.findChild(QPushButton,"train")
-        self.exitbutton = self.findChild(QPushButton,"ExitButton")
-        # self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+        self.exitbutton = self.findChild(QPushButton,"pushButton")
+
+        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
@@ -78,8 +81,8 @@ class UI(QMainWindow):
 
     def setvalue(self):
       
-        self.columns.clear()
-        self.column_list= data.get_column_list(self.df)
+        self.columns.addItems(self.column_list)
+        # self.column_list= data.get_column_list(self.df)
         self.X_combo.clear()
         self.X_combo.addItems(self.column_list)
         self.Y_combo.clear()
@@ -226,6 +229,8 @@ class UI(QMainWindow):
         self.ls_array =  np.array(self.ls_updated) 
         self.pred = self.classification.best_predict([self.ls_array])
         self.predict_val.setText(str(self.pred))
+        
+        uicode.decode(float(self.pred))
         
 
     def plt3d(self):

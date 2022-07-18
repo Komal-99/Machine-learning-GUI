@@ -94,6 +94,7 @@ class data_:
 		scaled_features=sc.fit_transform(x)
 		scaled_features_df = pd.DataFrame(scaled_features, index=x.index, columns=x.columns)
 		scaled_features_df[target]=df[target]
+		
 		return scaled_features_df,"PowerTransformer()"
 
 

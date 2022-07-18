@@ -13,6 +13,10 @@ from sklearn.utils.validation import check_array
 import data_visualise
 import pandas as pd
 import common
+from sklearn.preprocessing import OrdinalEncoder
+
+
+encoder = OrdinalEncoder()
 
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
@@ -80,7 +84,7 @@ class UI(QMainWindow):
             self.ls_array =  np.array(self.ls_updated)
             self.pred  =self.reg.predict([self.ls_array])
             self.predict_val.setText(str(self.pred))
-         
+            self.decode = encoder.categories_[self.predict_val]
 
     def download_model(self):
 

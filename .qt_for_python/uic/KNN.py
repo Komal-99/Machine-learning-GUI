@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\KNN.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\KNN.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -190,7 +190,7 @@ class Ui_Dialog(object):
         self.conf_mat.setFont(font)
         self.conf_mat.setObjectName("conf_mat")
         self.label_19 = QtWidgets.QLabel(Dialog)
-        self.label_19.setGeometry(QtCore.QRect(750, 380, 191, 31))
+        self.label_19.setGeometry(QtCore.QRect(720, 400, 191, 31))
         font = QtGui.QFont()
         font.setFamily("Ubuntu Condensed")
         font.setPointSize(11)
@@ -262,6 +262,24 @@ class Ui_Dialog(object):
         self.list = QtWidgets.QLineEdit(Dialog)
         self.list.setGeometry(QtCore.QRect(260, 550, 501, 31))
         self.list.setObjectName("list")
+        self.target = QtWidgets.QLabel(Dialog)
+        self.target.setGeometry(QtCore.QRect(840, 400, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.target.setFont(font)
+        self.target.setObjectName("target")
+        self.split = QtWidgets.QLabel(Dialog)
+        self.split.setGeometry(QtCore.QRect(870, 130, 141, 21))
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu Condensed")
+        font.setPointSize(11)
+        self.split.setFont(font)
+        self.split.setStyleSheet("color: rgb(1, 78, 144);")
+        self.split.setText("")
+        self.split.setObjectName("split")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -287,7 +305,7 @@ class Ui_Dialog(object):
         self.randomstate.setText(_translate("Dialog", "144"))
         self.label_10.setText(_translate("Dialog", "<html><head/><body><p align=\"center\">Visualization</p><p align=\"center\"><br/></p></body></html>"))
         self.conf_mat.setText(_translate("Dialog", "Confusion Matrix"))
-        self.label_19.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted Value</span></p></body></html>"))
+        self.label_19.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted </span></p></body></html>"))
         self.predict_val.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
         self.pushButton.setText(_translate("Dialog", "Exit"))
         self.weights.setItemText(0, _translate("Dialog", "uniform"))
@@ -300,3 +318,4 @@ class Ui_Dialog(object):
         self.label_2.setText(_translate("Dialog", "n_neighbours:"))
         self.label_3.setText(_translate("Dialog", "weights:"))
         self.neighbours.setText(_translate("Dialog", "5"))
+        self.target.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:14pt;\"><br/></span></p></body></html>"))
