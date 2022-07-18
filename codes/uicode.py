@@ -15,6 +15,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
 import plotly.express as px
 import plotly.io as pio
+import plotly.graph_objects as go
 
 class error_window(QMainWindow):
     def __init__(self):
@@ -94,7 +95,7 @@ class trained(QMainWindow):
             self.pickle_model = pickle.load(file)
     
     def test_pretrained(self):
-        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+        self.testing=pre_trained.UI(self.pickle_model)
 
  #  Help button connection
 class help_screen(QDialog):
@@ -216,9 +217,11 @@ class UI(QMainWindow):
         
 
     def plt3d(self):
-        pio.renderers.default= 'browser'
-        fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
-        return(pio.show(fig))        
+        # pio.renderers.default= 'chrome'
+        # fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
+        # return(pio.show(fig))    
+        fig= go.Figure(data= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())) 
+        return(fig.show())
 
     def heatmap_gen(self):
         data.plot_heatmap(self.df)
@@ -265,6 +268,14 @@ class UI(QMainWindow):
         self.scatter_y.addItems(self.column_list)
         self.null_column.clear()
         self.null_column.addItems(self.column_list)
+        self.X_combo.clear()
+        self.X_combo.addItems(self.column_list)
+        self.Y_combo.clear()
+        self.Y_combo.addItems(self.column_list)
+        self.Z_combo.clear()
+        self.Z_combo.addItems(self.column_list)
+        self.color_combo.clear()
+        self.color_combo.addItems(self.column_list)
        
         color= ['red', 'green', 'blue', 'yellow']
         self.scatter_c.clear()
