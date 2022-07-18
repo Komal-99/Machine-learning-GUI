@@ -4,9 +4,8 @@ import seaborn as sns
 import numpy as np 
 from sklearn.preprocessing import LabelEncoder,StandardScaler,MinMaxScaler,PowerTransformer
 import add_steps
+
 class data_:
-	
-	
 	
 	def read_file(self,filepath):
 		
@@ -19,8 +18,7 @@ class data_:
 		return df[column_name],"LabelEncoder()"
 	
 	def get_column_list(self,df):
-
-		column_list=[]
+		column_list= []
 
 		for i in df.columns:
 			column_list.append(i)
@@ -28,7 +26,7 @@ class data_:
 
 	def get_empty_list(self,df):
 
-		empty_list=[]
+		empty_list= []
 
 		for i in df.columns:
 			if(df[i].isnull().values.any()==True):
@@ -99,31 +97,31 @@ class data_:
 		return scaled_features_df,"PowerTransformer()"
 
 
-	def plot_histogram(self,df,column):
+	# def plot_histogram(self,df,column):
 		
-		df.hist(column=column)
-		plt.show()
+	# 	df.hist(column=column)
+	# 	plt.show()
 
-	def plot_heatmap(self,df):
-		plt.figure()
-		x=df.corr()
-		mask = np.triu(np.ones_like(x, dtype=np.bool))
-		sns.heatmap(x,annot=True,mask=mask,vmin=-1,vmax=1)
-		plt.show()
+	# def plot_heatmap(self,df):
+	# 	plt.figure()
+	# 	x=df.corr()
+	# 	mask = np.triu(np.ones_like(x, dtype=np.bool))
+	# 	sns.heatmap(x,annot=True,mask=mask,vmin=-1,vmax=1)
+	# 	plt.show()
 
-	def scatter_plot(self,df,x,y,c,marker):
-		plt.figure()
-		plt.scatter(df[x],df[y],c=c,marker=marker)
-		plt.xlabel(x)
-		plt.ylabel(y)
-		plt.title(y + " vs "+ x)
-		plt.show()
+	# def scatter_plot(self,df,x,y,c,marker):
+	# 	plt.figure()
+	# 	plt.scatter(df[x],df[y],c=c,marker=marker)
+	# 	plt.xlabel(x)
+	# 	plt.ylabel(y)
+	# 	plt.title(y + " vs "+ x)
+	# 	plt.show()
 
-	def line_plot(self,df,x,y,c,marker):
-		plt.figure()
-		df=df.sort_values(by=[x])
-		plt.plot(df[x],df[y],c=c,marker=marker)
-		plt.xlabel(x)
-		plt.ylabel(y)
-		plt.title(y + " vs "+ x)
-		plt.show()
+	# def line_plot(self,df,x,y,c,marker):
+	# 	plt.figure()
+	# 	df=df.sort_values(by=[x])
+	# 	plt.plot(df[x],df[y],c=c,marker=marker)
+	# 	plt.xlabel(x)
+	# 	plt.ylabel(y)
+	# 	plt.title(y + " vs "+ x)
+	# 	plt.show()
