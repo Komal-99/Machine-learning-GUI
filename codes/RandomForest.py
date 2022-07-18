@@ -32,6 +32,8 @@ class UI(QMainWindow):
         self.min_sample_split=self.findChild(QLineEdit,"min_sample_split")
         self.bootstrap=self.findChild(QComboBox,"bootstrap")
         self.train_btn=self.findChild(QPushButton,"train")
+        self.split_done= self.findChild(QLabel,"split")
+        self.target=self.findChild(QLabel,"target")
         
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
@@ -48,6 +50,12 @@ class UI(QMainWindow):
         self.predict_btn.clicked.connect(self.set_predict)
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
+        self.train_btn.setStyleSheet(
+                             "QPushButton::pressed"
+                             "{"
+                             "background-color : green;"
+                             "}"
+                             )
         
         self.dwnld.clicked.connect(self.download_model)
         self.setvalue()
@@ -57,7 +65,7 @@ class UI(QMainWindow):
     def set_predict(self):
         self.a = self.list.text()
         self.ls = self.a.split(",")
-       
+        self.target.setText(str(self.target_value))
         self.ls_updated = [float(x) for x in self.ls]
         self.ls_array =  np.array(self.ls_updated)
 
@@ -83,6 +91,7 @@ class UI(QMainWindow):
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
         print(self.y_train.shape)
         print(self.y_test.shape)
+        self.split_done.setText(str("Split Done"))
         
     def training(self):
 

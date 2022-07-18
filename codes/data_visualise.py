@@ -19,7 +19,7 @@ class data_:
 	
 	def get_column_list(self,df):
 		column_list= []
-
+		df.columns= df.columns.str.replace(' ','_')
 		for i in df.columns:
 			column_list.append(i)
 		return column_list

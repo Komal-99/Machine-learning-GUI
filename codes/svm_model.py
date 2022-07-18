@@ -35,6 +35,8 @@ class UI(QMainWindow):
 		self.kernel=self.findChild(QComboBox,"kernel")
 		self.degree=self.findChild(QLineEdit,"degree")
 		self.gamma=self.findChild(QComboBox,"gamma")
+		self.split_done= self.findChild(QLabel,"split")
+		self.target=self.findChild(QLabel,"target")
 		
 		self.coef=self.findChild(QLineEdit,"coef")
 		self.max_iter=self.findChild(QLineEdit,"max_iter")
@@ -58,6 +60,13 @@ class UI(QMainWindow):
 		self.predict_val =self.findChild(QLabel,"predict_val")
 		self.decission_rgn_btn.clicked.connect(self.decision_regions)
 		self.predict_btn.clicked.connect(self.set_predict)
+
+		self.train_btn.setStyleSheet(
+                             "QPushButton::pressed"
+                             "{"
+                             "background-color : green;"
+                             "}"
+                             )
 		self.setvalue()
 		self.show()
 
@@ -77,6 +86,7 @@ class UI(QMainWindow):
 	def set_predict(self):
 		self.a = self.list.text()
 		self.ls = self.a.split(",")
+		self.target.setText(str(self.target_value))
 		self.ls_updated = [float(x) for x in self.ls]
 		self.ls_array =  np.array(self.ls_updated)
 		self.pred  =self.svc_model.predict([self.ls_array])
@@ -88,6 +98,7 @@ class UI(QMainWindow):
 		self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
 		print(self.y_train.shape)
 		print(self.y_test.shape)
+		self.split_done.setText(str("Split Done"))
 		
 	def decision_regions(self):
 		self.plotting=self.column_list[2:]

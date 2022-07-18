@@ -13,6 +13,8 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
+import plotly.express as px
+import plotly.io as pio
 
 class error_window(QMainWindow):
     def __init__(self):
@@ -75,17 +77,24 @@ class model(QMainWindow):
         train = trained()
         widget.addWidget(train)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        
         self.close()
 
 class trained(QMainWindow):
     def __init__(self):
         super(trained,self).__init__()
         loadUi(r"ui_files/pre_trained.ui",self)
+
+        self.upload_model()
+        self.test_pretrained()
+        
+    def upload_model(self):
         self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)
+    
+    def test_pretrained(self):
         self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
-
 
  #  Help button connection
 class help_screen(QDialog):
@@ -147,7 +156,13 @@ class UI(QMainWindow):
         self.null_column=self.findChild(QComboBox,"null_column")
         self.nullbtn=self.findChild(QPushButton,"null_2")
 
-        
+
+        self.X_combo=self.findChild(QComboBox,"X_combo")
+        self.Y_combo=self.findChild(QComboBox,"Y_combo")
+        self.Z_combo=self.findChild(QComboBox,"Z_combo")
+        self.color_combo=self.findChild(QComboBox,"color_combo")
+        self.plot3d_btn= self.findChild(QPushButton,"visualize")
+
         self.Browse.clicked.connect(self.getCSV)
         self.Drop_btn.clicked.connect(self.dropc)
         self.scatter_btn.clicked.connect(self.scatter_plot)
@@ -155,11 +170,13 @@ class UI(QMainWindow):
         self.hist_remove_btn.clicked.connect(self.hist_remove_column)
         self.histogram_btn.clicked.connect(self.histogram_plot)
         self.heatmap_btn.clicked.connect(self.heatmap_gen)
+        self.visualize.clicked.connect(self.plt3d)
         self.con_btn.clicked.connect(self.con_cat)
         self.columns.clicked.connect(self.target)
         self.submit_btn.clicked.connect(self.set_target)
         self.train.clicked.connect(self.train_func)
         self.scale_btn.clicked.connect(self.scale_value)
+        
         self.nullbtn.clicked.connect(self.fillme)
    
         self.show()
@@ -197,7 +214,12 @@ class UI(QMainWindow):
             self.graphWidget.setBackground('w')
             self.graphWidget.plot(self.df,i)
         
-        
+
+    def plt3d(self):
+        pio.renderers.default= 'browser'
+        fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
+        return(pio.show(fig))        
+
     def heatmap_gen(self):
         data.plot_heatmap(self.df)
 
@@ -290,7 +312,7 @@ class UI(QMainWindow):
         self.filldetails()
 
     def getCSV(self):
-        self.filePath, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Downloads/ML Github/datasets',"csv(*.csv)")
+        self.filePath, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '',"csv(*.csv)")
         self.columns.clear()
         code="data=pd.read_csv('"+str(self.filePath)+"')"
         steps.add_code(code)
