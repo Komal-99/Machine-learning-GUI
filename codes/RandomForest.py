@@ -39,6 +39,9 @@ class UI(QMainWindow):
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
         self.accuracy=self.findChild(QLabel,"accuracy")
+        self.exitbutton = self.findChild(QPushButton,"pushButton")
+
+        self.exitbutton.clicked.connect(self.exit)
 
         self.test_data=self.findChild(QLineEdit,"test_data")
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
@@ -61,7 +64,8 @@ class UI(QMainWindow):
         self.setvalue()
         self.show()
 
-       
+    def exit(self):
+        sys.exit()
     def set_predict(self):
         self.a = self.list.text()
         self.ls = self.a.split(",")

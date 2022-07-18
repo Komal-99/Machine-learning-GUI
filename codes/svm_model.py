@@ -45,7 +45,8 @@ class UI(QMainWindow):
 		self.mae=self.findChild(QLabel,"mae")
 		self.mse=self.findChild(QLabel,"mse")
 		self.rmse=self.findChild(QLabel,"rmse")
-
+		self.exitbutton = self.findChild(QPushButton,"pushButton")
+		self.exitbutton.clicked.connect(self.exit)
 		self.test_data=self.findChild(QLineEdit,"test_data")
 		self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
 		self.train_btn.clicked.connect(self.training)
@@ -72,8 +73,8 @@ class UI(QMainWindow):
 
 	def setvalue(self):
 		self.columns.addItems(self.column_list)
-		
-
+	def exit(self):
+		sys.exit()
 	def download_model(self):
 
 		name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")

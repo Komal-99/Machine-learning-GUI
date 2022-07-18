@@ -46,6 +46,7 @@ class home_screen(QDialog):
     def StartButton(self):  #start button function
         self.w =model()     #creating an object of model
         self.w.show()    #showing the model
+      
 
 class model(QMainWindow):   #model class
     def __init__(self):      #model class initialisation
@@ -60,8 +61,10 @@ class model(QMainWindow):   #model class
         self.Trainedmodel.clicked.connect(self.train)
 
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
-        self.exitbutton.clicked.connect(QCoreApplication.instance().quit) #exit button function
-
+        # self.exitbutton.clicked.connect(app.instance().quit) #exit button function
+        self.exitbutton.clicked.connect(self.exit)
+    def exit(self):
+        sys.exit()
     def new(self):  #new model button function
         pred = UI() #creating an object of UI
         widget.addWidget(pred)
@@ -119,7 +122,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
-        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)   #exit button function
+        self.exitbutton.clicked.connect(self.exit)   #exit button function
         self.plot_win= self.findChild(QListWidget,"plotwidget")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
@@ -169,7 +172,8 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.nullbtn.clicked.connect(self.fillme)   # fill null values button function
    
         self.show() #showing the main window
-
+    def exit(self):
+        sys.exit()
     def scale_value(self):  #scaling the values
         if self.scaler.currentText()=='StandardScale':
             self.df,func_name = data.StandardScale(self.df,self.target_value)   #calling the function from data class converting data into standard scale
@@ -215,13 +219,13 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         data.plot_heatmap(self.df)  #calling the function from data class to plot the heatmap
 
     def set_target(self):
-        try:
+        # try:
             self.target_value=str(self.item.text()).split()[0]
             steps.add_code("target=data['"+self.target_value+"']")
             self.target_col.setText(self.target_value)
-        except:
-                self.w =error_window()
-                self.w.show()
+        # except:
+        #         self.w =error_window()
+        #         self.w.show()
 
 
 
@@ -229,7 +233,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         
             self.item=self.columns.currentItem()
         
-            print('exiting')    
+            # print('exiting')    
         
         
 
@@ -359,7 +363,8 @@ widget.addWidget(welcome)   #adding the home screen to the stacked widget
 widget.setFixedHeight(920)  #setting the height of the stacked widget
 widget.setFixedWidth(1408)  #setting the width of the stacked widget
 widget.show()   #showing the stacked widget
+
 try:    #try block to catch the exception
     sys.exit(app.exec())        #executing the application
-except:
+except:     #except block to catch the exception
     print("exiting..")  #printing the exception

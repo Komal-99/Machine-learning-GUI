@@ -10,7 +10,7 @@ from sklearn import metrics
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier as KNC
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score , confusion_matrix , roc_curve, roc_auc_score
+from sklearn.metrics import accuracy_score 
 import pandas as pd
 import seaborn as sns
 
@@ -48,7 +48,9 @@ class UI(QDialog):
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         self.dwnld_2.clicked.connect(self.download_model)
-        
+        self.exitbutton = self.findChild(QPushButton,"pushButton")
+
+        self.exitbutton.clicked.connect(self.exit)
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
@@ -65,7 +67,8 @@ class UI(QDialog):
 
     def setvalue(self):
         self.columns.addItems(self.column_list)
-     
+    def exit(self):
+        sys.exit()
 
    
     def set_predict(self):

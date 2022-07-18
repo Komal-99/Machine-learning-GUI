@@ -41,7 +41,7 @@ class UI(QMainWindow):
         self.train_btn=self.findChild(QPushButton,"train")
         self.exitbutton = self.findChild(QPushButton,"pushButton")
 
-        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+        self.exitbutton.clicked.connect(self.exit)
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
@@ -78,6 +78,8 @@ class UI(QMainWindow):
                              )
         self.setvalue()
         self.show()
+    def exit(self):
+        sys.exit()
 
     def setvalue(self):
       
