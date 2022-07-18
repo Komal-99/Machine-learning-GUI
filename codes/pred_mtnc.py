@@ -16,6 +16,7 @@ import time
 import plotly.express as px
 import plotly.io as pio
 
+
 class UI(QMainWindow):
     def __init__(self,df,target,user_actions):
         super(UI, self).__init__()
@@ -37,7 +38,7 @@ class UI(QMainWindow):
         self.multi_class=self.findChild(QComboBox,"multi_class")
         self.train_btn=self.findChild(QPushButton,"train")
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
-        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+        # self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
         self.mae=self.findChild(QLabel,"mae")
         self.mse=self.findChild(QLabel,"mse")
         self.rmse=self.findChild(QLabel,"rmse")
@@ -231,7 +232,6 @@ class UI(QMainWindow):
         pio.renderers.default= 'browser'
         fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
         return(pio.show(fig))
-        
 
     def conf_matrix(self):
 
