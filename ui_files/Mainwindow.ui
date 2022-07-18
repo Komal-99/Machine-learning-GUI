@@ -869,7 +869,7 @@
    <widget class="QLabel" name="target_col">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>430</x>
       <y>160</y>
       <width>201</width>
       <height>61</height>
