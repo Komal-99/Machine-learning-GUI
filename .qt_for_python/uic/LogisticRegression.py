@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\LogisticRegression.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\LogisticRegression.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -249,7 +249,7 @@ class Ui_MainWindow(object):
         self.dwnld_2.setFont(font)
         self.dwnld_2.setObjectName("dwnld_2")
         self.label_19 = QtWidgets.QLabel(self.centralwidget)
-        self.label_19.setGeometry(QtCore.QRect(780, 470, 191, 31))
+        self.label_19.setGeometry(QtCore.QRect(750, 470, 111, 31))
         font = QtGui.QFont()
         font.setFamily("Ubuntu Condensed")
         font.setPointSize(11)
@@ -284,6 +284,22 @@ class Ui_MainWindow(object):
         self.list = QtWidgets.QLineEdit(self.centralwidget)
         self.list.setGeometry(QtCore.QRect(220, 510, 471, 31))
         self.list.setObjectName("list")
+        self.split = QtWidgets.QLabel(self.centralwidget)
+        self.split.setGeometry(QtCore.QRect(880, 130, 141, 21))
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu Condensed")
+        font.setPointSize(11)
+        self.split.setFont(font)
+        self.split.setStyleSheet("color: rgb(1, 78, 144);")
+        self.split.setText("")
+        self.split.setObjectName("split")
+        self.target = QtWidgets.QLabel(self.centralwidget)
+        self.target.setGeometry(QtCore.QRect(870, 470, 141, 31))
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu Condensed")
+        font.setPointSize(11)
+        self.target.setFont(font)
+        self.target.setObjectName("target")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1000, 26))
@@ -331,7 +347,8 @@ class Ui_MainWindow(object):
         self.label_16.setText(_translate("MainWindow", "Enter List for Prediction  :"))
         self.ExitButton.setText(_translate("MainWindow", "Exit"))
         self.dwnld_2.setText(_translate("MainWindow", "Download Model"))
-        self.label_19.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted Value</span></p></body></html>"))
+        self.label_19.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600;\">Predicted </span></p></body></html>"))
         self.predict_val.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
         self.label_20.setText(_translate("MainWindow", "Accuracy :"))
         self.list.setText(_translate("MainWindow", "0.1"))
+        self.target.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\"><br/></span></p></body></html>"))

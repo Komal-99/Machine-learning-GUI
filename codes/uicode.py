@@ -105,7 +105,7 @@ class UI(QMainWindow):
         data=data_visualise.data_()
         steps=add_steps.add_steps()
 
-
+        
         self.Browse = self.findChild(QPushButton,"Browse")
         self.Drop_btn = self.findChild(QPushButton,"Drop")
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
