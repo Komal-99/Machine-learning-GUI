@@ -19,7 +19,7 @@ class data_:
 	
 	def get_column_list(self,df):
 		column_list= []
-
+		df.columns= df.columns.str.replace(' ','_')
 		for i in df.columns:
 			column_list.append(i)
 		return column_list
@@ -97,25 +97,25 @@ class data_:
 		return scaled_features_df,"PowerTransformer()"
 
 
-	# def plot_histogram(self,df,column):
+	def plot_histogram(self,df,column):
 		
-	# 	df.hist(column=column)
-	# 	plt.show()
+		df.hist(column=column)
+		plt.show()
 
-	# def plot_heatmap(self,df):
-	# 	plt.figure()
-	# 	x=df.corr()
-	# 	mask = np.triu(np.ones_like(x, dtype=np.bool))
-	# 	sns.heatmap(x,annot=True,mask=mask,vmin=-1,vmax=1)
-	# 	plt.show()
+	def plot_heatmap(self,df):
+		plt.figure()
+		x=df.corr()
+		mask = np.triu(np.ones_like(x, dtype=np.bool))
+		sns.heatmap(x,annot=True,mask=mask,vmin=-1,vmax=1)
+		plt.show()
 
-	# def scatter_plot(self,df,x,y,c,marker):
-	# 	plt.figure()
-	# 	plt.scatter(df[x],df[y],c=c,marker=marker)
-	# 	plt.xlabel(x)
-	# 	plt.ylabel(y)
-	# 	plt.title(y + " vs "+ x)
-	# 	plt.show()
+	def scatter_plot(self,df,x,y,c,marker):
+		plt.figure()
+		plt.scatter(df[x],df[y],c=c,marker=marker)
+		plt.xlabel(x)
+		plt.ylabel(y)
+		plt.title(y + " vs "+ x)
+		plt.show()
 
 	# def line_plot(self,df,x,y,c,marker):
 	# 	plt.figure()
