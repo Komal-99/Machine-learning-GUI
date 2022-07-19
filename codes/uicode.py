@@ -317,17 +317,17 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.color_combo.clear()
         self.color_combo.addItems(self.column_list)
        
-        color= ['red', 'green', 'blue', 'yellow']
-        self.scatter_c.clear()
-        self.scatter_c.addItems(color)
-        self.hist_column.clear()
-        self.hist_column.addItems(data.get_numeric(self.df))
-        self.hist_column.addItem("All")
-        self.hist_column_add.clear()
-        self.hist_column_add.addItems(data.get_numeric(self.df))
-        self.hist_column_add.addItem("All")
-        x=table_display.DataFrameModel(self.df)
-        self.table.setModel(x)
+        color= ['red', 'green', 'blue', 'yellow']   #list of colors
+        self.scatter_c.clear()  #clearing the scatter color combo box
+        self.scatter_c.addItems(color)  #adding the colors to the scatter color combo box
+        self.hist_column.clear()    
+        self.hist_column.addItems(data.get_numeric(self.df))    #adding the numeric columns to the histogram combo box
+        self.hist_column.addItem("All") #adding the all option to the histogram combo box
+        self.hist_column_add.clear()    
+        self.hist_column_add.addItems(data.get_numeric(self.df))    #adding the numeric columns to the histogram combo box
+        self.hist_column_add.addItem("All") #adding the all option to the histogram combo box
+        x=table_display.DataFrameModel(self.df) #creating a dataframe model
+        self.table.setModel(x)  #setting the dataframe model to the table
         
 
 
@@ -398,7 +398,17 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
                 self.w =error_window()
                 self.w.errortype.setText("Unable to load file")
                 self.w.show()
-
+    def fillme(self):   #function to fill the missing values
+        try:
+            self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())   #calling the function from data class to fill the missing values
+            code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"    #creating the code to fill the missing values
+            steps.add_code(code)    #adding the code to the steps
+            steps.add_text("No Empty Values")   #adding the text to the steps
+            self.filldetails()  #calling the function to fill the details
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("String values cannot be filled")
+                self.w.show()
     def dropc(self):    #function to drop the columns
         try:
             if (self.dropcolumns.currentText() == self.target_value):   #if the target column is selected
@@ -441,19 +451,19 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
         
     def train_func(self):   #function to train the model
-        try:
+        # try:
 
-            myDict={ "Linear Regression":linear_reg , "SVM":svm_model , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+            myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenace":pred_mtnc}   #creating a dictionary with the model names and the functions
 
             
             if(self.target_value!=""):  #if the target value is not empty
                 
                 self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)  #calling the function to train the model
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("Select the model")
-                self.w.show()
+        # except:
+        #         self.w =error_window()
+        #         self.w.errortype.setText("Select the model")
+        #         self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
@@ -463,13 +473,6 @@ widget.setFixedHeight(920)  #setting the height of the stacked widget
 widget.setFixedWidth(1408)  #setting the width of the stacked widget
 widget.show()   #showing the stacked widget
 
-app = QApplication(sys.argv)
-welcome = home_screen()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(welcome) 
-widget.setFixedHeight(920)
-widget.setFixedWidth(1408)
-widget.show()
 # try:
 sys.exit(app.exec_())
 
