@@ -45,7 +45,7 @@ class UI(QMainWindow):
 
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
 
-        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+        self.exitbutton.clicked.connect(self.exit)
         self.test_data=self.findChild(QLineEdit,"test_data")
         self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
         self.train_btn.clicked.connect(self.training)
@@ -68,7 +68,8 @@ class UI(QMainWindow):
         
         self.setvalue()
         self.show()
-
+    def exit(self):
+        sys.exit()
     def setvalue(self):
         self.columns.addItems(self.column_list)
 

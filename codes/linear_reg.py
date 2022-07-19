@@ -54,7 +54,7 @@ class UI(QMainWindow):
 
 
         #Connecting the buttons with the coresponding functions
-        self.exitbutton.clicked.connect(QCoreApplication.instance().quit)
+        self.exitbutton.clicked.connect(self.exit)
         self.test_size_btn.clicked.connect(self.test_split)
         self.train_btn.clicked.connect(self.training)
         self.bar_plot_btn.clicked.connect(self.barplot)
@@ -71,6 +71,8 @@ class UI(QMainWindow):
         self.setvalue()
 
     # Setting the the columns value
+    def exit(self):
+        sys.exit()
     def setvalue(self):
         self.columns.addItems(self.column_list)
     
