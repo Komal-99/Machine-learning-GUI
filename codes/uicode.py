@@ -133,17 +133,10 @@ class help_screen(QDialog): #help screen class
 class UI(QMainWindow):  #UI class for main window which do data processing and cleaning
     def __init__(self): #initialising the UI class
         super(UI, self).__init__()
-<<<<<<< HEAD
         uic.loadUi(r'ui_files\Mainwindow.ui', self)
         global data,steps, df
         data=data_visualise.data_()
         steps=add_steps.add_steps()
-=======
-        uic.loadUi(r'ui_files\Mainwindow.ui', self) #loading the ui file
-        global data,steps                         #globalising the data and steps
-        data=data_visualise.data_()             #creating an object of data class
-        steps=add_steps.add_steps()            #creating an object of steps class
->>>>>>> 87a71ad25ba1b78d48ad91a7553f5c087579d4bf
 
         #defining the buttons and their functions
         self.Browse = self.findChild(QPushButton,"Browse")
@@ -324,7 +317,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.color_combo.clear()
         self.color_combo.addItems(self.column_list)
        
-<<<<<<< HEAD
         color= ['red', 'green', 'blue', 'yellow']
         self.scatter_c.clear()
         self.scatter_c.addItems(color)
@@ -392,58 +384,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
     #     self.df[a],func_name =data.convert_category(self.df,a)
     #     self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
     #     print(self.dict_val.get(key))
-=======
-        color= ['red', 'green', 'blue', 'yellow']   #list of colors
-        self.scatter_c.clear()  #clearing the scatter color combo box
-        self.scatter_c.addItems(color)  #adding the colors to the scatter color combo box
-        self.hist_column.clear()    
-        self.hist_column.addItems(data.get_numeric(self.df))    #adding the numeric columns to the histogram combo box
-        self.hist_column.addItem("All") #adding the all option to the histogram combo box
-        x=table_display.DataFrameModel(self.df) #creating a dataframe model
-        self.table.setModel(x)  #setting the dataframe model to the table
-        
-
-
-    def con_cat(self):  #function to convert categorical columns to numeric
-        try: 
-            a = str(self.cat_column.currentText())  #getting the categorical column
-            self.df2 = self.df[[a]].copy()  #copying the dataframe
-            # print(self.df2.iloc[:,0]) 
-            self.df[a],func_name =data.convert_category(self.df,a)  #calling the function from data class to convert the categorical column to numeric
-            self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
-            steps.add_text("Column "+ a + " converted using Lab elEncoder") #adding the code to the steps
-            # print(self.dict_val)
-            steps.add_pipeline("LabelEncoder",func_name)    #adding the code to the steps
-            self.filldetails()  #calling the function to fill the details
-
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("dataset not loaded/column not selected")
-                self.w.show()
-
-    def decode(self,key):       #function to decode the categorical values
-        a = str(self.cat_column.currentText())
-        self.df2 = self.df[[a]].copy()      #copying the dataframe
-        # print(self.df2.iloc[:,0])
-        self.df[a],func_name =data.convert_category(self.df,a)
-        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
-        print(self.dict_val.get(key))   #getting the key from the dictionary
-        return self.dict_val
-
-
-
-    def fillme(self):   #function to fill the missing values
-        try:
-            self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())   #calling the function from data class to fill the missing values
-            code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"    #creating the code to fill the missing values
-            steps.add_code(code)    #adding the code to the steps
-            steps.add_text("No Empty Values")   #adding the text to the steps
-            self.filldetails()  #calling the function to fill the details
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("String column cannot be filled with mean")
-                self.w.show()
->>>>>>> 87a71ad25ba1b78d48ad91a7553f5c087579d4bf
 
     def getCSV(self):   #function to get the csv file
         try:
@@ -523,7 +463,6 @@ widget.setFixedHeight(920)  #setting the height of the stacked widget
 widget.setFixedWidth(1408)  #setting the width of the stacked widget
 widget.show()   #showing the stacked widget
 
-<<<<<<< HEAD
 app = QApplication(sys.argv)
 welcome = home_screen()
 widget = QtWidgets.QStackedWidget()
@@ -536,9 +475,3 @@ sys.exit(app.exec_())
 
 # except:
 #     print("exiting..")
-=======
-# try:    #try block to catch the exception
-sys.exit(app.exec_())        #executing the application
-# except:     #except block to catch the exception
-#     print("exiting..")  #printing the exception
->>>>>>> 87a71ad25ba1b78d48ad91a7553f5c087579d4bf

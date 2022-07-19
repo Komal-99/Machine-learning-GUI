@@ -1,18 +1,9 @@
-<<<<<<< HEAD
 
 from ast import Break
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 from PyQt5.QtCore import QCoreApplication
 from pyparsing import col
-=======
-#  importing libraries
-from base64 import decode
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
-import sys ,pickle
-from PyQt5.QtCore import QCoreApplication
-from uicode import *
->>>>>>> 87a71ad25ba1b78d48ad91a7553f5c087579d4bf
 import data_visualise
 import table_display
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
@@ -26,7 +17,7 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
-
+from uicode import *
 
 
 class UI(QMainWindow): # inheriting QMainWindow class
@@ -245,15 +236,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
         text=steps.classification_(self.y_test,self.y_pred) # returning the classification report
         self.report.setPlainText(text)  # displaying the classification report
 
-<<<<<<< HEAD
     def set_predict(self):
-        self.a = self.list.text()
-        self.ls = self.a.split(",")
-        self.target.setText(str(self.target_value))
-        self.ls_updated = [float(x) for x in self.ls]
-        self.ls_array =  np.array(self.ls_updated) 
-        self.pred = self.classification.best_predict([self.ls_array])
-        self.predict_val.setText(str(self.pred))
         
         # col_name, self.keys= uicode.UI().con_cat(self.df)
         # self.df[col_name],func_name =data.inv_convert_category(self.df,col_name)
@@ -263,12 +246,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
         # if int(self.pred) in self.dict_val:
         #     self.predict_val.setText(str(self.dict_val[int(self.pred)]))
         #     Break
-        
-=======
-    def set_predict(self):  # function to predict the test data
         try:
->>>>>>> 87a71ad25ba1b78d48ad91a7553f5c087579d4bf
-
             self.a = self.list.text()   # storing the value of the list
             self.ls = self.a.split(",") # splitting the value of the list
             self.target.setText(str(self.target_value))
