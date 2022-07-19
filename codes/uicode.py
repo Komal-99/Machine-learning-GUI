@@ -398,7 +398,17 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
                 self.w =error_window()
                 self.w.errortype.setText("Unable to load file")
                 self.w.show()
-
+    def fillme(self):   #function to fill the missing values
+        try:
+            self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())   #calling the function from data class to fill the missing values
+            code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"    #creating the code to fill the missing values
+            steps.add_code(code)    #adding the code to the steps
+            steps.add_text("No Empty Values")   #adding the text to the steps
+            self.filldetails()  #calling the function to fill the details
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("String values cannot be filled")
+                self.w.show()
     def dropc(self):    #function to drop the columns
         try:
             if (self.dropcolumns.currentText() == self.target_value):   #if the target column is selected
@@ -463,13 +473,6 @@ widget.setFixedHeight(920)  #setting the height of the stacked widget
 widget.setFixedWidth(1408)  #setting the width of the stacked widget
 widget.show()   #showing the stacked widget
 
-app = QApplication(sys.argv)
-welcome = home_screen()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(welcome) 
-widget.setFixedHeight(920)
-widget.setFixedWidth(1408)
-widget.show()
 # try:
 sys.exit(app.exec_())
 
