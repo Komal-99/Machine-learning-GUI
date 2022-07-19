@@ -1360,17 +1360,9 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< HEAD
-<<<<<<< HEAD
-     <width>1478</width>
-     <height>31</height>
-=======
-     <width>1371</width>
-=======
      <width>1408</width>
->>>>>>> a790bb5bcf0bd680cf54e225acf7e4bfd183fd9f
      <height>26</height>
->>>>>>> a36b9129802c42e8505ddd5fbfe2ca5def2fad42
+
     </rect>
    </property>
   </widget>
