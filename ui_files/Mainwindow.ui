@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1478</width>
-    <height>998</height>
+    <width>1408</width>
+    <height>920</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1360,8 +1360,13 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< HEAD
      <width>1478</width>
      <height>31</height>
+=======
+     <width>1371</width>
+     <height>26</height>
+>>>>>>> a36b9129802c42e8505ddd5fbfe2ca5def2fad42
     </rect>
    </property>
   </widget>
