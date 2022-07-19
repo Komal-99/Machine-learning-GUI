@@ -63,6 +63,7 @@ class home_screen(QDialog):
     def StartButton(self):
         self.w =model()
         self.w.show()
+        
 
 
        
@@ -87,7 +88,7 @@ class model(QMainWindow):
         pred = UI()
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
-        # self.close()
+        self.close()
         
 
     def train(self):
