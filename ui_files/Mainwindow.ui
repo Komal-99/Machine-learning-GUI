@@ -838,12 +838,12 @@ color: rgb(255, 255, 255);</string>
     </item>
     <item>
      <property name="text">
-      <string>SVM</string>
+      <string>K-Nearest Neighbour</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>K-Nearest Neighbour</string>
+      <string>Svm</string>
      </property>
     </item>
     <item>
