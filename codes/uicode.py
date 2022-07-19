@@ -420,6 +420,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             fig.show()
         except:
             self.w =error_window()
+            self.w.errortype.setText("Columns not selected")
             self.w.show()
         
     def train_func(self):   #function to train the model
