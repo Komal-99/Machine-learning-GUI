@@ -382,14 +382,18 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
      
     def box_plot(self):     #function to create a box plot
         # data.box_plot(df=self.df,x=self.boxscatter_x.currentText(),y=self.boxscatter_y.currentText())
+        try:
+            fig = px.box(self.df,
+                 x=self.boxscatter_x.currentText(),
+                 y=self.boxscatter_y.currentText(),
+                #  color  =  "Failure Type",    
 
-        fig = px.box(self.df,
-             y=str(self.scatter_y.currentText()),
-             x=str(self.boxscatter_x.currentText()),
-            #  color  =  "Failure Type",    
-             width  =  800,
-             height =  400)
-        fig.show()
+                 width  =  800,
+                 height =  400)
+            fig.show()
+        except:
+            self.w =error_window()
+            self.w.show()
         
     def train_func(self):   #function to train the model
 
