@@ -20,22 +20,22 @@ import plotly.io as pio
 import plotly.graph_objects as go
 
 
-class error_window(QMainWindow):
-    def __init__(self):
-        super(error_window, self).__init__()
+class error_window(QMainWindow): #error window class
+    def __init__(self): #constructor
+        super(error_window, self).__init__()        
         uic.loadUi("ui_files/error.ui", self)
-        self.ExitError = self.findChild(QPushButton, "ExitButtonError")
+        self.ExitError = self.findChild(QPushButton, "ExitButtonError") #exit button
         self.ExitError.clicked.connect(self.exit)
         self.back = self.findChild(QPushButton,"Back")
-        self.errortype = self.findChild(QLabel, 'Error_type')
-        self.back.clicked.connect(self.Backbut)
-        self.show()
+        self.errortype = self.findChild(QLabel, 'Error_type')     
+        self.back.clicked.connect(self.Backbut) #back button
+        self.show() #show the window
 #  Home Screen class to start our project
-    def exit(self):
-        sys.exit()
-    def Backbut(self):
+    def exit(self): #exit button
+        sys.exit()  # exit the application
+    def Backbut(self):  #back button
         self.back.clicked.connect(UI().target)
-        self.close()
+        self.close()    # close the window
 
 
 
@@ -52,22 +52,19 @@ class home_screen(QDialog):
 
         
     def helpButton(self):   #help button function
-        help = help_screen() #creating an object of help screen
-        widget.addWidget(help) #adding the help screen to the widget
-        widget.setCurrentIndex(widget.currentIndex()+1)     #setting the current index to the next widget
-        
+        try:
+            
+            help = help_screen() #creating an object of help screen
+            widget.addWidget(help) #adding the help screen to the widget
+            widget.setCurrentIndex(widget.currentIndex()+1)     #setting the current index to the next widget
+        except:
+                self.w =error_window()
+                self.w.errortype.setText(" Some Error Occured Try Again")
+                self.w.show()
+
     def StartButton(self):  #start button function
         self.w =model()     #creating an object of model
         self.w.show()    #showing the model
-      
-
-    def StartButton(self):
-        self.w =model()
-        self.w.show()
-        
-
-
-       
 
 class model(QMainWindow):
     def __init__(self):
@@ -202,17 +199,21 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
     def exit(self):
         sys.exit()
     def scale_value(self):  #scaling the values
-        if self.scaler.currentText()=='StandardScale':
-            self.df,func_name = data.StandardScale(self.df,self.target_value)   #calling the function from data class converting data into standard scale
-        elif self.scaler.currentText()=='MinMaxScale':  #calling the function from data class converting data into min max scale
-            self.df,func_name = data.MinMaxScale(self.df,self.target_value)
-        elif self.scaler.currentText()=='PowerScale':   #calling the function from data class converting data into power scale
-            self.df,func_name = data.PowerScale(self.df,self.target_value)
-        
-        steps.add_text(self.scaler.currentText()+" applied to data")    #adding the text to the steps
-        steps.add_pipeline(self.scaler.currentText(),func_name) #adding the pipeline to the steps
-        self.filldetails()  #calling the function to fill the details
-
+        try:
+            if self.scaler.currentText()=='StandardScale':
+                self.df,func_name = data.StandardScale(self.df,self.target_value)   #calling the function from data class converting data into standard scale
+            elif self.scaler.currentText()=='MinMaxScale':  #calling the function from data class converting data into min max scale
+                self.df,func_name = data.MinMaxScale(self.df,self.target_value)
+            elif self.scaler.currentText()=='PowerScale':   #calling the function from data class converting data into power scale
+                self.df,func_name = data.PowerScale(self.df,self.target_value)
+            
+            steps.add_text(self.scaler.currentText()+" applied to data")    #adding the text to the steps
+            steps.add_pipeline(self.scaler.currentText(),func_name) #adding the pipeline to the steps
+            self.filldetails()  #calling the function to fill the details
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Select a dataset and target value")
+                self.w.show()
 
     def hist_add_column(self):  #call the function to add a column to the histogram
         
@@ -227,43 +228,46 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
 
     def histogram_plot(self):       #histogram plot function
-        
-        AllItems = [self.hist_column_add.itemText(i) for i in range(self.hist_column_add.count())]
-        for i in AllItems:  #iterating through the columns to plot the histogram
-            data.plot_histogram(self.df,i)  #calling the function from data class to plot the histogram
-            self.graphWidget.setBackground('w') #setting the background color to white
-            self.graphWidget.plot(self.df,i)    #plotting the histogram
-        
+        try:
+            AllItems = [self.hist_column_add.itemText(i) for i in range(self.hist_column_add.count())]
+            for i in AllItems:  #iterating through the columns to plot the histogram
+                data.plot_histogram(self.df,i)  #calling the function from data class to plot the histogram
+                self.graphWidget.setBackground('w') #setting the background color to white
+                self.graphWidget.plot(self.df,i)    #plotting the histogram
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Dataset/Column not selected")
+                self.w.show()
 
-    def plt3d(self):
-        # pio.renderers.default= 'chrome'
-        # fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
-        # return(pio.show(fig))    
-        fig= go.Figure(data= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())) 
-        return(fig.show())
+    def plt3d(self): #3d plot function   
+        try:  
+            fig= go.Figure(data= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())) 
+            return(fig.show())
+        except:
+                self.w =error_window()  #calling the error window function
+                self.w.errortype.setText("Dataset/Column not selected")
+                self.w.show()
 
     def heatmap_gen(self):
-        data.plot_heatmap(self.df)  #calling the function from data class to plot the heatmap
-
-    def set_target(self):
         try:
+            data.plot_heatmap(self.df)  #calling the function from data class to plot the heatmap
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Dataframe not selected")
+                self.w.show()
+    def set_target(self):
+        try:    #setting the target value
             self.target_value=str(self.item.text()).split()[0]
             steps.add_code("target=data['"+self.target_value+"']")
             self.target_col.setText(self.target_value)
         except:
-        
                 self.w =error_window()
+                self.w.errortype.setText("Target column not selected")
                 self.w.show()
 
-
-
     def target(self):
-        
             self.item=self.columns.currentItem()
         
-        
-        
-
     def filldetails(self,flag=1):   #function to fill the details
          
         if(flag==0):    #if the flag is 0 then the data is being loaded from the file
@@ -317,18 +321,21 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
 
     def con_cat(self):  #function to convert categorical columns to numeric
-        
-        a = str(self.cat_column.currentText())  #getting the categorical column
+        try: 
+            a = str(self.cat_column.currentText())  #getting the categorical column
+            self.df2 = self.df[[a]].copy()  #copying the dataframe
+            # print(self.df2.iloc[:,0]) 
+            self.df[a],func_name =data.convert_category(self.df,a)  #calling the function from data class to convert the categorical column to numeric
+            self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
+            steps.add_text("Column "+ a + " converted using Lab elEncoder") #adding the code to the steps
+            # print(self.dict_val)
+            steps.add_pipeline("LabelEncoder",func_name)    #adding the code to the steps
+            self.filldetails()  #calling the function to fill the details
 
-        self.df2 = self.df[[a]].copy()  #copying the dataframe
-        # print(self.df2.iloc[:,0]) 
-        self.df[a],func_name =data.convert_category(self.df,a)  #calling the function from data class to convert the categorical column to numeric
-        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
-        
-        steps.add_text("Column "+ a + " converted using Lab elEncoder") #adding the code to the steps
-        # print(self.dict_val)
-        steps.add_pipeline("LabelEncoder",func_name)    #adding the code to the steps
-        self.filldetails()  #calling the function to fill the details
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("dataset not loaded/column not selected")
+                self.w.show()
 
     def decode(self,key):       #function to decode the categorical values
         a = str(self.cat_column.currentText())
@@ -342,46 +349,68 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
 
     def fillme(self):   #function to fill the missing values
-
-        self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())   #calling the function from data class to fill the missing values
-        code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"    #creating the code to fill the missing values
-        steps.add_code(code)    #adding the code to the steps
-        steps.add_text("No Empty Values")   #adding the text to the steps
-        self.filldetails()  #calling the function to fill the details
+        try:
+            self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())   #calling the function from data class to fill the missing values
+            code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"    #creating the code to fill the missing values
+            steps.add_code(code)    #adding the code to the steps
+            steps.add_text("No Empty Values")   #adding the text to the steps
+            self.filldetails()  #calling the function to fill the details
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("String column cannot be filled with mean")
+                self.w.show()
 
     def getCSV(self):   #function to get the csv file
-        self.filePath, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '',"csv(*.csv)")    #getting the file path
-        self.columns.clear()    #clearing the columns
-        code="data=pd.read_csv('"+str(self.filePath)+"')"   #creating the code to read the csv file
-        steps.add_code(code)        #adding the code to the steps
-        steps.add_text("File "+self.filePath+" read")   #adding the text to the steps
-        if(self.filePath!=""):  #if the file path is not empty
-            self.filldetails(0)  #calling the function to fill the details
+        try:
+            self.filePath, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '',"csv(*.csv)")    #getting the file path
+            self.columns.clear()    #clearing the columns
+            code="data=pd.read_csv('"+str(self.filePath)+"')"   #creating the code to read the csv file
+            steps.add_code(code)        #adding the code to the steps
+            steps.add_text("File "+self.filePath+" read")   #adding the text to the steps
+            if(self.filePath!=""):  #if the file path is not empty
+                self.filldetails(0)  #calling the function to fill the details
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Unable to load file")
+                self.w.show()
 
     def dropc(self):    #function to drop the columns
-
-        if (self.dropcolumns.currentText() == self.target_value):   #if the target column is selected
-            self.target_value=""    #setting the target value to empty
-            self.target_col.setText("")  #setting the target column to empty
-        self.df=data.drop_columns(self.df,self.dropcolumns.currentText())   #calling the function from data class to drop the columns
-        steps.add_code("data=data.drop('"+self.dropcolumns.currentText()+"',axis=1)")   #adding the code to the steps
-        steps.add_text("Column "+ self.dropcolumns.currentText()+ " dropped")   #adding the text to the steps
-        self.filldetails()  
+        try:
+            if (self.dropcolumns.currentText() == self.target_value):   #if the target column is selected
+                self.target_value=""    #setting the target value to empty
+                self.target_col.setText("")  #setting the target column to empty
+            self.df=data.drop_columns(self.df,self.dropcolumns.currentText())   #calling the function from data class to drop the columns
+            steps.add_code("data=data.drop('"+self.dropcolumns.currentText()+"',axis=1)")   #adding the code to the steps
+            steps.add_text("Column "+ self.dropcolumns.currentText()+ " dropped")   #adding the text to the steps
+            self.filldetails()  
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Target Value of dataset not set")
+                self.w.show()
 
     def scatter_plot(self):     #function to create a scatter plot
+        try:
+            data.scatter_plot(df=self.df,x=self.scatter_x.currentText(),y=self.scatter_y.currentText(),c=self.scatter_c.currentText(),marker=self.scatter_mark.currentText())
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Arguments not selected")
+                self.w.show()
 
-        data.scatter_plot(df=self.df,x=self.scatter_x.currentText(),y=self.scatter_y.currentText(),c=self.scatter_c.currentText(),marker=self.scatter_mark.currentText())
-     
+
     def train_func(self):   #function to train the model
+        try:
 
-        myDict={ "Linear Regression":linear_reg , "SVM":svm_model , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
-        "K-Nearest Neighbour":KNN ,"Predictive Maintenace":pred_mtnc}   #creating a dictionary with the model names and the functions
+            myDict={ "Linear Regression":linear_reg , "SVM":svm_model , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+            "K-Nearest Neighbour":KNN ,"Predictive Maintenace":pred_mtnc}   #creating a dictionary with the model names and the functions
 
-        
-        if(self.target_value!=""):  #if the target value is not empty
             
-            self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)  #calling the function to train the model
-
+            if(self.target_value!=""):  #if the target value is not empty
+                
+                self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)  #calling the function to train the model
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Select the model")
+                self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
@@ -391,7 +420,7 @@ widget.setFixedHeight(920)  #setting the height of the stacked widget
 widget.setFixedWidth(1408)  #setting the width of the stacked widget
 widget.show()   #showing the stacked widget
 
-try:    #try block to catch the exception
-    sys.exit(app.exec())        #executing the application
-except:     #except block to catch the exception
-    print("exiting..")  #printing the exception
+# try:    #try block to catch the exception
+sys.exit(app.exec_())        #executing the application
+# except:     #except block to catch the exception
+#     print("exiting..")  #printing the exception
