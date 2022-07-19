@@ -25,15 +25,14 @@ class error_window(QMainWindow):
         super(error_window, self).__init__()
         uic.loadUi("ui_files/error.ui", self)
         self.ExitError = self.findChild(QPushButton, "ExitButtonError")
-        self.ExitError.clicked.connect(QCoreApplication.instance().quit)
+        self.ExitError.clicked.connect(self.exit)
         self.back = self.findChild(QPushButton,"Back")
         self.errortype = self.findChild(QLabel, 'Error_type')
         self.back.clicked.connect(self.Backbut)
         self.show()
 #  Home Screen class to start our project
-
-    
-    
+    def exit(self):
+        sys.exit()
     def Backbut(self):
         self.back.clicked.connect(UI().target)
         self.close()
@@ -105,9 +104,11 @@ class trained(QMainWindow):     #trained model class
         self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")    #opening the file dialog
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)   #loading the pickle file
+        # UI.train_func(self)
+
         # self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
-        loadUi(r"ui_files/pre_trained.ui",self)
+        # self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
+        # loadUi(r"ui_files/pre_trained.ui",self)
 
 
  #  Help button connection
@@ -250,8 +251,8 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             steps.add_code("target=data['"+self.target_value+"']")
             self.target_col.setText(self.target_value)
         except:
+        
                 self.w =error_window()
-                self.w.errortype.setText(str("Select a Target from the column"))
                 self.w.show()
 
 
