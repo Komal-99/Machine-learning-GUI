@@ -161,7 +161,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.scatter_mark=self.findChild(QComboBox,"scatter_mark")
         self.scatter_c=self.findChild(QComboBox,"scatter_c")
         self.scatter_btn = self.findChild(QPushButton,"scatterplot")
-        self.boxplot_btn = self.findChild(QPushButton,"boxplot")
         self.hist_column=self.findChild(QComboBox,"hist_column")
         self.hist_column_add=self.findChild(QComboBox,"hist_column_add")
         self.hist_add_btn = self.findChild(QPushButton,"hist_add_btn")
@@ -173,6 +172,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.nullbtn=self.findChild(QPushButton,"null_2")
 
 
+        self.boxplot_btn = self.findChild(QPushButton,"boxplot")
         self.X_combo=self.findChild(QComboBox,"X_combo")
         self.Y_combo=self.findChild(QComboBox,"Y_combo")
         self.Z_combo=self.findChild(QComboBox,"Z_combo")
@@ -186,7 +186,8 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.hist_remove_btn.clicked.connect(self.hist_remove_column)   #histogram remove button function
         self.histogram_btn.clicked.connect(self.histogram_plot) #histogram button function
         self.heatmap_btn.clicked.connect(self.heatmap_gen)  #heatmap button function
-        self.boxplot_btn.clicked.connect(self.box_plot)  #heatmap button function
+
+        self.boxplot_btn.clicked.connect(self.box_plot)  
         self.visualize.clicked.connect(self.plt3d)  #3d plot button function
         self.con_btn.clicked.connect(self.con_cat)  #convert to categorical button function encoding 
         self.columns.clicked.connect(self.target)   #target column button function
@@ -440,8 +441,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             fig = px.box(self.df,
                  x=self.boxscatter_x.currentText(),
                  y=self.boxscatter_y.currentText(),
-                #  color  =  "Failure Type",    
-
                  width  =  800,
                  height =  400)
             fig.show()
