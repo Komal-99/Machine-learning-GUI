@@ -323,6 +323,9 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.hist_column.clear()    
         self.hist_column.addItems(data.get_numeric(self.df))    #adding the numeric columns to the histogram combo box
         self.hist_column.addItem("All") #adding the all option to the histogram combo box
+        self.hist_column_add.clear()    
+        self.hist_column_add.addItems(data.get_numeric(self.df))    #adding the numeric columns to the histogram combo box
+        self.hist_column_add.addItem("All") #adding the all option to the histogram combo box
         x=table_display.DataFrameModel(self.df) #creating a dataframe model
         self.table.setModel(x)  #setting the dataframe model to the table
         
@@ -424,19 +427,19 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
         
     def train_func(self):   #function to train the model
-        try:
+        # try:
 
-            myDict={ "Linear Regression":linear_reg , "SVM":svm_model , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+            myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenace":pred_mtnc}   #creating a dictionary with the model names and the functions
 
             
             if(self.target_value!=""):  #if the target value is not empty
                 
                 self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)  #calling the function to train the model
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("Select the model")
-                self.w.show()
+        # except:
+        #         self.w =error_window()
+        #         self.w.errortype.setText("Select the model")
+        #         self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
