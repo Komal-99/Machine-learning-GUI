@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from mlxtend.plotting import plot_decision_regions
 import pandas as pd
 import seaborn as sns
-from uicode import *
+# from uicode import *
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 import common
@@ -46,7 +46,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 		self.mae=self.findChild(QLabel,"mae")
 		self.mse=self.findChild(QLabel,"mse")
 		self.rmse=self.findChild(QLabel,"rmse")
-		self.exitbutton = self.findChild(QPushButton,"pushButton")
+		self.exitbutton = self.findChild(QPushButton,"ExitButton")
 		self.exitbutton.clicked.connect(self.exit)
 		self.test_data=self.findChild(QLineEdit,"test_data")
 		self.test_size_btn=self.findChild(QPushButton,"test_size_btn")
