@@ -14,7 +14,14 @@ class data_:
 	def convert_category(self,df,column_name):
 
 		le=LabelEncoder()
-		df[column_name] =le.fit_transform(df[column_name])
+		le.fit(df[column_name])
+		df[column_name]= le.transform(df[column_name])
+		return df[column_name],"LabelEncoder()"
+
+	def inv_convert_category(self,df,column_name):
+
+		le=LabelEncoder()
+		df[column_name] =le.inverse_transform(df[column_name])
 		return df[column_name],"LabelEncoder()"
 	
 	def get_column_list(self,df):

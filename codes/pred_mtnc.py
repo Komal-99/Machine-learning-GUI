@@ -1,7 +1,9 @@
 
+from ast import Break
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 from PyQt5.QtCore import QCoreApplication
+from pyparsing import col
 import data_visualise
 import table_display
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
@@ -230,7 +232,14 @@ class UI(QMainWindow):
         self.pred = self.classification.best_predict([self.ls_array])
         self.predict_val.setText(str(self.pred))
         
-        uicode.decode(float(self.pred))
+        # col_name, self.keys= uicode.UI().con_cat(self.df)
+        # self.df[col_name],func_name =data.inv_convert_category(self.df,col_name)
+        # self.values= self.df[col].unique()
+        # self.values= list(self.values)
+        # self.dict_val= dict(zip(self.keys,self.values))
+        # if int(self.pred) in self.dict_val:
+        #     self.predict_val.setText(str(self.dict_val[int(self.pred)]))
+        #     Break
         
 
     def plt3d(self):

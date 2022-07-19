@@ -108,7 +108,7 @@ class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi(r'ui_files\Mainwindow.ui', self)
-        global data,steps
+        global data,steps, df
         data=data_visualise.data_()
         steps=add_steps.add_steps()
 
@@ -268,34 +268,67 @@ class UI(QMainWindow):
         self.hist_column.clear()
         self.hist_column.addItems(data.get_numeric(self.df))
         self.hist_column.addItem("All")
+        self.hist_column_add.clear()
+        self.hist_column_add.addItems(data.get_numeric(self.df))
+        self.hist_column_add.addItem("All")
         x=table_display.DataFrameModel(self.df)
         self.table.setModel(x)
         
 
 
     def con_cat(self):
-        
+        # self.df = df
+        # a=self.cat_column.currentText()
+        # self.df[a],func_name =data.convert_category(self.df,a)
+        # self.keys= self.df[a].unique()
+        # self.keys= list(self.keys)
+        # steps.add_text("Column "+ a + " converted using LabelEncoder")
+        # steps.add_pipeline("LabelEncoder",func_name)
+        # self.filldetails()
+        # return a, self.keys
         a = str(self.cat_column.currentText())
 
         self.df2 = self.df[[a]].copy()
-        # print(self.df2.iloc[:,0])
+        # keys= self.df.a.unique()
+        print(self.df2.iloc[:,0])
         self.df[a],func_name =data.convert_category(self.df,a)
         self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
-        
-        steps.add_text("Column "+ a + " converted using Lab elEncoder")
-        # print(self.dict_val)
+        # label_encoder= LabelEncoder()
+        steps.add_text("Column "+ a + " converted using LabelEncoder")
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
+        # label_encoder.fit(self.df[a])
+        # self.df[a]= label_encoder.transform(self.df[a])
+        # values= self.df.a.unique()
+        # steps.add_text("Column "+ a + " converted using LabelEncoder")
+        # # print(self.dict_val)
+        # # steps.add_pipeline("LabelEncoder",func_name)
+        # self.filldetails()
+        # self.dict_val= dict(zip(keys,values))
+        # print(self.dict_val)
+        # return self.dict_val
+
+        # a=self.cat_column.currentText()
+        # # self.df[a],func_name =data.convert_category(self.df,a)
+        # le= LabelEncoder()
+        # le.fit(self.df[a])
+        # self.df[a]= le.transform(self.df[a])
+        # self.a_inv= le.inverse_transform(self.df[a])
+        # self.dict_val= dict(zip(self.a_le,self.a_inv))
+        # steps.add_text("Column "+ a + " converted using LabelEncoder")
+        # # steps.add_pipeline("LabelEncoder",func_name)
+        # self.filldetails()
+        # return self.dict_val
 
 
 
-    def decode(self,key):
-        a = str(self.cat_column.currentText())
-        self.df2 = self.df[[a]].copy()
-        # print(self.df2.iloc[:,0])
-        self.df[a],func_name =data.convert_category(self.df,a)
-        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
-        print(self.dict_val.get(key))
+    # def decode(self,key):
+    #     a = str(self.cat_column.currentText())
+    #     self.df2 = self.df[[a]].copy()
+    #     # print(self.df2.iloc[:,0])
+    #     self.df[a],func_name =data.convert_category(self.df,a)
+    #     self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+    #     print(self.dict_val.get(key))
 
 
 
@@ -348,7 +381,8 @@ widget.addWidget(welcome)
 widget.setFixedHeight(920)
 widget.setFixedWidth(1408)
 widget.show()
-try:
-    sys.exit(app.exec())
-except:
-    print("exiting..")
+# try:
+sys.exit(app.exec_())
+
+# except:
+#     print("exiting..")
