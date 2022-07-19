@@ -27,6 +27,7 @@ class error_window(QMainWindow):
         self.ExitError = self.findChild(QPushButton, "ExitButtonError")
         self.ExitError.clicked.connect(QCoreApplication.instance().quit)
         self.back = self.findChild(QPushButton,"Back")
+        self.errortype = self.findChild(QLabel, 'Error_type')
         self.back.clicked.connect(self.Backbut)
         self.show()
 #  Home Screen class to start our project
@@ -147,6 +148,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.plot_win= self.findChild(QListWidget,"plotwidget")
         self.con_btn = self.findChild(QPushButton,"convert_btn")
         self.columns= self.findChild(QListWidget,"column_list")
+      
         self.cat_column=self.findChild(QComboBox,"cat_column")
         self.table = self.findChild(QTableView,"tableView")
         self.dropcolumns=self.findChild(QComboBox,"dropcolumn")
@@ -193,6 +195,9 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.nullbtn.clicked.connect(self.fillme)   # fill null values button function
    
         self.show() #showing the main window
+    
+
+
     def exit(self):
         sys.exit()
     def scale_value(self):  #scaling the values
@@ -240,13 +245,14 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         data.plot_heatmap(self.df)  #calling the function from data class to plot the heatmap
 
     def set_target(self):
-        # try:
+        try:
             self.target_value=str(self.item.text()).split()[0]
             steps.add_code("target=data['"+self.target_value+"']")
             self.target_col.setText(self.target_value)
-        # except:
-        #         self.w =error_window()
-        #         self.w.show()
+        except:
+                self.w =error_window()
+                self.w.errortype.setText(str("Select a Target from the column"))
+                self.w.show()
 
 
 
