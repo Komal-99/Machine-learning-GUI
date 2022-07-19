@@ -15,7 +15,7 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 import matplotlib.pyplot as plt
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QCoreApplication
-import plotly.express as px
+import plotly.express as px 
 import plotly.io as pio
 import plotly.graph_objects as go
 
@@ -158,10 +158,13 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.target_col =self.findChild(QLabel,"target_col")
         self.model_select=self.findChild(QComboBox,"model_select")
         self.scatter_x=self.findChild(QComboBox,"scatter_x")
+        self.boxscatter_x=self.findChild(QComboBox,"scatter_x_box")
         self.scatter_y=self.findChild(QComboBox,"scatter_y")
+        self.boxscatter_y=self.findChild(QComboBox,"scatter_y_box")
         self.scatter_mark=self.findChild(QComboBox,"scatter_mark")
         self.scatter_c=self.findChild(QComboBox,"scatter_c")
         self.scatter_btn = self.findChild(QPushButton,"scatterplot")
+        self.boxplot_btn = self.findChild(QPushButton,"boxplot")
         self.hist_column=self.findChild(QComboBox,"hist_column")
         self.hist_column_add=self.findChild(QComboBox,"hist_column_add")
         self.hist_add_btn = self.findChild(QPushButton,"hist_add_btn")
@@ -186,6 +189,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.hist_remove_btn.clicked.connect(self.hist_remove_column)   #histogram remove button function
         self.histogram_btn.clicked.connect(self.histogram_plot) #histogram button function
         self.heatmap_btn.clicked.connect(self.heatmap_gen)  #heatmap button function
+        self.boxplot_btn.clicked.connect(self.box_plot)  #heatmap button function
         self.visualize.clicked.connect(self.plt3d)  #3d plot button function
         self.con_btn.clicked.connect(self.con_cat)  #convert to categorical button function encoding 
         self.columns.clicked.connect(self.target)   #target column button function
@@ -291,8 +295,12 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.cat_column.addItems(self.cat_col_list) #adding the categorical columns to the combo box
         self.scatter_x.clear()
         self.scatter_x.addItems(self.column_list)   #adding the columns to the scatter x combo box
+        self.boxscatter_x.clear()
+        self.boxscatter_x.addItems(self.column_list)   #adding the columns to the box scatter x combo box
         self.scatter_y.clear()
         self.scatter_y.addItems(self.column_list)   #adding the columns to the scatter y combo box
+        self.boxscatter_y.clear()
+        self.boxscatter_y.addItems(self.column_list)   #adding the columns to the box scatter y combo box
         self.null_column.clear()
         self.null_column.addItems(self.column_list)  #adding the columns to the null column combo box
        
@@ -337,7 +345,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.df[a],func_name =data.convert_category(self.df,a)
         self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
         print(self.dict_val.get(key))   #getting the key from the dictionary
-        print(self.dict_val)
+        return self.dict_val
 
 
 
@@ -372,6 +380,17 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
         data.scatter_plot(df=self.df,x=self.scatter_x.currentText(),y=self.scatter_y.currentText(),c=self.scatter_c.currentText(),marker=self.scatter_mark.currentText())
      
+    def box_plot(self):     #function to create a box plot
+        # data.box_plot(df=self.df,x=self.boxscatter_x.currentText(),y=self.boxscatter_y.currentText())
+
+        fig = px.box(self.df,
+             y=str(self.scatter_y.currentText()),
+             x=str(self.boxscatter_x.currentText()),
+            #  color  =  "Failure Type",    
+             width  =  800,
+             height =  400)
+        fig.show()
+        
     def train_func(self):   #function to train the model
 
         myDict={ "Linear Regression":linear_reg , "SVM":svm_model , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
@@ -395,3 +414,4 @@ try:    #try block to catch the exception
     sys.exit(app.exec())        #executing the application
 except:     #except block to catch the exception
     print("exiting..")  #printing the exception
+

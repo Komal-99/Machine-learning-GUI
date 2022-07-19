@@ -322,8 +322,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="scatterplot">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>760</y>
+      <x>420</x>
+      <y>590</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -379,8 +379,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="scatter_x">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>560</y>
+      <x>450</x>
+      <y>470</y>
       <width>101</width>
       <height>23</height>
      </rect>
@@ -394,8 +394,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="scatter_y">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>590</y>
+      <x>450</x>
+      <y>500</y>
       <width>101</width>
       <height>23</height>
      </rect>
@@ -409,8 +409,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="scatter_mark">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>650</y>
+      <x>450</x>
+      <y>560</y>
       <width>101</width>
       <height>23</height>
      </rect>
@@ -489,8 +489,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>560</y>
+      <x>370</x>
+      <y>470</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -511,8 +511,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_13">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>590</y>
+      <x>370</x>
+      <y>500</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -533,8 +533,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>620</y>
+      <x>370</x>
+      <y>530</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -555,8 +555,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>650</y>
+      <x>370</x>
+      <y>560</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -577,8 +577,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="scatter_c">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>620</y>
+      <x>450</x>
+      <y>530</y>
       <width>101</width>
       <height>23</height>
      </rect>
@@ -1353,6 +1353,122 @@ color: rgb(255, 255, 255);</string>
      <string>Fill Null</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>640</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(1, 78, 144);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Boxplot&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>710</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string> Y-Axis:</string>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="scatter_x_box">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>680</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="scatter_y_box">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>710</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>680</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string> X-Axis:</string>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="boxplot">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>740</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Show</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -1360,17 +1476,8 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< HEAD
-<<<<<<< HEAD
-     <width>1478</width>
-     <height>31</height>
-=======
-     <width>1371</width>
-=======
      <width>1408</width>
->>>>>>> a790bb5bcf0bd680cf54e225acf7e4bfd183fd9f
      <height>26</height>
->>>>>>> a36b9129802c42e8505ddd5fbfe2ca5def2fad42
     </rect>
    </property>
   </widget>
