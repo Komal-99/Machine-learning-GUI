@@ -17,7 +17,7 @@ import seaborn as sns
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 import common
-
+from PyQt5.QtCore import QCoreApplication
 
 class UI(QMainWindow): # inherit from QMainWindow	
 	def __init__(self,df,target,user_actions):	# constructor
