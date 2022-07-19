@@ -129,11 +129,3 @@ class data_:
 
 
 
-    # def line_plot(self,df,x,y,c,marker):
-    # 	plt.figure()
-    # 	df=df.sort_values(by=[x])
-    # 	plt.plot(df[x],df[y],c=c,marker=marker)
-    # 	plt.xlabel(x)
-    # 	plt.ylabel(y)
-    # 	plt.title(y + " vs "+ x)
-    # 	plt.show()
