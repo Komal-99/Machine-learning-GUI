@@ -17,11 +17,26 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.graph_objects as go
 
+
+
+
 class error_window(QMainWindow):
     def __init__(self):
         super(error_window, self).__init__()
         uic.loadUi("ui_files/error.ui", self)
+        self.ExitError = self.findChild(QPushButton, "ExitButtonError")
+        self.ExitError.clicked.connect(QCoreApplication.instance().quit)
+        self.back = self.findChild(QPushButton,"Back")
+        self.back.clicked.connect(self.Backbut)
         self.show()
+
+    
+    
+    def Backbut(self):
+        self.back.clicked.connect(UI().target)
+        self.close()
+
+
 
 class home_screen(QDialog):
     def __init__(self):
@@ -31,6 +46,7 @@ class home_screen(QDialog):
         self.Start.clicked.connect(self.StartButton)
         self.help = self.findChild(QPushButton,"pushButton_3")
         self.help.clicked.connect(self.helpButton)
+
         
 
 
@@ -71,7 +87,7 @@ class model(QMainWindow):
         pred = UI()
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
-        self.close()
+        # self.close()
         
 
     def train(self):
@@ -81,6 +97,8 @@ class model(QMainWindow):
     
     def test_pretrained(self):
         self.testing=pre_trained.UI(self.pickle_model)
+    
+   
 
  #  Help button connection
 class help_screen(QDialog):
@@ -229,7 +247,6 @@ class UI(QMainWindow):
         
             self.item=self.columns.currentItem()
         
-            print('exiting')    
         
         
 

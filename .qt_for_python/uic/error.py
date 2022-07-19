@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\error.ui'
+# Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\error.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,12 +14,63 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(508, 202)
+        MainWindow.resize(516, 389)
+        MainWindow.setStyleSheet("background-color: rgb(1, 78, 144);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.label_31 = QtWidgets.QLabel(self.centralwidget)
+        self.label_31.setGeometry(QtCore.QRect(0, 50, 511, 31))
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu Condensed")
+        font.setPointSize(11)
+        self.label_31.setFont(font)
+        self.label_31.setStyleSheet("background-color:rgb(1, 78, 144);\n"
+"color: rgb(255, 255, 255);")
+        self.label_31.setWordWrap(False)
+        self.label_31.setObjectName("label_31")
+        self.Back = QtWidgets.QPushButton(self.centralwidget)
+        self.Back.setGeometry(QtCore.QRect(150, 180, 221, 41))
+        font = QtGui.QFont()
+        font.setFamily("Segoe Fluent Icons")
+        font.setPointSize(16)
+        font.setBold(False)
+        font.setWeight(50)
+        self.Back.setFont(font)
+        self.Back.setStyleSheet("background-color: rgb(200, 217, 231);\n"
+"border-radius: 35px;\n"
+"border-width: 2opx;\n"
+"color: rgb(1, 78, 144);")
+        self.Back.setObjectName("Back")
+        self.ExitButtonError = QtWidgets.QPushButton(self.centralwidget)
+        self.ExitButtonError.setGeometry(QtCore.QRect(150, 250, 221, 41))
+        font = QtGui.QFont()
+        font.setFamily("Segoe Fluent Icons")
+        font.setPointSize(16)
+        font.setBold(False)
+        font.setWeight(50)
+        self.ExitButtonError.setFont(font)
+        self.ExitButtonError.setStyleSheet("background-color: rgb(200, 217, 231);\n"
+"border-radius: 35px;\n"
+"border-width: 2opx;\n"
+"color: rgb(1, 78, 144);")
+        self.ExitButtonError.setObjectName("ExitButtonError")
+        self.Error_type = QtWidgets.QLabel(self.centralwidget)
+        self.Error_type.setGeometry(QtCore.QRect(0, 100, 521, 51))
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu Condensed")
+        font.setPointSize(17)
+        font.setBold(True)
+        font.setWeight(75)
+        self.Error_type.setFont(font)
+        self.Error_type.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.Error_type.setStatusTip("")
+        self.Error_type.setAutoFillBackground(False)
+        self.Error_type.setStyleSheet("color:rgb(255,255,255);\n"
+"background-color: rgb(1, 78, 144);")
+        self.Error_type.setObjectName("Error_type")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 508, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 516, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -32,3 +83,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setToolTip(_translate("MainWindow", "<html><head/><body><p align=\"center\">ERROR!</p></body></html>"))
+        self.label_31.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600;\">ERROR!</span></p><p align=\"center\"><br/></p><p align=\"center\"><br/></p></body></html>"))
+        self.Back.setText(_translate("MainWindow", "BACK"))
+        self.ExitButtonError.setText(_translate("MainWindow", "EXIT"))
+        self.Error_type.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
