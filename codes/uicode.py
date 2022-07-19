@@ -454,7 +454,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         # try:
 
             myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
-            "K-Nearest Neighbour":KNN ,"Predictive Maintenace":pred_mtnc}   #creating a dictionary with the model names and the functions
+            "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
             
             if(self.target_value!=""):  #if the target value is not empty
