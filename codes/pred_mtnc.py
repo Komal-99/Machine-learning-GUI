@@ -1,9 +1,9 @@
-#  importing libraries
-from base64 import decode
+
+from ast import Break
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 from PyQt5.QtCore import QCoreApplication
-from uicode import *
+from pyparsing import col
 import data_visualise
 import table_display
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
@@ -17,7 +17,7 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
-
+from uicode import *
 
 
 class UI(QMainWindow): # inheriting QMainWindow class
@@ -236,9 +236,17 @@ class UI(QMainWindow): # inheriting QMainWindow class
         text=steps.classification_(self.y_test,self.y_pred) # returning the classification report
         self.report.setPlainText(text)  # displaying the classification report
 
-    def set_predict(self):  # function to predict the test data
+    def set_predict(self):
+        
+        # col_name, self.keys= uicode.UI().con_cat(self.df)
+        # self.df[col_name],func_name =data.inv_convert_category(self.df,col_name)
+        # self.values= self.df[col].unique()
+        # self.values= list(self.values)
+        # self.dict_val= dict(zip(self.keys,self.values))
+        # if int(self.pred) in self.dict_val:
+        #     self.predict_val.setText(str(self.dict_val[int(self.pred)]))
+        #     Break
         try:
-
             self.a = self.list.text()   # storing the value of the list
             self.ls = self.a.split(",") # splitting the value of the list
             self.target.setText(str(self.target_value))
