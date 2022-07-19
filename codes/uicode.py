@@ -31,7 +31,7 @@ class error_window(QMainWindow):
         self.show()
 #  Home Screen class to start our project
 
-    
+     
     
     def Backbut(self):
         self.back.clicked.connect(UI().target)
@@ -240,13 +240,13 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         data.plot_heatmap(self.df)  #calling the function from data class to plot the heatmap
 
     def set_target(self):
-        # try:
+        try:
             self.target_value=str(self.item.text()).split()[0]
             steps.add_code("target=data['"+self.target_value+"']")
             self.target_col.setText(self.target_value)
-        # except:
-        #         self.w =error_window()
-        #         self.w.show()
+        except:
+                self.w =error_window()
+                self.w.show()
 
 
 
