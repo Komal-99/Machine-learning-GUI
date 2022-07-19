@@ -61,7 +61,6 @@ class home_screen(QDialog):
         self.w.show()    #showing the model
       
 
-<<<<<<< HEAD
     def StartButton(self):
         self.w =model()
         self.w.show()
@@ -72,10 +71,6 @@ class home_screen(QDialog):
 
 class model(QMainWindow):
     def __init__(self):
-=======
-class model(QMainWindow):   #model class
-    def __init__(self):      #model class initialisation
->>>>>>> 09708b10774290cb0ad7e88030c2d1dd79c3d704
         super(model,self).__init__()
         loadUi("ui_files/modeltype.ui",self)      #loading the ui file
         
@@ -108,20 +103,11 @@ class trained(QMainWindow):     #trained model class
         super(trained,self).__init__()
         self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")    #opening the file dialog
         with open(self.filePath_pre, 'rb') as file:
-<<<<<<< HEAD
-            self.pickle_model = pickle.load(file)
-    
-    def test_pretrained(self):
-        self.testing=pre_trained.UI(self.pickle_model)
-    
-   
-=======
             self.pickle_model = pickle.load(file)   #loading the pickle file
         # self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
         self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
         loadUi(r"ui_files/pre_trained.ui",self)
 
->>>>>>> 09708b10774290cb0ad7e88030c2d1dd79c3d704
 
  #  Help button connection
 class help_screen(QDialog): #help screen class
@@ -268,10 +254,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         
             self.item=self.columns.currentItem()
         
-<<<<<<< HEAD
-=======
-            # print('exiting')    
->>>>>>> 09708b10774290cb0ad7e88030c2d1dd79c3d704
         
         
 
