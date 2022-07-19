@@ -1,4 +1,5 @@
 
+# Importing libraries
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser, QDialog
 import sys ,pickle
 import data_visualise
@@ -10,23 +11,24 @@ from sklearn import metrics
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier as KNC
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score , confusion_matrix , roc_curve, roc_auc_score
+from sklearn.metrics import accuracy_score 
 import pandas as pd
 import seaborn as sns
 
 from sklearn.metrics import accuracy_score
 import common
 
-class UI(QDialog):
-    def __init__(self,df,target,user_actions):
+class UI(QDialog): # QDialog is the base class  of all user interface objects in PyQt5. 
+    def __init__(self,df,target,user_actions):  # Constructor
         super(UI, self).__init__()
-        uic.loadUi("ui_files/KNN.ui", self)
-        self.user_act=user_actions
-        global data ,steps
-        data=data_visualise.data_()
-        steps=common.common_steps(df,target)
-        self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        self.columns= self.findChild(QListWidget,"columns")  
+        uic.loadUi("ui_files/KNN.ui", self) # Load the UI
+        self.user_act=user_actions  # User Actions
+        global data ,steps  # Global variables
+        data=data_visualise.data_() # Data Visualise
+        steps=common.common_steps(df,target)    # Common Steps
+        self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()    # Return Data
+        #defining the variables and their respective functions
+        self.columns= self.findChild(QListWidget,"columns")     # Find the child  of the object 
         self.solver=self.findChild(QComboBox,"solver")        
         self.random=self.findChild(QLineEdit,"randomstate")     
         self.max_iter=self.findChild(QLineEdit,"max_iter")  
@@ -48,73 +50,76 @@ class UI(QDialog):
         self.conf_mat_btn.clicked.connect(self.conf_matrix)
         self.test_size_btn.clicked.connect(self.test_split)
         self.dwnld_2.clicked.connect(self.download_model)
-        
+        self.exitbutton = self.findChild(QPushButton,"pushButton")
+
+        self.exitbutton.clicked.connect(self.exit)
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
         self.predict_btn.clicked.connect(self.set_predict)
-        self.train_btn.setStyleSheet(
+        self.train_btn.setStyleSheet(   
                              "QPushButton::pressed"
                              "{"
                              "background-color : green;"
                              "}"
-                             )
+                             )  # Set the style sheet for the train  button
         
-        self.setvalue()
-        self.show()
+        self.setvalue() # Set the values of the columns
+        self.show() # Show the window
 
-    def setvalue(self):
+    def setvalue(self): # Set the values of the columns
         self.columns.addItems(self.column_list)
-     
+    def exit(self): # Exit the window
+        sys.exit()  
 
    
-    def set_predict(self):
-        self.a = self.list.text()
-        self.ls = self.a.split(",")
+    def set_predict(self):  # Set the predict value function
+        self.a = self.list.text()   # Get the value from the text box
+        self.ls = self.a.split(",") # Split the value
        
-        self.ls_updated = [float(x) for x in self.ls]
-        self.ls_array =  np.array(self.ls_updated)
-        self.target.setText(str(self.target_value))
-        self.pred  =self.knn.predict([self.ls_array])
-        self.predict_val.setText(np.str_(self.pred))
+        self.ls_updated = [float(x) for x in self.ls]   # Convert the string to float
+        self.ls_array =  np.array(self.ls_updated)  # Convert the list to array
+        self.target.setText(str(self.target_value)) # Set the target value
+        self.pred  =self.knn.predict([self.ls_array])   # Predict the value
+        self.predict_val.setText(np.str_(self.pred))    # Set the predicted value
 
 
     
-    def test_split(self):
+    def test_split(self):   # Test Split function
 
         self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
-        print(self.y_train.shape)
+        print(self.y_train.shape)   # Print the shape of the train and test data
         print(self.y_test.shape)
-        self.split_done.setText(str("Split Done"))
+        self.split_done.setText(str("Split Done"))  # Set the text of the label
    
 
-    def download_model(self):
+    def download_model(self):   # Download the model function
 
-        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
-        pkl_filename = name[0]
-        with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.knn, file)  
-        
-        self.user_act.save_file(pkl_filename)  
+        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")  # Get the file name
+        pkl_filename = name[0]  # Get the file name
+        with open(pkl_filename, 'wb') as file:  # Open the file
+            pickle.dump(self.knn, file)     # Write the model to the file
 
-    def training(self):
-        self.knn = KNC(n_neighbors=int(self.neighbours.text()),weights=self.weights.currentText(),algorithm=self.algorithm.currentText())
-        self.knn.fit(self.x_train,self.y_train)
-        self.pre=self.knn.predict(self.x_test)
-        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
-        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
-        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))
-        text=steps.classification_(self.y_test,self.pre)
-        self.report.setPlainText(text)
+        self.user_act.save_file(pkl_filename)   # Save the file  
 
-    def conf_matrix(self):
+    def training(self):  # Training function
+        self.knn = KNC(n_neighbors=int(self.neighbours.text()),weights=self.weights.currentText(),algorithm=self.algorithm.currentText())   # Create the model knn
+        self.knn.fit(self.x_train,self.y_train)  # Fit the model
+        self.pre=self.knn.predict(self.x_test)  # Predict the value
+        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))    # Set the mean absolute error
+        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))   # Set the mean squared error
+        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))   # Set the root mean squared error
+        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))    # Set the accuracy score
+        text=steps.classification_(self.y_test,self.pre)    # Get the classification report
+        self.report.setPlainText(text)  # Set the text of the report
 
-        data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }
-        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted'])
-        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
-        plt.figure()
+    def conf_matrix(self):  # Confusion Matrix function
+
+        data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }      # Create the dataframe
+        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) # Create the dataframe
+        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])  # Create the confusion matrix
+        plt.figure()    
         sns.heatmap(confusion_matrix, annot=True)
-        plt.show()
+        plt.show()  # Show the confusion matrix
 
    
