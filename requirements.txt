@@ -1,25 +1,7 @@
-attrs                 21.4.0
-backcall              0.2.0
-certifi               2022.5.18.1
-charset-normalizer    2.0.12
-chart-studio          1.1.0
-colorama              0.4.5
-cycler                0.11.0
-debugpy               1.6.0
-decorator             5.1.1
-entrypoints           0.4
-fonttools             4.33.3
+
 guidata               2.3.0
 guiqwt                4.3.0
 htmlmin               0.1.12
-idna                  3.3
-ImageHash             4.2.1
-ipykernel             6.15.0
-ipython               7.34.0
-jedi                  0.18.1
-Jinja2                3.1.2
-joblib                1.1.0
-jupyter-client        7.3.4
 jupyter-core          4.10.0
 kiwisolver            1.4.2
 MarkupSafe            2.1.1
