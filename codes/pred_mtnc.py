@@ -17,7 +17,8 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
-from uicode import *
+# from uicode import *
+import uicode
 
 
 class UI(QMainWindow): # inheriting QMainWindow class
@@ -103,7 +104,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             print(self.y_test.shape)    
             self.split_done.setText(str("Split Done"))  # setting the text of the label
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText(" Size not set")
                 self.w.show()
 
@@ -116,7 +117,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
                 pickle.dump(self.lr, file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)   # calling the function to save the file
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("Failed to save the file")
                 self.w.show()
 
@@ -155,7 +156,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             classifier.append('Decision Tree')
             imported_as.append('dt')
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("First Split your dataset!")
                 self.w.show()
 
@@ -237,15 +238,6 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.report.setPlainText(text)  # displaying the classification report
 
     def set_predict(self):
-        
-        # col_name, self.keys= uicode.UI().con_cat(self.df)
-        # self.df[col_name],func_name =data.inv_convert_category(self.df,col_name)
-        # self.values= self.df[col].unique()
-        # self.values= list(self.values)
-        # self.dict_val= dict(zip(self.keys,self.values))
-        # if int(self.pred) in self.dict_val:
-        #     self.predict_val.setText(str(self.dict_val[int(self.pred)]))
-        #     Break
         try:
             self.a = self.list.text()   # storing the value of the list
             self.ls = self.a.split(",") # splitting the value of the list
@@ -254,10 +246,8 @@ class UI(QMainWindow): # inheriting QMainWindow class
             self.ls_array =  np.array(self.ls_updated)  # converting the values of the list to array
             self.pred = self.classification.best_predict([self.ls_array])   # predicting the test data
             self.predict_val.setText(str(self.pred))    # displaying the prediction
-            self.dict_val  = UI.decode()    # decoding the values
-            print(self.dict_val)    # printing the dictionary
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("Error! Try Again")
                 self.w.show()
         
@@ -271,7 +261,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
             return(pio.show(fig))   # returning the 3D graph
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("Columns not selected")
                 self.w.show()
 

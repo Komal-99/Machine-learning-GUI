@@ -344,7 +344,38 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         steps.add_text("Column "+ a + " converted using LabelEncoder")
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
-    
+        # label_encoder.fit(self.df[a])
+        # self.df[a]= label_encoder.transform(self.df[a])
+        # values= self.df.a.unique()
+        # steps.add_text("Column "+ a + " converted using LabelEncoder")
+        # # print(self.dict_val)
+        # # steps.add_pipeline("LabelEncoder",func_name)
+        # self.filldetails()
+        # self.dict_val= dict(zip(keys,values))
+        # print(self.dict_val)
+        # return self.dict_val
+
+        # a=self.cat_column.currentText()
+        # # self.df[a],func_name =data.convert_category(self.df,a)
+        # le= LabelEncoder()
+        # le.fit(self.df[a])
+        # self.df[a]= le.transform(self.df[a])
+        # self.a_inv= le.inverse_transform(self.df[a])
+        # self.dict_val= dict(zip(self.a_le,self.a_inv))
+        # steps.add_text("Column "+ a + " converted using LabelEncoder")
+        # # steps.add_pipeline("LabelEncoder",func_name)
+        # self.filldetails()
+        # return self.dict_val
+
+
+
+    # def decode(self,key):
+    #     a = str(self.cat_column.currentText())
+    #     self.df2 = self.df[[a]].copy()
+    #     # print(self.df2.iloc[:,0])
+    #     self.df[a],func_name =data.convert_category(self.df,a)
+    #     self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+    #     print(self.dict_val.get(key))
 
     def getCSV(self):   #function to get the csv file
         try:
