@@ -612,7 +612,7 @@ class Ui_MainWindow(object):
         self.model_select.setItemText(2, _translate("MainWindow", "Random Forest"))
         self.model_select.setItemText(3, _translate("MainWindow", "K-Nearest Neighbour"))
         self.model_select.setItemText(4, _translate("MainWindow", "Svm"))
-        self.model_select.setItemText(5, _translate("MainWindow", "Predictive Maintenace"))
+        self.model_select.setItemText(5, _translate("MainWindow", "Predictive Maintenance"))
         self.label_29.setText(_translate("MainWindow", "Target Set :"))
         self.target_col.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p><p align=\"center\"><br/></p></body></html>"))
         self.scale_btn.setText(_translate("MainWindow", "Scale Values"))
