@@ -254,8 +254,8 @@ class UI(QMainWindow): # inheriting QMainWindow class
             self.ls_array =  np.array(self.ls_updated)  # converting the values of the list to array
             self.pred = self.classification.best_predict([self.ls_array])   # predicting the test data
             self.predict_val.setText(str(self.pred))    # displaying the prediction
-            self.dict_val  = UI.decode()    # decoding the values
-            print(self.dict_val)    # printing the dictionary
+            # self.dict_val  = UI.decode()    # decoding the values
+            # print(self.dict_val)    # printing the dictionary
         except:
                 self.w =error_window()
                 self.w.errortype.setText("Error! Try Again")
