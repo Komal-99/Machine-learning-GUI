@@ -17,13 +17,12 @@ from sklearn.metrics import accuracy_score
 import common
 from PyQt5.QtCore import QCoreApplication
 import uicode
-
-j
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         
         super(UI, self).__init__()
         uic.loadUi("ui_files/LogisticRegression.ui", self)
+        self.df_original = df_original
         self.user_act=user_actions
         global data ,steps
         data=data_visualise.data_()
@@ -86,7 +85,7 @@ class UI(QMainWindow):
        
         pkl_filename = name[0]
         with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.lr, file)  
+            pickle.dump(self.df_original, file)  
         
         self.user_act.save_file(pkl_filename)  
 

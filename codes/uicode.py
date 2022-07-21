@@ -95,16 +95,20 @@ class model(QMainWindow):
 class trained(QMainWindow):     #trained model class
     def __init__(self):
         super(trained,self).__init__()
+       
+        self.path = rb'C:\Users\Sandeep\OneDrive\Desktop\UTS Summer Intern\UTS-Project\codes\logistic_model_df.pkl'
         self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/Pre_trained_model',"pkl(*.pkl)")    #opening the file dialog
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)   #loading the pickle file
-        # with open(pred_mntc_model_df.pkl,'rb') as f:
-        #     self.df_data=pickle.load(f)
+        with open(self.path,'rb') as f:
+            self.df_data=pickle.load(f)
 
+        print(self.df_data)
+        self.testing=pre_trained.UI(self.df_data,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
         # UI.train_func(self)
-        self.target_value_='failure_type'
-        # self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        self.testing=pre_trained.UI(self.df_data,self.target_value_,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
+        # self.target_value_='failure_type'
+        # self.X,self.n_class
+        # es,self.target_value,self.df,self.column_list=steps.return_data()
         # loadUi(r"ui_files/pre_trained.ui",self)
 
 
@@ -345,42 +349,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         steps.add_text("Column "+ a + " converted using LabelEncoder")
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
-        # label_encoder.fit(self.df[a])
-        # self.df[a]= label_encoder.transform(self.df[a])
-        # values= self.df.a.unique()
-        # steps.add_text("Column "+ a + " converted using LabelEncoder")
-        # # print(self.dict_val)
-        # # steps.add_pipeline("LabelEncoder",func_name)
-        # self.filldetails()
-        # self.dict_val= dict(zip(keys,values))
-        # print(self.dict_val)
-        # return self.dict_val
-
-        # a=self.cat_column.currentText()
-        # # self.df[a],func_name =data.convert_category(self.df,a)
-        # le= LabelEncoder()
-        # le.fit(self.df[a])
-        # self.df[a]= le.transform(self.df[a])
-        # self.a_inv= le.inverse_transform(self.df[a])
-        # self.dict_val= dict(zip(self.a_le,self.a_inv))
-        # steps.add_text("Column "+ a + " converted using LabelEncoder")
-        # # steps.add_pipeline("LabelEncoder",func_name)
-        # self.filldetails()
-        # return self.dict_val
-
-    # def decode(self,value):
-    #     for key in self.dict_val:
-    #         if self.value == self.dict_val[key]:
-    #             return key
-
-
-    # def decode(self,key):
-    #     a = str(self.cat_column.currentText())
-    #     self.df2 = self.df[[a]].copy()
-    #     # print(self.df2.iloc[:,0])
-    #     self.df[a],func_name =data.convert_category(self.df,a)
-    #     self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
-    #     print(self.dict_val.get(key))
+ 
 
     def getCSV(self):   #function to get the csv file
         try:
@@ -446,7 +415,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
         
     def train_func(self):   #function to train the model
-        # try:
+        try:
 
             myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
@@ -454,10 +423,10 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             
             if(self.target_value!=""):  #if the target value is not empty
                 self.win = myDict[self.model_select.currentText()].UI(self.df_original,self.df,self.target_value,steps)  #calling the function to train the model
-        # except:
-        #         self.w =error_window()
-        #         self.w.errortype.setText("Select the model")
-        #         self.w.show()
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Select the model")
+                self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
