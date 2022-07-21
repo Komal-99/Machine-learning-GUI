@@ -9,8 +9,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.utils.validation import check_array
-import data_visualise
+import data_visualise   
 import pandas as pd
 import common
 from sklearn.preprocessing import OrdinalEncoder
