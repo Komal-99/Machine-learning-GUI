@@ -17,8 +17,12 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
-from uicode import *
+import uicode
+import sys
+import warnings
 
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
 
 class UI(QMainWindow): # inheriting QMainWindow class
     def __init__(self,df,target,user_actions):  # constructor
@@ -103,7 +107,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             print(self.y_test.shape)    
             self.split_done.setText(str("Split Done"))  # setting the text of the label
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText(" Size not set")
                 self.w.show()
 
@@ -116,7 +120,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
                 pickle.dump(self.lr, file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)   # calling the function to save the file
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("Failed to save the file")
                 self.w.show()
 
@@ -155,7 +159,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             classifier.append('Decision Tree')
             imported_as.append('dt')
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("First Split your dataset!")
                 self.w.show()
 
@@ -256,8 +260,10 @@ class UI(QMainWindow): # inheriting QMainWindow class
             self.predict_val.setText(str(self.pred))    # displaying the prediction
             # self.dict_val  = UI.decode()    # decoding the values
             # print(self.dict_val)    # printing the dictionary
+            # self.y_pred= uicode.UI().decode(int(self.pred))
+            # self.predict_val.setText(str(self.y_pred))
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("Error! Try Again")
                 self.w.show()
         
@@ -271,7 +277,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
             return(pio.show(fig))   # returning the 3D graph
         except:
-                self.w =error_window()
+                self.w =uicode.error_window()
                 self.w.errortype.setText("Columns not selected")
                 self.w.show()
 
