@@ -1,4 +1,3 @@
-
 #importing Libraries
 
 from PyQt5.QtWidgets import *
@@ -36,8 +35,6 @@ class error_window(QMainWindow): #error window class
     def Backbut(self):  #back button
         self.back.clicked.connect(UI().target)
         self.close()    # close the window
-
-
 
 class home_screen(QDialog):
     def __init__(self):           #initialising the home screen
