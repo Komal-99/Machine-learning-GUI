@@ -133,10 +133,10 @@ class help_screen(QDialog): #help screen class
 class UI(QMainWindow):  #UI class for main window which do data processing and cleaning
     def __init__(self): #initialising the UI class
         super(UI, self).__init__()
-        uic.loadUi(r'ui_files\Mainwindow.ui', self) #loading the ui file
-        global data,steps                         #globalising the data and steps
-        data=data_visualise.data_()             #creating an object of data class
-        steps=add_steps.add_steps()            #creating an object of steps class
+        uic.loadUi(r'ui_files\Mainwindow.ui', self)
+        global data,steps, df
+        data=data_visualise.data_()
+        steps=add_steps.add_steps()
 
         #defining the buttons and their functions
         self.Browse = self.findChild(QPushButton,"Browse")
@@ -161,7 +161,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.scatter_mark=self.findChild(QComboBox,"scatter_mark")
         self.scatter_c=self.findChild(QComboBox,"scatter_c")
         self.scatter_btn = self.findChild(QPushButton,"scatterplot")
-        self.boxplot_btn = self.findChild(QPushButton,"boxplot")
         self.hist_column=self.findChild(QComboBox,"hist_column")
         self.hist_column_add=self.findChild(QComboBox,"hist_column_add")
         self.hist_add_btn = self.findChild(QPushButton,"hist_add_btn")
@@ -173,6 +172,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.nullbtn=self.findChild(QPushButton,"null_2")
 
 
+        self.boxplot_btn = self.findChild(QPushButton,"boxplot")
         self.X_combo=self.findChild(QComboBox,"X_combo")
         self.Y_combo=self.findChild(QComboBox,"Y_combo")
         self.Z_combo=self.findChild(QComboBox,"Z_combo")
@@ -186,7 +186,8 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.hist_remove_btn.clicked.connect(self.hist_remove_column)   #histogram remove button function
         self.histogram_btn.clicked.connect(self.histogram_plot) #histogram button function
         self.heatmap_btn.clicked.connect(self.heatmap_gen)  #heatmap button function
-        self.boxplot_btn.clicked.connect(self.box_plot)  #heatmap button function
+
+        self.boxplot_btn.clicked.connect(self.box_plot)  
         self.visualize.clicked.connect(self.plt3d)  #3d plot button function
         self.con_btn.clicked.connect(self.con_cat)  #convert to categorical button function encoding 
         self.columns.clicked.connect(self.target)   #target column button function
@@ -323,50 +324,58 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.hist_column.clear()    
         self.hist_column.addItems(data.get_numeric(self.df))    #adding the numeric columns to the histogram combo box
         self.hist_column.addItem("All") #adding the all option to the histogram combo box
+        self.hist_column_add.clear()    
+        self.hist_column_add.addItems(data.get_numeric(self.df))    #adding the numeric columns to the histogram combo box
+        self.hist_column_add.addItem("All") #adding the all option to the histogram combo box
         x=table_display.DataFrameModel(self.df) #creating a dataframe model
         self.table.setModel(x)  #setting the dataframe model to the table
         
 
 
-    def con_cat(self):  #function to convert categorical columns to numeric
-        try: 
-            a = str(self.cat_column.currentText())  #getting the categorical column
-            self.df2 = self.df[[a]].copy()  #copying the dataframe
-            # print(self.df2.iloc[:,0]) 
-            self.df[a],func_name =data.convert_category(self.df,a)  #calling the function from data class to convert the categorical column to numeric
-            self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
-            steps.add_text("Column "+ a + " converted using Lab elEncoder") #adding the code to the steps
-            # print(self.dict_val)
-            steps.add_pipeline("LabelEncoder",func_name)    #adding the code to the steps
-            self.filldetails()  #calling the function to fill the details
-
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("dataset not loaded/column not selected")
-                self.w.show()
-
-    def decode(self,key):       #function to decode the categorical values
+    def con_cat(self):
         a = str(self.cat_column.currentText())
-        self.df2 = self.df[[a]].copy()      #copying the dataframe
-        # print(self.df2.iloc[:,0])
+
+        self.df2 = self.df[[a]].copy()
+        # keys= self.df.a.unique()
+        print(self.df2.iloc[:,0])
         self.df[a],func_name =data.convert_category(self.df,a)
-        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))    #creating a dictionary with the categorical values and the numeric values
-        print(self.dict_val.get(key))   #getting the key from the dictionary
-        return self.dict_val
+        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+        # label_encoder= LabelEncoder()
+        steps.add_text("Column "+ a + " converted using LabelEncoder")
+        steps.add_pipeline("LabelEncoder",func_name)
+        self.filldetails()
+        # label_encoder.fit(self.df[a])
+        # self.df[a]= label_encoder.transform(self.df[a])
+        # values= self.df.a.unique()
+        # steps.add_text("Column "+ a + " converted using LabelEncoder")
+        # # print(self.dict_val)
+        # # steps.add_pipeline("LabelEncoder",func_name)
+        # self.filldetails()
+        # self.dict_val= dict(zip(keys,values))
+        # print(self.dict_val)
+        # return self.dict_val
+
+        # a=self.cat_column.currentText()
+        # # self.df[a],func_name =data.convert_category(self.df,a)
+        # le= LabelEncoder()
+        # le.fit(self.df[a])
+        # self.df[a]= le.transform(self.df[a])
+        # self.a_inv= le.inverse_transform(self.df[a])
+        # self.dict_val= dict(zip(self.a_le,self.a_inv))
+        # steps.add_text("Column "+ a + " converted using LabelEncoder")
+        # # steps.add_pipeline("LabelEncoder",func_name)
+        # self.filldetails()
+        # return self.dict_val
 
 
 
-    def fillme(self):   #function to fill the missing values
-        try:
-            self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())   #calling the function from data class to fill the missing values
-            code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"    #creating the code to fill the missing values
-            steps.add_code(code)    #adding the code to the steps
-            steps.add_text("No Empty Values")   #adding the text to the steps
-            self.filldetails()  #calling the function to fill the details
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("String column cannot be filled with mean")
-                self.w.show()
+    # def decode(self,key):
+    #     a = str(self.cat_column.currentText())
+    #     self.df2 = self.df[[a]].copy()
+    #     # print(self.df2.iloc[:,0])
+    #     self.df[a],func_name =data.convert_category(self.df,a)
+    #     self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+    #     print(self.dict_val.get(key))
 
     def getCSV(self):   #function to get the csv file
         try:
@@ -381,7 +390,17 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
                 self.w =error_window()
                 self.w.errortype.setText("Unable to load file")
                 self.w.show()
-
+    def fillme(self):   #function to fill the missing values
+        try:
+            self.df[self.null_column.currentText()]=data.fillmean(self.df,self.null_column.currentText())   #calling the function from data class to fill the missing values
+            code="data['"+self.null_column.currentText()+"'].fillna(data['"+self.null_column.currentText()+"'].mean(),inplace=True)"    #creating the code to fill the missing values
+            steps.add_code(code)    #adding the code to the steps
+            steps.add_text("No Empty Values")   #adding the text to the steps
+            self.filldetails()  #calling the function to fill the details
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("String values cannot be filled")
+                self.w.show()
     def dropc(self):    #function to drop the columns
         try:
             if (self.dropcolumns.currentText() == self.target_value):   #if the target column is selected
@@ -413,8 +432,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             fig = px.box(self.df,
                  x=self.boxscatter_x.currentText(),
                  y=self.boxscatter_y.currentText(),
-                #  color  =  "Failure Type",    
-
                  width  =  800,
                  height =  400)
             fig.show()
@@ -426,12 +443,11 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
     def train_func(self):   #function to train the model
         try:
 
-            myDict={ "Linear Regression":linear_reg , "SVM":svm_model , "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
-            "K-Nearest Neighbour":KNN ,"Predictive Maintenace":pred_mtnc}   #creating a dictionary with the model names and the functions
+            myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+            "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
             
             if(self.target_value!=""):  #if the target value is not empty
-                
                 self.win = myDict[self.model_select.currentText()].UI(self.df_original,self.df,self.target_value,steps)  #calling the function to train the model
         except:
                 self.w =error_window()
@@ -446,7 +462,8 @@ widget.setFixedHeight(920)  #setting the height of the stacked widget
 widget.setFixedWidth(1408)  #setting the width of the stacked widget
 widget.show()   #showing the stacked widget
 
-# try:    #try block to catch the exception
-sys.exit(app.exec_())        #executing the application
-# except:     #except block to catch the exception
-#     print("exiting..")  #printing the exception
+# try:
+sys.exit(app.exec_())
+
+# except:
+#     print("exiting..")

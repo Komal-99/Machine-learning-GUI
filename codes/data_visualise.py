@@ -122,9 +122,40 @@ class data_:
         plt.ylabel(y)
         plt.title(y + " vs " + x)
         plt.show()
+		
+	# def read_file(self,filepath):
+	# 	return pd.read_csv(str(filepath))
 
+	# def convert_category(self,df,column_name):
 
+	# 	le=LabelEncoder()
+	# 	le.fit(df[column_name])
+	# 	df[column_name]= le.transform(df[column_name])
+	# 	return df[column_name],"LabelEncoder()"
+
+	# def inv_convert_category(self,df,column_name):
+
+	# 	le=LabelEncoder()
+	# 	df[column_name] =le.inverse_transform(df[column_name])
+	# 	return df[column_name],"LabelEncoder()"
 	
+	# def get_column_list(self,df):
+	# 	column_list= []
+	# 	df.columns= df.columns.str.replace(' ','_')
+	# 	for i in df.columns:
+	# 		column_list.append(i)
+	# 	return column_list
+
+	# def get_empty_list(self,df):
+	# 	empty_list= []
+
+	# 	for i in df.columns:
+	# 		if(df[i].isnull().values.any()==True):
+	# 			empty_list.append(i)
+	# 	return empty_list
+
+	# def get_shape(self,df):
+	# 	return df.shape 
 
 
 
