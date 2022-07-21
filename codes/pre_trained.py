@@ -16,7 +16,7 @@ import seaborn as sns
 
 
 class UI(QMainWindow):
-    def __init__(self,df,target,pickle_model,path):
+    def __init__(self,df_original,df,target,pickle_model,path):
         super(UI, self).__init__()
         uic.loadUi("ui_files/pre_trained.ui", self)
         self.path=path

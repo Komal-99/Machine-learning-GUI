@@ -20,7 +20,7 @@ import uicode
 
 
 class UI(QMainWindow):
-    def __init__(self,df,target,user_actions):
+    def __init__(self,df_original,df,target,user_actions):
         
         super(UI, self).__init__()
         uic.loadUi("ui_files/LogisticRegression.ui", self)

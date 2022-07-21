@@ -110,17 +110,16 @@ class UI(QMainWindow): # inheriting QMainWindow class
                 self.w.show()
 
     def download_model(self):   # function to download the model
-        try:
-
+        # try:
             name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
             pkl_filename = name[0]  # getting the file name
             with open(pkl_filename, 'wb') as file:  # opening the file
-                pickle.dump(self.lr, file)  # this will dump the object to a file
+                pickle.dump(self.classification,file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)   # calling the function to save the file
-        except:
-                self.w =uicode.error_window()
-                self.w.errortype.setText("Failed to save the file")
-                self.w.show()
+        # except:
+        #         self.w =uicode.error_window()
+        #         self.w.errortype.setText("Failed to save the file")
+        #         self.w.show()
 
     def training(self): # function to train the model
         try:

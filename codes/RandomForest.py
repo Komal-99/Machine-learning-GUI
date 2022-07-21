@@ -16,7 +16,7 @@ from sklearn.metrics import accuracy_score,auc
 import common
 
 class UI(QMainWindow):  # inherit from QMainWindow  
-    def __init__(self,df,target,user_actions):  # constructor
+    def __init__(self,df_original,df,target,user_actions):  # constructor
         super(UI, self).__init__()
         uic.loadUi("ui_files/RandomForest.ui", self)    # load the UI
         self.user_act=user_actions  # user_actions is the object of class User_Actions

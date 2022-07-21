@@ -18,7 +18,7 @@ from sklearn.preprocessing import OrdinalEncoder
 
 # MainWindow of the Linear Regression Model
 class UI(QMainWindow):
-    def __init__(self,df,target,user_actions):
+    def __init__(self,df_original,df,target,user_actions):
         super(UI, self).__init__()
         uic.loadUi('ui_files\LinearRegression.ui', self)
         self.user_act=user_actions
