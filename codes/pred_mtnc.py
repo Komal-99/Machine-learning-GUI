@@ -1,5 +1,6 @@
-
-from ast import Break
+#  importing libraries
+# from base64 import decode
+# from re import A
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 from PyQt5.QtCore import QCoreApplication
@@ -20,11 +21,11 @@ import plotly.io as pio
 # from uicode import *
 import uicode
 
-
 class UI(QMainWindow): # inheriting QMainWindow class
-    def __init__(self,df,target,user_actions):  # constructor
+    def __init__(self,df_original,df,target,user_actions):  # constructor
         super(UI, self).__init__()
         uic.loadUi("ui_files/PredictiveMaintenance.ui", self)   # loading the UI file
+        self.df_original = df_original
         self.user_act=user_actions  # storing the user actions object
         global data ,steps  # global variables
         data=data_visualise.data_() # creating an object of data class
@@ -237,19 +238,36 @@ class UI(QMainWindow): # inheriting QMainWindow class
         text=steps.classification_(self.y_test,self.y_pred) # returning the classification report
         self.report.setPlainText(text)  # displaying the classification report
 
-    def set_predict(self):
-        try:
-            self.a = self.list.text()   # storing the value of the list
-            self.ls = self.a.split(",") # splitting the value of the list
-            self.target.setText(str(self.target_value))
-            self.ls_updated = [float(x) for x in self.ls]   # converting the values of the list to float
-            self.ls_array =  np.array(self.ls_updated)  # converting the values of the list to array
-            self.pred = self.classification.best_predict([self.ls_array])   # predicting the test data
-            self.predict_val.setText(str(self.pred))    # displaying the prediction
-        except:
-                self.w =uicode.error_window()
-                self.w.errortype.setText("Error! Try Again")
-                self.w.show()
+    def set_predict(self):  # function to predict the test data
+        # try:
+
+        self.a = self.list.text()   # storing the value of the list
+        self.ls = self.a.split(",") # splitting the value of the list
+        self.target.setText(str(self.target_value))
+        self.ls_updated = [float(x) for x in self.ls]   # converting the values of the list to float
+        self.ls_array =  np.array(self.ls_updated)  # converting the values of the list to array
+        self.pred = self.classification.best_predict([self.ls_array])   # predicting the test data
+        # print(self.df)
+        
+        self.predict_val.setText(str(self.pred))    # displaying the prediction
+        a = str(self.target_value)
+        # print(a)
+        self.df2 = pd.DataFrame(self.df_original[a].copy())
+        self.df_original[a],func_name =data.convert_category(self.df_original,a)
+        print(self.df_original[a])
+        # print(self.df2)
+        # print(self.df2[a])
+        self.dict_val = dict(zip(self.df_original[a],self.df2.iloc[:,0]))
+        
+        print(self.dict_val)    # printing the dictionary
+        pred_str = str(self.pred).replace('[','').replace(']','')
+        print(self.dict_val[float(pred_str)])
+
+        # self.dict_val  = UI.decode()    # decoding the values
+        # except:
+        #   self.w =error_window()
+        #   self.w.errortype.setText("Error! Try Again")
+        #   self.w.show()
         
     
     
