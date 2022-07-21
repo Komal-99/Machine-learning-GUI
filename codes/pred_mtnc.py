@@ -21,7 +21,6 @@ import plotly.io as pio
 # from uicode import *
 import uicode
 
-
 class UI(QMainWindow): # inheriting QMainWindow class
     def __init__(self,df_original,df,target,user_actions):  # constructor
         super(UI, self).__init__()

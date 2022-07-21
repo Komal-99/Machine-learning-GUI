@@ -339,7 +339,8 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         # keys= self.df.a.unique()
         print(self.df2.iloc[:,0])
         self.df[a],func_name =data.convert_category(self.df,a)
-        self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
+        cat= self.df[a].unique()
+        self.dict_val = dict(zip(cat,self.df2.iloc[:,0]))
         # label_encoder= LabelEncoder()
         steps.add_text("Column "+ a + " converted using LabelEncoder")
         steps.add_pipeline("LabelEncoder",func_name)
@@ -367,6 +368,10 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         # self.filldetails()
         # return self.dict_val
 
+    # def decode(self,value):
+    #     for key in self.dict_val:
+    #         if self.value == self.dict_val[key]:
+    #             return key
 
 
     # def decode(self,key):
