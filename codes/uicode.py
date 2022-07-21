@@ -98,8 +98,8 @@ class trained(QMainWindow):     #trained model class
         self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/Pre_trained_model',"pkl(*.pkl)")    #opening the file dialog
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)   #loading the pickle file
-        with open(pred_mntc_model_df.pkl,'rb') as f:
-            self.df_data=pickle.load(f)
+        # with open(pred_mntc_model_df.pkl,'rb') as f:
+        #     self.df_data=pickle.load(f)
 
         # UI.train_func(self)
         self.target_value_='failure_type'
@@ -446,7 +446,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
         
     def train_func(self):   #function to train the model
-        try:
+        # try:
 
             myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
@@ -454,10 +454,10 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             
             if(self.target_value!=""):  #if the target value is not empty
                 self.win = myDict[self.model_select.currentText()].UI(self.df_original,self.df,self.target_value,steps)  #calling the function to train the model
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("Select the model")
-                self.w.show()
+        # except:
+        #         self.w =error_window()
+        #         self.w.errortype.setText("Select the model")
+        #         self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen

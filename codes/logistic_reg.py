@@ -18,7 +18,7 @@ import common
 from PyQt5.QtCore import QCoreApplication
 import uicode
 
-
+j
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         
