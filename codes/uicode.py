@@ -333,15 +333,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
 
     def con_cat(self):
-        # self.df = df
-        # a=self.cat_column.currentText()
-        # self.df[a],func_name =data.convert_category(self.df,a)
-        # self.keys= self.df[a].unique()
-        # self.keys= list(self.keys)
-        # steps.add_text("Column "+ a + " converted using LabelEncoder")
-        # steps.add_pipeline("LabelEncoder",func_name)
-        # self.filldetails()
-        # return a, self.keys
         a = str(self.cat_column.currentText())
 
         self.df2 = self.df[[a]].copy()
