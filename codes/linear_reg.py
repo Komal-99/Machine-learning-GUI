@@ -9,16 +9,14 @@ from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.utils.validation import check_array
-import data_visualise
+import data_visualise   
 import pandas as pd
 import common
-from sklearn.preprocessing import OrdinalEncoder
 
 
 # MainWindow of the Linear Regression Model
 class UI(QMainWindow):
-    def __init__(self,df,target,user_actions):
+    def __init__(self,df_original,df,target,user_actions):
         super(UI, self).__init__()
         uic.loadUi('ui_files\LinearRegression.ui', self)
         self.user_act=user_actions
