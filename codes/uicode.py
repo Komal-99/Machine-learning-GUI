@@ -26,7 +26,7 @@ class error_window(QMainWindow): #error window class
         uic.loadUi("ui_files/error.ui", self)
         self.ExitError = self.findChild(QPushButton, "ExitButtonError") #exit button
         self.ExitError.clicked.connect(self.exit)
-        self.back = self.findChild(QPushButton,"Back")
+        self.back = self.findChild(QPushButton,"Back")  
         self.errortype = self.findChild(QLabel, 'Error_type')     
         self.back.clicked.connect(self.Backbut) #back button
         self.show() #show the window
@@ -277,7 +277,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
          
         if(flag==0):    #if the flag is 0 then the data is being loaded from the file
             self.df = data.read_file(str(self.filePath))    #calling the function from data class to read the file
-        
+            self.df_original = self.df
         
         self.columns.clear()    #clearing the columns
         self.column_list=data.get_column_list(self.df)  #getting the column list
@@ -446,19 +446,18 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
         
     def train_func(self):   #function to train the model
-        # try:
+        try:
 
             myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
             
             if(self.target_value!=""):  #if the target value is not empty
-                
-                self.win = myDict[self.model_select.currentText()].UI(self.df,self.target_value,steps)  #calling the function to train the model
-        # except:
-        #         self.w =error_window()
-        #         self.w.errortype.setText("Select the model")
-        #         self.w.show()
+                self.win = myDict[self.model_select.currentText()].UI(self.df_original,self.df,self.target_value,steps)  #calling the function to train the model
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Select the model")
+                self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
