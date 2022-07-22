@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
-import linear_reg,svm_model,table_display,data_visualise,logistic_reg,RandomForest
+import linearRegression,svm_model,table_display,data_visualise,logistic_reg,RandomForest
 import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
@@ -60,58 +60,10 @@ class home_screen(QDialog):
                 self.w.show()
 
     def StartButton(self):  #start button function
-        self.w =model()     #creating an object of model
-        self.w.show()    #showing the model
-
-class model(QMainWindow):
-    def __init__(self):
-        super(model,self).__init__()
-        loadUi("ui_files/modeltype.ui",self)      #loading the ui file
-        
-        #defining the buttons and their functions for model ui
-        self.New_model = self.findChild(QPushButton, "newmodel")
-        self.New_model.clicked.connect(self.new)
-
-        self.Trainedmodel = self.findChild(QPushButton,"trainedmodel")
-        self.Trainedmodel.clicked.connect(self.train)
-
-        self.exitbutton = self.findChild(QPushButton,"ExitButton")
-        # self.exitbutton.clicked.connect(app.instance().quit) #exit button function
-        self.exitbutton.clicked.connect(self.exit)
-    def exit(self):
-        sys.exit()
-    def new(self):  #new model button function
         pred = UI() #creating an object of UI
         widget.addWidget(pred)
         widget.setCurrentIndex(widget.currentIndex()+1)
         self.close()    #closing the model type window
-        
-
-    def train(self):    #trained model button function
-        self.t=trained()
-        self.t.show()
-        self.close()
-
-class trained(QMainWindow):     #trained model class
-    def __init__(self):
-        super(trained,self).__init__()
-       
-        self.path = rb'C:\Users\Sandeep\OneDrive\Desktop\UTS Summer Intern\UTS-Project\codes\logistic_model_df.pkl'
-        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/Pre_trained_model',"pkl(*.pkl)")    #opening the file dialog
-        with open(self.filePath_pre, 'rb') as file:
-            self.pickle_model = pickle.load(file)   #loading the pickle file
-        with open(self.path,'rb') as f:
-            self.df_data=pickle.load(f)
-
-        print(self.df_data)
-        self.testing=pre_trained.UI(self.df_data,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
-        # UI.train_func(self)
-        # self.target_value_='failure_type'
-        # self.X,self.n_class
-        # es,self.target_value,self.df,self.column_list=steps.return_data()
-        # loadUi(r"ui_files/pre_trained.ui",self)
-
-
  #  Help button connection
 class help_screen(QDialog): #help screen class
     def __init__(self):
@@ -182,6 +134,12 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.Z_combo=self.findChild(QComboBox,"Z_combo")
         self.color_combo=self.findChild(QComboBox,"color_combo")
         self.plot3d_btn= self.findChild(QPushButton,"visualize")
+        self.upload=self.findChild(QPushButton,"upload")
+        self.trained=self.findChild(QPushButton,"pre_trained")
+        self.upload.clicked.connect(self.uploadfile)
+        self.trained.clicked.connect(self.pretrained)
+        self.set=self.findChild(QLabel,"done")
+
 
         self.Browse.clicked.connect(self.getCSV)    #browse button function
         self.Drop_btn.clicked.connect(self.dropc)   #drop button function
@@ -202,8 +160,25 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.nullbtn.clicked.connect(self.fillme)   # fill null values button function
    
         self.show() #showing the main window
-    
+    def uploadfile(self):
+        try:
+            self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/Pre_trained_model',"pkl(*.pkl)")    #opening the file dialog
+            with open(self.filePath_pre, 'rb') as file:
+                self.pickle_model = pickle.load(file)   #loading the pickle file
+            self.set.setText("Model Loaded")
+            print(self.filePath_pre)
+        except:
+            self.w =error_window()
+            self.w.errortype.setText("Can't load trained model")
+            self.w.show()
 
+    def pretrained(self):
+        # try:
+            self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+        # except:
+        #     self.w =error_window()
+        #     self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
+        #     self.w.show()
 
     def exit(self):
         sys.exit()
@@ -417,7 +392,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
     def train_func(self):   #function to train the model
         try:
 
-            myDict={ "Linear Regression":linear_reg , "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+            myDict={ "LinearRegression": linearRegression, "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
             
