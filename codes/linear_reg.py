@@ -19,7 +19,7 @@ import uicode
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         super(UI, self).__init__()
-        uic.loadUi('ui_files\LinearRegression.ui', self)
+        uic.loadUi('ui_files\Linear.ui', self)
         self.user_act=user_actions
         global data 
         #Calling the data_ class from data_visualise.py
@@ -127,7 +127,9 @@ class UI(QMainWindow):
     def training(self):
 
         try:
+
             self.reg=LinearRegression().fit(self.x_train,self.y_train)
+            str1=""
             coef=' '.join(map(str, self.reg.coef_)) 
             self.intercept.setText(str(self.reg.intercept_))
             self.weights.setText(coef)
@@ -159,7 +161,6 @@ class UI(QMainWindow):
             plt.show()
 
         except:
-
             self.w =uicode.error_window()
             self.w.errortype.setText("Train Your Model First!")
-            self.w.show()
+            self.w.show() 
