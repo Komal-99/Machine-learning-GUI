@@ -98,14 +98,14 @@ class model(QMainWindow):
 class trained(QMainWindow):     #trained model class
     def __init__(self):
         super(trained,self).__init__()
-        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl)")    #opening the file dialog
+        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl);;sav(*.sav)")    #opening the file dialog
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)   #loading the pickle file
-        # UI.train_func(self)
+        UI.train_func(self)
 
-        # self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        # self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
-        # loadUi(r"ui_files/pre_trained.ui",self)
+        self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
+        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
+        loadUi(r"ui_files/pre_trained.ui",self)
 
 
  #  Help button connection
