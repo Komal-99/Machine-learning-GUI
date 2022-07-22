@@ -97,7 +97,7 @@ class UI(QMainWindow):
     #Downloading a Trained Model
     def download_model(self):
         try:
-            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','',"pickle(*.pkl)")
             pkl_filename = name[0]
             with open(pkl_filename, 'wb') as file:
                 pickle.dump(self.reg, file)  
