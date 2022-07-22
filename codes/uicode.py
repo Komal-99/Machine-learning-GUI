@@ -7,11 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
-<<<<<<< HEAD
-import linearReg,svm_model,table_display,data_visualise,logistic_reg,RandomForest
-=======
 import linearRegression,svm_model,table_display,data_visualise,logistic_reg,RandomForest
->>>>>>> 7ad06bf6cc7a24afb9048313b34544f9b7636849
 import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
