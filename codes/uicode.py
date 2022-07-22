@@ -390,17 +390,17 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
         
     def train_func(self):   #function to train the model
-        try:
+        # try:
             myDict={ "LinearRegression": linear_reg, "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
         
             if(self.target_value!=""):  #if the target value is not empty
                 self.win = myDict[self.model_select.currentText()].UI(self.df_original, self.df,self.target_value,steps)  #calling the function to train the model
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("Select the model")
-                self.w.show()
+        # except:
+        #         self.w =error_window()
+        #         self.w.errortype.setText("Select the model")
+        #         self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
