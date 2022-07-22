@@ -156,3 +156,6 @@ class UI(QMainWindow): # inherit from QMainWindow
 			plt.show()
 		except:
 			self.w =uicode.error_window()
+			self.w.errortype.setText("Train your Model First!")
+			self.w.show()
+		

@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
-import linearRegression,svm_model,table_display,data_visualise,logistic_reg,RandomForest
+import svm_model,table_display,data_visualise,logistic_reg,RandomForest,linear_reg
 import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
@@ -162,7 +162,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.show() #showing the main window
     def uploadfile(self):
         try:
-            self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/Pre_trained_model',"pkl(*.pkl)")    #opening the file dialog
+            self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '',"pkl(*.pkl)")    #opening the file dialog
             with open(self.filePath_pre, 'rb') as file:
                 self.pickle_model = pickle.load(file)   #loading the pickle file
             self.set.setText("Model Loaded")
@@ -391,13 +391,12 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         
     def train_func(self):   #function to train the model
         try:
-
-            myDict={ "LinearRegression": linearRegression, "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
+            myDict={ "LinearRegression": linear_reg, "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
         
             if(self.target_value!=""):  #if the target value is not empty
-                self.win = myDict[self.model_select.currentText()].UI(self.df_original,self.df,self.target_value,steps)  #calling the function to train the model
+                self.win = myDict[self.model_select.currentText()].UI(self.df_original, self.df,self.target_value,steps)  #calling the function to train the model
         except:
                 self.w =error_window()
                 self.w.errortype.setText("Select the model")
@@ -410,9 +409,4 @@ widget.addWidget(welcome)   #adding the home screen to the stacked widget
 widget.setFixedHeight(920)  #setting the height of the stacked widget
 widget.setFixedWidth(1408)  #setting the width of the stacked widget
 widget.show()   #showing the stacked widget
-
-# try:
 sys.exit(app.exec_())
-
-# except:
-#     print("exiting..")

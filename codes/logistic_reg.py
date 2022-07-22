@@ -91,7 +91,7 @@ class UI(QMainWindow):
 
         try:
 
-            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','',"pickle(*.pkl)")
         
             pkl_filename = name[0]
             with open(pkl_filename, 'wb') as file:

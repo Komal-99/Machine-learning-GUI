@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,Q
 import sys,pickle
 from PyQt5.QtCore import QCoreApplication
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
-from pyparsing import col
+from pyparsing import null_debug_action
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -19,9 +19,9 @@ import uicode
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         super(UI, self).__init__()
-        uic.loadUi("ui_files/LinearRegression.ui", self)
+        uic.loadUi('ui_files\Linear.ui', self)
         self.user_act=user_actions
-        global data, steps
+        global data 
         #Calling the data_ class from data_visualise.py
         data=data_visualise.data_()
         #Calling the common class from common_steps.py
@@ -66,9 +66,9 @@ class UI(QMainWindow):
                              "background-color : green;"
                              "}"
                              )
-        
-        self.setvalue()
         self.show()
+        self.setvalue()
+
     # Setting the the columns value
     def exit(self):
         sys.exit()
@@ -98,7 +98,7 @@ class UI(QMainWindow):
     #Downloading a Trained Model
     def download_model(self):
         try:
-            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','',"pickle(*.pkl)")
             pkl_filename = name[0]
             with open(pkl_filename, 'wb') as file:
                 pickle.dump(self.reg, file)  
@@ -151,7 +151,6 @@ class UI(QMainWindow):
     def barplot(self):
 
         try:
-
             y_pred = self.reg.predict(self.x_test)
             df = pd.DataFrame({'Actual': self.y_test, 'Predicted': y_pred})
             df1=df.head(20)
@@ -162,7 +161,6 @@ class UI(QMainWindow):
             plt.show()
 
         except:
-
             self.w =uicode.error_window()
             self.w.errortype.setText("Train Your Model First!")
             self.w.show() 
