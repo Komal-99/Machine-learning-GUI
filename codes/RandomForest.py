@@ -14,9 +14,10 @@ import pandas as pd
 import seaborn as sns
 from sklearn.metrics import accuracy_score,auc
 import common
+import uicode
 
 class UI(QMainWindow):  # inherit from QMainWindow  
-    def __init__(self,df,target,user_actions):  # constructor
+    def __init__(self,df_original,df,target,user_actions):  # constructor
         super(UI, self).__init__()
         uic.loadUi("ui_files/RandomForest.ui", self)    # load the UI
         self.user_act=user_actions  # user_actions is the object of class User_Actions
@@ -89,33 +90,57 @@ class UI(QMainWindow):  # inherit from QMainWindow
 
     def download_model(self):   # function to download the model
 
-        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
-        pkl_filename = name[0]      # pkl_filename is the name of the file
-        with open(pkl_filename, 'wb') as file:  # open the file
-            pickle.dump(self.lr, file)      # dump the model in the file
+        try:
 
-        self.user_act.save_file(pkl_filename)  
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
+            pkl_filename = name[0]      # pkl_filename is the name of the file
+            with open(pkl_filename, 'wb') as file:  # open the file
+                pickle.dump(self.lr, file)      # dump the model in the file
+
+            self.user_act.save_file(pkl_filename)  
+
+        except:
+
+            self.w = uicode.error_window()
+            self.w.errortype.setText("Failed to save the file")
+            self.w.show()
     
     def test_split(self):   # function to split the data
 
-        self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
-        print(self.y_train.shape)   # print the shape of the train and test data
-        print(self.y_test.shape)
-        self.split_done.setText(str("Split Done"))  # set the text of the label
+        try:
+
+            self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
+            print(self.y_train.shape)   # print the shape of the train and test data
+            print(self.y_test.shape)
+            self.split_done.setText(str("Split Done"))  # set the text of the label
+
+        except:
+
+            self.w = uicode.error_window()
+            self.w.errortype.setText("Size Not set")
+            self.w.show()
         
     def training(self):  # function to train the model
 
-        self.lr = RFC(n_estimators=int(self.estimators.text()),criterion=self.criterion.currentText(),max_depth=None,min_samples_split=int(self.min_sample_split.text()),bootstrap=self.bootstrap.currentText()=='True',random_state=1) # create the model of Randomm forest
+        try:
 
-        self.lr.fit(self.x_train,self.y_train)  # fit the model
-        
-        self.pre=self.lr.predict(self.x_test)   # predict the value
-        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))    # set the mae
-        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))   # set the mse
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))   # set the rmse
-        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))    # set the accuracy
-        text=steps.classification_(self.y_test,self.pre)    # get the classification report
-        self.report.setPlainText(text)  
+            self.lr = RFC(n_estimators=int(self.estimators.text()),criterion=self.criterion.currentText(),max_depth=None,min_samples_split=int(self.min_sample_split.text()),bootstrap=self.bootstrap.currentText()=='True',random_state=1) # create the model of Randomm forest
+
+            self.lr.fit(self.x_train,self.y_train)  # fit the model
+            
+            self.pre=self.lr.predict(self.x_test)   # predict the value
+            self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))    # set the mae
+            self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))   # set the mse
+            self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))   # set the rmse
+            self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))    # set the accuracy
+            text=steps.classification_(self.y_test,self.pre)    # get the classification report
+            self.report.setPlainText(text)  
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("First Split your dataset!")
+            self.w.show()
 
     def conf_matrix(self):
 

@@ -16,13 +16,17 @@ import seaborn as sns
 
 
 class UI(QMainWindow):
-    def __init__(self,df,target,pickle_model,path):
+    def __init__(self,df_data,pickle_model,path):
         super(UI, self).__init__()
         uic.loadUi("ui_files/pre_trained.ui", self)
         self.path=path
         global data 
+        self.df=df_data
+        self.target_value = df_data['Outcome']
+        print(self.target_value)
+
         data=data_visualise.data_()
-        steps=common.common_steps(df,target)
+        steps=common.common_steps(self.df,self.target_value)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
         self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")

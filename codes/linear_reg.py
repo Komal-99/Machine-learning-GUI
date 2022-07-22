@@ -9,11 +9,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.utils.validation import check_array
-import data_visualise
+import data_visualise   
 import pandas as pd
 import common
 from sklearn.preprocessing import OrdinalEncoder
+import uicode
 
 
 # MainWindow of the Linear Regression Model
@@ -78,52 +78,76 @@ class UI(QMainWindow):
     
     # Prediction for a Specific Value
     def set_valpred(self):
-        pred = str(self.list.text())
-        if len(pred) == 0:
-            self.error.setText("Enter Values to Predict!")
-        else:
-            self.a = self.list.text() 
-            self.ls = self.a.split(",")
-            self.target.setText(str(self.target_value))
-       
-            self.ls_updated = [float(x) for x in self.ls]
-            self.ls_array =  np.array(self.ls_updated)
-            self.pred  =self.reg.predict([self.ls_array])
-            self.predict_val.setText(str(self.pred))
+        try:
+            pred = str(self.list.text())
+            if len(pred) == 0:
+                self.error.setText("Enter Values to Predict!")
+            else:
+                self.a = self.list.text() 
+                self.ls = self.a.split(",")
+                self.target.setText(str(self.target_value))
+        
+                self.ls_updated = [float(x) for x in self.ls]
+                self.ls_array =  np.array(self.ls_updated)
+                self.pred  =self.reg.predict([self.ls_array])
+                self.predict_val.setText(str(self.pred))
+        except:
+            self.w = uicode.error_window()
+            self.w.errortype.setText("Failed to Predict")
+            self.w.show()
 
     #Downloading a Trained Model
     def download_model(self):
-        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
-        pkl_filename = name[0]
-        with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.reg, file)  
-        self.user_act.save_file(pkl_filename)  
+        try:
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
+            pkl_filename = name[0]
+            with open(pkl_filename, 'wb') as file:
+                pickle.dump(self.reg, file)  
+            self.user_act.save_file(pkl_filename)  
+        except:
+            self.w = uicode.error_window()
+            self.w.errortype.setText("Failed to save the file")
+            self.w.show()
 
     #Splitting the Model
     def test_split(self):
-        self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=0)
-        print(self.y_train.shape)
-        print(self.y_test.shape)
-        self.split_done.setText(str("Split Done"))
+        try:
+            
+            self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=0)
+            print(self.y_train.shape)
+            print(self.y_test.shape)
+            self.split_done.setText(str("Split Done"))
+        
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Size Not set")
+            self.w.show()
      
     #Training the Model
     def training(self):
 
-        self.reg=LinearRegression().fit(self.x_train,self.y_train)
-        str1=""
-        coef=' '.join(map(str, self.reg.coef_)) 
-        self.intercept.setText(str(self.reg.intercept_))
-        self.weights.setText(coef)
+        try:
 
-        #Various Parameters for the trained model
-        pre=self.reg.predict(self.x_test)
-        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,pre)))
-        self.mse.setText(str(metrics.mean_squared_error(self.y_test,pre)))
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,pre))))
-        self.accuracy.setText(str(self.reg.score(self.x_test,self.y_test)))
-        
+            self.reg=LinearRegression().fit(self.x_train,self.y_train)
+            str1=""
+            coef=' '.join(map(str, self.reg.coef_)) 
+            self.intercept.setText(str(self.reg.intercept_))
+            self.weights.setText(coef)
 
+            #Various Parameters for the trained model
+            pre=self.reg.predict(self.x_test)
+            self.mae.setText(str(metrics.mean_absolute_error(self.y_test,pre)))
+            self.mse.setText(str(metrics.mean_squared_error(self.y_test,pre)))
+            self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,pre))))
+            self.accuracy.setText(str(self.reg.score(self.x_test,self.y_test)))
 
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("First Split your dataset!")
+            self.w.show() 
+            
     #plotting the Bar Graph
     def barplot(self):
 

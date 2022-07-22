@@ -20,7 +20,7 @@ import common
 from PyQt5.QtCore import QCoreApplication
 
 class UI(QMainWindow): # inherit from QMainWindow	
-	def __init__(self,df,target,user_actions):	# constructor
+	def __init__(self,df_original,df,target,user_actions):	# constructor
 		super(UI, self).__init__()
 		uic.loadUi("ui_files/SVM.ui", self)	# load the UI
 		self.user_act=user_actions

@@ -1,4 +1,3 @@
-
 #importing Libraries
 
 from PyQt5.QtWidgets import *
@@ -36,8 +35,6 @@ class error_window(QMainWindow): #error window class
     def Backbut(self):  #back button
         self.back.clicked.connect(UI().target)
         self.close()    # close the window
-
-
 
 class home_screen(QDialog):
     def __init__(self):           #initialising the home screen
@@ -98,14 +95,21 @@ class model(QMainWindow):
 class trained(QMainWindow):     #trained model class
     def __init__(self):
         super(trained,self).__init__()
-        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/home/akshay/Dekstop',"pkl(*.pkl);;sav(*.sav)")    #opening the file dialog
+       
+        self.path = rb'C:\Users\Sandeep\OneDrive\Desktop\UTS Summer Intern\UTS-Project\codes\logistic_model_df.pkl'
+        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '/Pre_trained_model',"pkl(*.pkl)")    #opening the file dialog
         with open(self.filePath_pre, 'rb') as file:
             self.pickle_model = pickle.load(file)   #loading the pickle file
-        UI.train_func(self)
+        with open(self.path,'rb') as f:
+            self.df_data=pickle.load(f)
 
-        self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
-        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
-        loadUi(r"ui_files/pre_trained.ui",self)
+        print(self.df_data)
+        self.testing=pre_trained.UI(self.df_data,self.pickle_model,self.filePath_pre)  #creating an object of UI pretrained 
+        # UI.train_func(self)
+        # self.target_value_='failure_type'
+        # self.X,self.n_class
+        # es,self.target_value,self.df,self.column_list=steps.return_data()
+        # loadUi(r"ui_files/pre_trained.ui",self)
 
 
  #  Help button connection
@@ -345,42 +349,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         steps.add_text("Column "+ a + " converted using LabelEncoder")
         steps.add_pipeline("LabelEncoder",func_name)
         self.filldetails()
-        # label_encoder.fit(self.df[a])
-        # self.df[a]= label_encoder.transform(self.df[a])
-        # values= self.df.a.unique()
-        # steps.add_text("Column "+ a + " converted using LabelEncoder")
-        # # print(self.dict_val)
-        # # steps.add_pipeline("LabelEncoder",func_name)
-        # self.filldetails()
-        # self.dict_val= dict(zip(keys,values))
-        # print(self.dict_val)
-        # return self.dict_val
-
-        # a=self.cat_column.currentText()
-        # # self.df[a],func_name =data.convert_category(self.df,a)
-        # le= LabelEncoder()
-        # le.fit(self.df[a])
-        # self.df[a]= le.transform(self.df[a])
-        # self.a_inv= le.inverse_transform(self.df[a])
-        # self.dict_val= dict(zip(self.a_le,self.a_inv))
-        # steps.add_text("Column "+ a + " converted using LabelEncoder")
-        # # steps.add_pipeline("LabelEncoder",func_name)
-        # self.filldetails()
-        # return self.dict_val
-
-    # def decode(self,value):
-    #     for key in self.dict_val:
-    #         if self.value == self.dict_val[key]:
-    #             return key
-
-
-    # def decode(self,key):
-    #     a = str(self.cat_column.currentText())
-    #     self.df2 = self.df[[a]].copy()
-    #     # print(self.df2.iloc[:,0])
-    #     self.df[a],func_name =data.convert_category(self.df,a)
-    #     self.dict_val = dict(zip(self.df[a],self.df2.iloc[:,0]))
-    #     print(self.dict_val.get(key))
+ 
 
     def getCSV(self):   #function to get the csv file
         try:

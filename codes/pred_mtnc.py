@@ -34,8 +34,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
 
         # Defining buttons and there funtions
         self.target = self.findChild(QLabel,"target")
-        self.columns= self.findChild(QListWidget,"columns")
-        self.target = self.findChild(QLabel,"target")
+        self.Failure_name = self.findChild(QLabel,"Failure_Name")
         self.columns= self.findChild(QListWidget,"columns")
         self.solver=self.findChild(QComboBox,"solver")        
    
@@ -53,7 +52,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.download=self.findChild(QPushButton,"dwnld")
         self.X_combo=self.findChild(QComboBox,"X_combo")
         self.Y_combo=self.findChild(QComboBox,"Y_combo")
-        self.Z_combo=self.findChild(QComboBox,"Z_combo")
+        self.Z_combo=self.findChild(QComboBox,"Z_combo")       
         self.color_combo=self.findChild(QComboBox,"color_combo")
 
         self.test_data=self.findChild(QLineEdit,"test_data")
@@ -61,7 +60,6 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
         self.plot3d_btn= self.findChild(QPushButton,"visualize")
         self.split_done= self.findChild(QLabel,"split")
-        self.target=self.findChild(QLabel,"target")
         
         self.exitbutton.clicked.connect(self.exit)
         self.train_btn.clicked.connect(self.training) 
@@ -110,17 +108,16 @@ class UI(QMainWindow): # inheriting QMainWindow class
                 self.w.show()
 
     def download_model(self):   # function to download the model
-        try:
-
+        # try:
             name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
             pkl_filename = name[0]  # getting the file name
             with open(pkl_filename, 'wb') as file:  # opening the file
                 pickle.dump(self.classification.best_model(type='model'), file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)   # calling the function to save the file
-        except:
-                self.w =uicode.error_window()
-                self.w.errortype.setText("Failed to save the file")
-                self.w.show()
+        # except:
+        #         self.w =uicode.error_window()
+        #         self.w.errortype.setText("Failed to save the file")
+        #         self.w.show()
 
     def training(self): # function to train the model
         try:
@@ -261,7 +258,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
         
         print(self.dict_val)    # printing the dictionary
         pred_str = str(self.pred).replace('[','').replace(']','')
-        print(self.dict_val[float(pred_str)])
+        self.Failure_name.setText(self.dict_val[float(pred_str)])
 
         # self.dict_val  = UI.decode()    # decoding the values
         # except:

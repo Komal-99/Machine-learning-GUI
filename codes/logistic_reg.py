@@ -17,13 +17,12 @@ from sklearn.metrics import accuracy_score
 import common
 from PyQt5.QtCore import QCoreApplication
 import uicode
-
-
 class UI(QMainWindow):
-    def __init__(self,df,target,user_actions):
+    def __init__(self,df_original,df,target,user_actions):
         
         super(UI, self).__init__()
         uic.loadUi("ui_files/LogisticRegression.ui", self)
+        self.df_original = df_original
         self.user_act=user_actions
         global data ,steps
         data=data_visualise.data_()
@@ -75,20 +74,36 @@ class UI(QMainWindow):
 
     def test_split(self):
 
-        self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
-        print(self.y_train.shape)
-        print(self.y_test.shape)
-        self.split_done.setText(str("Split Done"))
+        try:
+
+            self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
+            print(self.y_train.shape)
+            print(self.y_test.shape)
+            self.split_done.setText(str("Split Done"))
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Size Not set")
+            self.w.show()
 
     def download_model(self):
 
-        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
-       
-        pkl_filename = name[0]
-        with open(pkl_filename, 'wb') as file:
-            pickle.dump(self.lr, file)  
+        try:
+
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
         
-        self.user_act.save_file(pkl_filename)  
+            pkl_filename = name[0]
+            with open(pkl_filename, 'wb') as file:
+                pickle.dump(self.lr, file)  
+            
+            self.user_act.save_file(pkl_filename)  
+
+        except:
+
+            self.w = uicode.error_window()
+            self.w.errortype.setText("Failed to save the file")
+            self.w.show()
 
     def set_predict(self):
         self.a = self.list.text() 
@@ -103,17 +118,25 @@ class UI(QMainWindow):
 
     def training(self):
 
-        self.lr = LogisticRegression(max_iter=int(self.max_iter.text()),random_state=1,solver=self.solver.currentText(),multi_class=self.multi_class.currentText())
-        self.lr.fit(self.x_train,self.y_train)
-        
-        self.pre=self.lr.predict(self.x_test)
-        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
-        self.mae_2.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
-        self.accuracy_score.setText(str(accuracy_score(self.pre,self.y_test)))
-        self.text=steps.classification_(self.y_test,self.pre)
-        self.report.setPlainText(self.text)
-        self.accuracy_score.setText(str(self.lr.score(self.x_test,self.y_test)))
+        try:
+
+            self.lr = LogisticRegression(max_iter=int(self.max_iter.text()),random_state=1,solver=self.solver.currentText(),multi_class=self.multi_class.currentText())
+            self.lr.fit(self.x_train,self.y_train)
+            
+            self.pre=self.lr.predict(self.x_test)
+            self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
+            self.mae_2.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))
+            self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))
+            self.accuracy_score.setText(str(accuracy_score(self.pre,self.y_test)))
+            self.text=steps.classification_(self.y_test,self.pre)
+            self.report.setPlainText(self.text)
+            self.accuracy_score.setText(str(self.lr.score(self.x_test,self.y_test)))
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("First Split your dataset!")
+            self.w.show()
 
 
     def conf_matrix(self):
