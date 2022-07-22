@@ -1,0 +1,7 @@
+
+File D:/Users/aaa/OneDrive - The Northcap university/Desktop/predictive_maintenance.csv read
+Column UDI dropped
+Column Product_ID dropped
+Column Target dropped
+Column Type converted using LabelEncoder
+Column Failure_Type converted using LabelEncoder
