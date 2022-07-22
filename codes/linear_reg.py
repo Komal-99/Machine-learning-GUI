@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,Q
 import sys,pickle
 from PyQt5.QtCore import QCoreApplication
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
-from pyparsing import col
+from pyparsing import null_debug_action
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -12,19 +12,20 @@ import numpy as np
 import data_visualise   
 import pandas as pd
 import common
+from sklearn.preprocessing import OrdinalEncoder
 import uicode
 
 # MainWindow of the Linear Regression Model
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         super(UI, self).__init__()
-        uic.loadUi("ui_files/LinearRegression.ui", self)
+        uic.loadUi('ui_files\LinearRegression.ui', self)
         self.user_act=user_actions
-        global data, steps
+        global data 
         #Calling the data_ class from data_visualise.py
         data=data_visualise.data_()
-        steps=common.common_steps(df,target)
         #Calling the common class from common_steps.py
+        steps=common.common_steps(df,target)
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
 
 
@@ -65,9 +66,9 @@ class UI(QMainWindow):
                              "background-color : green;"
                              "}"
                              )
-        
-        self.setvalue()
         self.show()
+        self.setvalue()
+
     # Setting the the columns value
     def exit(self):
         sys.exit()
@@ -126,9 +127,7 @@ class UI(QMainWindow):
     def training(self):
 
         try:
-
             self.reg=LinearRegression().fit(self.x_train,self.y_train)
-            str1=""
             coef=' '.join(map(str, self.reg.coef_)) 
             self.intercept.setText(str(self.reg.intercept_))
             self.weights.setText(coef)
@@ -150,7 +149,6 @@ class UI(QMainWindow):
     def barplot(self):
 
         try:
-
             y_pred = self.reg.predict(self.x_test)
             df = pd.DataFrame({'Actual': self.y_test, 'Predicted': y_pred})
             df1=df.head(20)
@@ -164,8 +162,4 @@ class UI(QMainWindow):
 
             self.w =uicode.error_window()
             self.w.errortype.setText("Train Your Model First!")
-<<<<<<< HEAD:codes/linearReg.py
             self.w.show()
-=======
-            self.w.show() 
->>>>>>> 7ad06bf6cc7a24afb9048313b34544f9b7636849:codes/linear_reg.py
