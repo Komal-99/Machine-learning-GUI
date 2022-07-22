@@ -17,13 +17,12 @@ from sklearn.metrics import accuracy_score
 import common
 from PyQt5.QtCore import QCoreApplication
 import uicode
-
-
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         
         super(UI, self).__init__()
         uic.loadUi("ui_files/LogisticRegression.ui", self)
+        self.df_original = df_original
         self.user_act=user_actions
         global data ,steps
         data=data_visualise.data_()

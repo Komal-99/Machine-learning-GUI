@@ -34,8 +34,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
 
         # Defining buttons and there funtions
         self.target = self.findChild(QLabel,"target")
-        self.columns= self.findChild(QListWidget,"columns")
-        self.target = self.findChild(QLabel,"target")
+        self.Failure_name = self.findChild(QLabel,"Failure_Name")
         self.columns= self.findChild(QListWidget,"columns")
         self.solver=self.findChild(QComboBox,"solver")        
    
@@ -53,7 +52,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.download=self.findChild(QPushButton,"dwnld")
         self.X_combo=self.findChild(QComboBox,"X_combo")
         self.Y_combo=self.findChild(QComboBox,"Y_combo")
-        self.Z_combo=self.findChild(QComboBox,"Z_combo")
+        self.Z_combo=self.findChild(QComboBox,"Z_combo")       
         self.color_combo=self.findChild(QComboBox,"color_combo")
 
         self.test_data=self.findChild(QLineEdit,"test_data")
@@ -61,7 +60,6 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.conf_mat_btn=self.findChild(QPushButton,"conf_mat")
         self.plot3d_btn= self.findChild(QPushButton,"visualize")
         self.split_done= self.findChild(QLabel,"split")
-        self.target=self.findChild(QLabel,"target")
         
         self.exitbutton.clicked.connect(self.exit)
         self.train_btn.clicked.connect(self.training) 
@@ -260,7 +258,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
         
         print(self.dict_val)    # printing the dictionary
         pred_str = str(self.pred).replace('[','').replace(']','')
-        print(self.dict_val[float(pred_str)])
+        self.Failure_name.setText(self.dict_val[float(pred_str)])
 
         # self.dict_val  = UI.decode()    # decoding the values
         # except:

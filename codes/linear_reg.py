@@ -9,8 +9,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.utils.validation import check_array
-import data_visualise
+import data_visualise   
 import pandas as pd
 import common
 from sklearn.preprocessing import OrdinalEncoder
@@ -79,18 +78,23 @@ class UI(QMainWindow):
     
     # Prediction for a Specific Value
     def set_valpred(self):
-        pred = str(self.list.text())
-        if len(pred) == 0:
-            self.error.setText("Enter Values to Predict!")
-        else:
-            self.a = self.list.text() 
-            self.ls = self.a.split(",")
-            self.target.setText(str(self.target_value))
-       
-            self.ls_updated = [float(x) for x in self.ls]
-            self.ls_array =  np.array(self.ls_updated)
-            self.pred  =self.reg.predict([self.ls_array])
-            self.predict_val.setText(str(self.pred))
+        try:
+            pred = str(self.list.text())
+            if len(pred) == 0:
+                self.error.setText("Enter Values to Predict!")
+            else:
+                self.a = self.list.text() 
+                self.ls = self.a.split(",")
+                self.target.setText(str(self.target_value))
+        
+                self.ls_updated = [float(x) for x in self.ls]
+                self.ls_array =  np.array(self.ls_updated)
+                self.pred  =self.reg.predict([self.ls_array])
+                self.predict_val.setText(str(self.pred))
+        except:
+            self.w = uicode.error_window()
+            self.w.errortype.setText("Failed to Predict")
+            self.w.show()
 
     #Downloading a Trained Model
     def download_model(self):
