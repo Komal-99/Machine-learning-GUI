@@ -15,7 +15,6 @@ import common
 from sklearn.preprocessing import OrdinalEncoder
 import uicode
 
-
 # MainWindow of the Linear Regression Model
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
