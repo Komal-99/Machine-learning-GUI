@@ -12,21 +12,20 @@ import numpy as np
 import data_visualise   
 import pandas as pd
 import common
-from sklearn.preprocessing import OrdinalEncoder
 import uicode
-
 
 # MainWindow of the Linear Regression Model
 class UI(QMainWindow):
-    def __init__(self,df_original,df,target,user_actions):
-        super(UI, self).__init__()
-        uic.loadUi('ui_files\LinearRegression.ui', self)
+    def _init_(self,df_original ,df,target,user_actions):
+        super(UI, self)._init_()
+        uic.loadUi('ui_files\LinearReg.ui', self)
+        self.df_original = df_original
         self.user_act=user_actions
-        global data 
+        global data,steps
         #Calling the data_ class from data_visualise.py
         data=data_visualise.data_()
-        #Calling the common class from common_steps.py
         steps=common.common_steps(df,target)
+        #Calling the common class from common_steps.py
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
 
 
@@ -151,11 +150,19 @@ class UI(QMainWindow):
     #plotting the Bar Graph
     def barplot(self):
 
-        y_pred = self.reg.predict(self.x_test)
-        df = pd.DataFrame({'Actual': self.y_test, 'Predicted': y_pred})
-        df1=df.head(20)
-        
-        df1.plot(kind='bar')
-        plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
-        plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
-        plt.show()
+        try:
+
+            y_pred = self.reg.predict(self.x_test)
+            df = pd.DataFrame({'Actual': self.y_test, 'Predicted': y_pred})
+            df1=df.head(20)
+            
+            df1.plot(kind='bar')
+            plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
+            plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+            plt.show()
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Train Your Model First!")
+            self.w.show()
