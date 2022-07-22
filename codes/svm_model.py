@@ -156,10 +156,6 @@ class UI(QMainWindow): # inherit from QMainWindow
 			plt.show()
 		except:
 			self.w =uicode.error_window()
-<<<<<<< HEAD
-			self.w.errortype.setText("Error in printing Confusion Matrix")
-=======
 			self.w.errortype.setText("Train your Model First!")
->>>>>>> 6f2d6cf93da65a86d8a022b5fa1a9f65814ab962
 			self.w.show()
 		
