@@ -19,7 +19,7 @@ from sklearn.metrics import accuracy_score
 import common
 
 class UI(QDialog): # QDialog is the base class  of all user interface objects in PyQt5. 
-    def __init__(self,df,target,user_actions):  # Constructor
+    def __init__(self,df_original,df,target,user_actions):  # Constructor
         super(UI, self).__init__()
         uic.loadUi("ui_files/KNN.ui", self) # Load the UI
         self.user_act=user_actions  # User Actions

@@ -1,6 +1,3 @@
-#  importing libraries
-# from base64 import decode
-# from re import A
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 from PyQt5.QtCore import QCoreApplication

@@ -843,7 +843,7 @@ color: rgb(255, 255, 255);</string>
     </item>
     <item>
      <property name="text">
-      <string>Svm</string>
+      <string>SVM</string>
      </property>
     </item>
     <item>
