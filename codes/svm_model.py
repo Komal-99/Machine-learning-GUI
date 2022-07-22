@@ -13,12 +13,11 @@ import matplotlib.pyplot as plt
 from mlxtend.plotting import plot_decision_regions
 import pandas as pd
 import seaborn as sns
-import uicode
+# from uicode import *
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 import common
 from PyQt5.QtCore import QCoreApplication
-import uicode
 
 class UI(QMainWindow): # inherit from QMainWindow	
 	def __init__(self,df_original,df,target,user_actions):	# constructor
@@ -156,6 +155,5 @@ class UI(QMainWindow): # inherit from QMainWindow
 			plt.show()
 		except:
 			self.w =uicode.error_window()
-			self.w.errortype.setText("Train your Model First!")
+			self.w.errortype.setText("Error in printing Confusion Matrix")
 			self.w.show()
-		

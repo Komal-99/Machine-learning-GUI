@@ -63,6 +63,7 @@ class UI(QMainWindow):
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
+       
         self.predict_btn.clicked.connect(self.set_predict)
         
         self.setvalue()
