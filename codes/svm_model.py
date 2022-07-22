@@ -18,6 +18,7 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 import common
 from PyQt5.QtCore import QCoreApplication
+import uicode
 
 class UI(QMainWindow): # inherit from QMainWindow	
 	def __init__(self,df_original,df,target,user_actions):	# constructor
@@ -85,7 +86,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 
 			self.user_act.save_file(pkl_filename)	# call the function to save the file
 		except:
-			self.w =error_window()
+			self.w =uicode.error_window()
 			self.w.errortype.setText("Failed to Download Model")
 			self.w.show()		# show the error window
 
@@ -99,7 +100,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 			self.pred  =self.svc_model.predict([self.ls_array])	# predict the value
 			self.predict_val.setText(str(self.pred))	# set the predicted value
 		except:
-			self.w =error_window()		# show the error window
+			self.w =uicode.error_window()		# show the error window
 			self.w.errortype.setText("Failed to Predict")
 			self.w.show()
 
@@ -126,7 +127,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 						legend=2)	# plot the decision regions
 			plt.show()
 		except:
-			self.w =error_window()
+			self.w =uicode.error_window()
 			self.w.errortype.setText("Runtime Error")
 			self.w.show()
 	def training(self):
@@ -141,7 +142,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 			text=steps.classification_(self.y_test,self.pre)	# get the classification report
 			self.report.setPlainText(text)
 		except:
-			self.w =error_window()
+			self.w =uicode.error_window()
 			self.w.errortype.setText("First split your dataset")
 			self.w.show()
 
@@ -154,7 +155,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 			sns.heatmap(confusion_matrix, annot=True)
 			plt.show()
 		except:
-			self.w =error_window()
-			self.w.errortype.setText("Error in printing Confusion Matrix")
+			self.w =uicode.error_window()
+			self.w.errortype.setText("Train your Model First!")
 			self.w.show()
 		

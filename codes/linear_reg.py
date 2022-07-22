@@ -151,11 +151,19 @@ class UI(QMainWindow):
     #plotting the Bar Graph
     def barplot(self):
 
-        y_pred = self.reg.predict(self.x_test)
-        df = pd.DataFrame({'Actual': self.y_test, 'Predicted': y_pred})
-        df1=df.head(20)
-        
-        df1.plot(kind='bar')
-        plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
-        plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
-        plt.show()
+        try:
+
+            y_pred = self.reg.predict(self.x_test)
+            df = pd.DataFrame({'Actual': self.y_test, 'Predicted': y_pred})
+            df1=df.head(20)
+            
+            df1.plot(kind='bar')
+            plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
+            plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+            plt.show()
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Train Your Model First!")
+            self.w.show() 

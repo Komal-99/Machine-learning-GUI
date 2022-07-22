@@ -141,22 +141,39 @@ class UI(QMainWindow):
 
     def conf_matrix(self):
 
-        data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }
-        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted'])
-        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
-        plt.figure()
-        sns.heatmap(confusion_matrix, annot=True)
-        plt.show()
+        try:
+
+            data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }
+            df = pd.DataFrame(data, columns=['y_Actual','y_Predicted'])
+            confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
+            plt.figure()
+            sns.heatmap(confusion_matrix, annot=True)
+            plt.show()
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Train Your Model First!")
+            self.w.show() 
 
     
     def roc_plot(self):
-        self.pre=self.lr.predict(self.x_test)
-        self.auc=roc_auc_score(self.y_test,self.pre)
-        self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
-        plt.plot(self.fpr,self.tpr,color='red',label='ROC')
-        plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
-        plt.xlabel("FPR")
-        plt.ylabel("TPR")
-        plt.title('Receiver Operating Characteristics Curve')
-        plt.legend()
-        plt.show()
+
+        try:
+
+            self.pre=self.lr.predict(self.x_test)
+            self.auc=roc_auc_score(self.y_test,self.pre)
+            self.fpr,self.tpr,threshold =roc_curve(self.y_test,self.pre)
+            plt.plot(self.fpr,self.tpr,color='red',label='ROC')
+            plt.plot([0,1],[0,1],color='darkblue', linestyle='--',label='ROC Curve( area=%0.2f)' %self.auc)
+            plt.xlabel("FPR")
+            plt.ylabel("TPR")
+            plt.title('Receiver Operating Characteristics Curve')
+            plt.legend()
+            plt.show()
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Train Your Model First!")
+            self.w.show()
