@@ -279,9 +279,17 @@ class UI(QMainWindow): # inheriting QMainWindow class
 
     def conf_matrix(self):  # function to return the confusion matrix
 
-        data = {'y_Actual':self.y_test.values,'y_Predicted':self.y_pred }
-        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) # creating a dataframe
-        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
-        plt.figure()    # creating a figure
-        sns.heatmap(confusion_matrix, annot=True)
-        plt.show()  # displaying the confusion matrix
+        try:
+
+            data = {'y_Actual':self.y_test.values,'y_Predicted':self.y_pred }
+            df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) # creating a dataframe
+            confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
+            plt.figure()    # creating a figure
+            sns.heatmap(confusion_matrix, annot=True)
+            plt.show()  # displaying the confusion matrix
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Train Your Model First!")
+            self.w.show()
