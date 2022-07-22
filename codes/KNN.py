@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score 
 import pandas as pd
 import seaborn as sns
-
+import uicode
 from sklearn.metrics import accuracy_score
 import common
 
@@ -87,31 +87,56 @@ class UI(QDialog): # QDialog is the base class  of all user interface objects in
     
     def test_split(self):   # Test Split function
 
-        self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
-        print(self.y_train.shape)   # Print the shape of the train and test data
-        print(self.y_test.shape)
-        self.split_done.setText(str("Split Done"))  # Set the text of the label
+        try:
+
+            self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.df,self.X[self.target_value],test_size=float(self.test_data.text()),random_state=int(self.random.text()))
+            print(self.y_train.shape)   # Print the shape of the train and test data
+            print(self.y_test.shape)
+            self.split_done.setText(str("Split Done"))  # Set the text of the label
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Size Not set")
+            self.w.show()
    
 
     def download_model(self):   # Download the model function
 
-        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")  # Get the file name
-        pkl_filename = name[0]  # Get the file name
-        with open(pkl_filename, 'wb') as file:  # Open the file
-            pickle.dump(self.knn, file)     # Write the model to the file
+        try:
 
-        self.user_act.save_file(pkl_filename)   # Save the file  
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")  # Get the file name
+            pkl_filename = name[0]  # Get the file name
+            with open(pkl_filename, 'wb') as file:  # Open the file
+                pickle.dump(self.knn, file)     # Write the model to the file
+
+            self.user_act.save_file(pkl_filename)   # Save the file  
+
+        except:
+
+            self.w = uicode.error_window()
+            self.w.errortype.setText("Failed to save the file")
+            self.w.show()
 
     def training(self):  # Training function
-        self.knn = KNC(n_neighbors=int(self.neighbours.text()),weights=self.weights.currentText(),algorithm=self.algorithm.currentText())   # Create the model knn
-        self.knn.fit(self.x_train,self.y_train)  # Fit the model
-        self.pre=self.knn.predict(self.x_test)  # Predict the value
-        self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))    # Set the mean absolute error
-        self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))   # Set the mean squared error
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))   # Set the root mean squared error
-        self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))    # Set the accuracy score
-        text=steps.classification_(self.y_test,self.pre)    # Get the classification report
-        self.report.setPlainText(text)  # Set the text of the report
+
+        try:
+
+            self.knn = KNC(n_neighbors=int(self.neighbours.text()),weights=self.weights.currentText(),algorithm=self.algorithm.currentText())   # Create the model knn
+            self.knn.fit(self.x_train,self.y_train)  # Fit the model
+            self.pre=self.knn.predict(self.x_test)  # Predict the value
+            self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))    # Set the mean absolute error
+            self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))   # Set the mean squared error
+            self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))   # Set the root mean squared error
+            self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))    # Set the accuracy score
+            text=steps.classification_(self.y_test,self.pre)    # Get the classification report
+            self.report.setPlainText(text)  # Set the text of the report
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("First Split your dataset!")
+            self.w.show()
 
     def conf_matrix(self):  # Confusion Matrix function
 
