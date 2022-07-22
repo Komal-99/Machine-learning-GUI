@@ -1,6 +1,9 @@
 
+import os
+import sys
 from PyQt5.QtWidgets import *
-import sys,os,re,pickle
+from os import system
+import re,pickle
 import data_visualise,common
 
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
@@ -16,13 +19,13 @@ import seaborn as sns
 
 
 class UI(QMainWindow):
-    def __init__(self,df_data,pickle_model,path):
+    def __init__(self,df,target_value,pickle_model,path):
         super(UI, self).__init__()
         uic.loadUi("ui_files/pre_trained.ui", self)
         self.path=path
         global data 
-        self.df=df_data
-        self.target_value = df_data['Outcome']
+        self.df=df
+        self.target_value = target_value
         print(self.target_value)
 
         data=data_visualise.data_()
@@ -34,25 +37,32 @@ class UI(QMainWindow):
         self.model=pickle_model      #load the model
         self.conf_mat.clicked.connect(self.conf_matrix)
         self.test.clicked.connect(self.test_model)
+        self.exitbutton = self.findChild(QPushButton,"ExitButton")
+        
+        self.exitbutton.clicked.connect(self.exit)
         self.setvalue()
         self.show()
-
+    def exit(self):
+        sys.exit()
     def setvalue(self):
         self.target.setText(self.target_value)
         self.columns.clear()
         self.columns.addItems(self.column_list)
         self.data_shape.setText(str(self.df.shape))
-        
+      
+        st=str(self.path)
+        s=st.split(".")[0]
+        f= s+".txt"
         original=sys.stdout
-        sys.stdout = open('summary.txt', 'w')
+        sys.stdout = open(f, 'w')
         print(self.model)
         sys.stdout=original
-        text=open('summary.txt').read()
+        text=open(f).read()
         self.model_details.setPlainText(text)
-        os.remove('summary.txt')
-        x=self.path.split(".")
-        text=open(x[0]+".txt").read()
+        # os.remove(f)
+
         self.user_actions.setPlainText(text)
+    
         
 
 

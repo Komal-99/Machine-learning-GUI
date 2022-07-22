@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 
+<<<<<<< HEAD
 # Form implementation generated from reading ui file 'c:\Users\jvish\OneDrive\Desktop\UTS-Project\ui_files\LogisticRegression.ui'
+=======
+<<<<<<< HEAD
+# Form implementation generated from reading ui file 'd:\Users\aaa\OneDrive - The Northcap university\Desktop\UTS\UTS-Project\ui_files\LogisticRegression.ui'
+=======
+# Form implementation generated from reading ui file 'c:\Users\Sandeep\OneDrive\Desktop\UTS Summer Intern\UTS-Project\ui_files\LogisticRegression.ui'
+>>>>>>> 816dc6c02f899040766d274a6a34e4a5be921a33
+>>>>>>> 7ad06bf6cc7a24afb9048313b34544f9b7636849
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #

@@ -19,7 +19,7 @@ from sklearn.metrics import accuracy_score
 import common
 
 class UI(QDialog): # QDialog is the base class  of all user interface objects in PyQt5. 
-    def __init__(self,df,target,user_actions):  # Constructor
+    def __init__(self,df_original,df,target,user_actions):  # Constructor
         super(UI, self).__init__()
         uic.loadUi("ui_files/KNN.ui", self) # Load the UI
         self.user_act=user_actions  # User Actions
@@ -140,11 +140,19 @@ class UI(QDialog): # QDialog is the base class  of all user interface objects in
 
     def conf_matrix(self):  # Confusion Matrix function
 
-        data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }      # Create the dataframe
-        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) # Create the dataframe
-        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])  # Create the confusion matrix
-        plt.figure()    
-        sns.heatmap(confusion_matrix, annot=True)
-        plt.show()  # Show the confusion matrix
+        try:
+
+            data = {'y_Actual':self.y_test.values,'y_Predicted':self.pre }      # Create the dataframe
+            df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) # Create the dataframe
+            confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])  # Create the confusion matrix
+            plt.figure()    
+            sns.heatmap(confusion_matrix, annot=True)
+            plt.show()  # Show the confusion matrix
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Train Your Model First!")
+            self.w.show()
 
    

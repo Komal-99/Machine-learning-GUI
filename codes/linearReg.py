@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,Q
 import sys,pickle
 from PyQt5.QtCore import QCoreApplication
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
-from pyparsing import null_debug_action
+from pyparsing import col
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -16,12 +16,11 @@ import uicode
 
 # MainWindow of the Linear Regression Model
 class UI(QMainWindow):
-    def _init_(self,df_original ,df,target,user_actions):
-        super(UI, self)._init_()
-        uic.loadUi('ui_files\LinearReg.ui', self)
-        self.df_original = df_original
+    def __init__(self,df_original,df,target,user_actions):
+        super(UI, self).__init__()
+        uic.loadUi("ui_files/LinearRegression.ui", self)
         self.user_act=user_actions
-        global data,steps
+        global data, steps
         #Calling the data_ class from data_visualise.py
         data=data_visualise.data_()
         steps=common.common_steps(df,target)
@@ -66,9 +65,9 @@ class UI(QMainWindow):
                              "background-color : green;"
                              "}"
                              )
-        self.show()
+        
         self.setvalue()
-
+        self.show()
     # Setting the the columns value
     def exit(self):
         sys.exit()
@@ -165,4 +164,8 @@ class UI(QMainWindow):
 
             self.w =uicode.error_window()
             self.w.errortype.setText("Train Your Model First!")
+<<<<<<< HEAD:codes/linearReg.py
             self.w.show()
+=======
+            self.w.show() 
+>>>>>>> 7ad06bf6cc7a24afb9048313b34544f9b7636849:codes/linear_reg.py

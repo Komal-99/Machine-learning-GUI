@@ -1,6 +1,3 @@
-#  importing libraries
-# from base64 import decode
-# from re import A
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QTextEdit ,QListWidget ,QTableView ,QComboBox,QLabel,QLineEdit,QTextBrowser
 import sys ,pickle
 from PyQt5.QtCore import QCoreApplication
@@ -112,7 +109,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
             pkl_filename = name[0]  # getting the file name
             with open(pkl_filename, 'wb') as file:  # opening the file
-                pickle.dump(self.classification,file)  # this will dump the object to a file
+                pickle.dump(self.classification.best_model(type='model'), file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)   # calling the function to save the file
         # except:
         #         self.w =uicode.error_window()
@@ -125,32 +122,32 @@ class UI(QMainWindow): # inheriting QMainWindow class
             classifier= []  # creating an empty list
             imported_as= [] 
             from sklearn.linear_model import LogisticRegression # importing the logistic regression model
-            lr= LogisticRegression()    # creating an object of the logistic regression model
+            self.lr= LogisticRegression()    # creating an object of the logistic regression model
             classifier.append('Logistic Regression')    # adding the logistic regression to the list
             imported_as.append('lr')    # adding the logistic regression to the list
 
             from sklearn.neighbors import KNeighborsClassifier  # importing the KNN model
-            knn= KNeighborsClassifier(n_neighbors=1)    # creating an object of the KNN model
+            self.knn= KNeighborsClassifier(n_neighbors=1)    # creating an object of the KNN model
             classifier.append(' K Nearest Neighbors')   # adding the KNN to the list
             imported_as.append('knn')   # adding the KNN to the list
 
             from sklearn.svm import SVC
-            svc= SVC()
+            self.svc= SVC()
             classifier.append('Support Vector Machine')
             imported_as.append('svc')
 
             from sklearn.ensemble import RandomForestClassifier
-            rfc= RandomForestClassifier()
+            self.rfc= RandomForestClassifier()
             classifier.append('Random Forest')
             imported_as.append('rfc')
 
             from sklearn.naive_bayes import GaussianNB  # importing the Gaussian Naive Bayes model
-            nb= GaussianNB()    # creating an object of the Gaussian Naive Bayes model
+            self.nb= GaussianNB()    # creating an object of the Gaussian Naive Bayes model
             classifier.append('Naive Bayes')    # adding the Gaussian Naive Bayes to the list
             imported_as.append('nb')    # adding the Gaussian Naive Bayes to the list
 
             from sklearn.tree import DecisionTreeClassifier
-            dt= DecisionTreeClassifier()
+            self.dt= DecisionTreeClassifier()
             classifier.append('Decision Tree')
             imported_as.append('dt')
         except:
@@ -175,9 +172,9 @@ class UI(QMainWindow): # inheriting QMainWindow class
                     if i == 'knn':  # if the model is KNN
                         accuracy= []    # creating an empty list
                         for j in range(1, 200): # looping through the values of K
-                            kn= KNeighborsClassifier(n_neighbors= j)     # creating an object of the KNN model
-                            kn.fit(self.x_train, self.y_train)  
-                            predK= kn.predict(self.x_test)  # predicting the test data
+                            self.kn= KNeighborsClassifier(n_neighbors= j)     # creating an object of the KNN model
+                            self.kn.fit(self.x_train, self.y_train)  
+                            predK= self.kn.predict(self.x_test)  # predicting the test data
                             accuracy.append([metrics.accuracy_score(self.y_test, predK), j])
                         temp= accuracy[0]   # storing the accuracy and the value of K
                         for m in accuracy:  # looping through the accuracy values
@@ -221,7 +218,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             def best_predict(self, x_testp):    # function to predict the test data
                 return self.best.predict(x_testp)   # returning the prediction of the test data
 
-        self.models_to_test= [rfc, lr, knn, svc, nb, dt]    # storing the models to test
+        self.models_to_test= [self.rfc, self.lr, self.knn, self.svc, self.nb, self.dt]    # storing the models to test
         self.classification= Modelling(self.x_train, self.y_train, self.x_test, self.y_test, self.models_to_test)
         self.classification.fit()   # fitting the models
         self.classification.results()   # returning the results of the models
@@ -282,9 +279,17 @@ class UI(QMainWindow): # inheriting QMainWindow class
 
     def conf_matrix(self):  # function to return the confusion matrix
 
-        data = {'y_Actual':self.y_test.values,'y_Predicted':self.y_pred }
-        df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) # creating a dataframe
-        confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
-        plt.figure()    # creating a figure
-        sns.heatmap(confusion_matrix, annot=True)
-        plt.show()  # displaying the confusion matrix
+        try:
+
+            data = {'y_Actual':self.y_test.values,'y_Predicted':self.y_pred }
+            df = pd.DataFrame(data, columns=['y_Actual','y_Predicted']) # creating a dataframe
+            confusion_matrix = pd.crosstab(df['y_Actual'], df['y_Predicted'], rownames=['Actual'], colnames=['Predicted'])
+            plt.figure()    # creating a figure
+            sns.heatmap(confusion_matrix, annot=True)
+            plt.show()  # displaying the confusion matrix
+
+        except:
+
+            self.w =uicode.error_window()
+            self.w.errortype.setText("Train Your Model First!")
+            self.w.show()
