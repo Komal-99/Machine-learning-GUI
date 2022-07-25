@@ -153,7 +153,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.set.setText("Model Loaded")
             print(self.filePath_pre)
         except:
-            self.w =error_window()
+            self.w =error.error_window()
             self.w.errortype.setText("Can't load trained model")
             self.w.show()
 
