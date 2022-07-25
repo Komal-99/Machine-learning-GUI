@@ -19,7 +19,22 @@ from sklearn.metrics import auc
 
 import common
 from PyQt5.QtCore import QCoreApplication
-import error
+class error_window(QMainWindow): #error window class
+    def __init__(self): #constructor
+        super(error_window, self).__init__()        
+        uic.loadUi("ui_files/error.ui", self)
+        self.ExitError = self.findChild(QPushButton, "ExitButtonError") #exit button
+        self.ExitError.clicked.connect(self.exit)
+        self.back = self.findChild(QPushButton,"Back")  
+        self.errortype = self.findChild(QLabel, 'Error_type')     
+        self.back.clicked.connect(self.Backbut) #back button
+        self.show() #show the window
+#  Home Screen class to start our project
+    def exit(self): #exit button
+        sys.exit()  # exit the application
+    def Backbut(self):  #back button
+        self.back.clicked.connect(UI().target)
+        self.close()    # close the window
 
 class UI(QMainWindow): # inherit from QMainWindow	
 	def __init__(self,df_original,df,target,user_actions):	# constructor
@@ -87,7 +102,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 
 			self.user_act.save_file(pkl_filename)	# call the function to save the file
 		except:
-			self.w =error.error_window()
+			self.w =error_window()
 			self.w.errortype.setText("Failed to Download Model")
 			self.w.show()		# show the error window
 
@@ -101,7 +116,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 			self.pred  =self.svc_model.predict([self.ls_array])	# predict the value
 			self.predict_val.setText(str(self.pred))	# set the predicted value
 		except:
-			self.w =error.error_window()		# show the error window
+			self.w =error_window()		# show the error window
 			self.w.errortype.setText("Failed to Predict")
 			self.w.show()
 
@@ -128,7 +143,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 						legend=2)	# plot the decision regions
 			plt.show()
 		except:
-			self.w =error.error_window()
+			self.w =error_window()
 			self.w.errortype.setText("Runtime Error")
 			self.w.show()
 	def training(self):
@@ -143,7 +158,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 			text=steps.classification_(self.y_test,self.pre)	# get the classification report
 			self.report.setPlainText(text)
 		except:
-			self.w =error.error_window()
+			self.w =error_window()
 			self.w.errortype.setText("First split your dataset")
 			self.w.show()
 
@@ -156,6 +171,6 @@ class UI(QMainWindow): # inherit from QMainWindow
 			sns.heatmap(confusion_matrix, annot=True)
 			plt.show()
 		except:
-			self.w =error.error_window()
+			self.w =error_window()
 			self.w.errortype.setText("Error in printing Confusion Matrix")
 			self.w.show()
