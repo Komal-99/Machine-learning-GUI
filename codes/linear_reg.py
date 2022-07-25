@@ -13,23 +13,7 @@ import data_visualise
 import pandas as pd
 import common
 from sklearn.preprocessing import OrdinalEncoder
-
-class error_window(QMainWindow): #error window class
-    def __init__(self): #constructor
-        super(error_window, self).__init__()        
-        uic.loadUi("ui_files/error.ui", self)
-        self.ExitError = self.findChild(QPushButton, "ExitButtonError") #exit button
-        self.ExitError.clicked.connect(self.exit)
-        self.back = self.findChild(QPushButton,"Back")  
-        self.errortype = self.findChild(QLabel, 'Error_type')     
-        self.back.clicked.connect(self.Backbut) #back button
-        self.show() #show the window
-#  Home Screen class to start our project
-    def exit(self): #exit button
-        sys.exit()  # exit the application
-    def Backbut(self):  #back button
-        self.back.clicked.connect(UI().target)
-        self.close()    # close the window
+import error
 # MainWindow of the Linear Regression Model
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
@@ -106,7 +90,7 @@ class UI(QMainWindow):
                 self.pred  =self.reg.predict([self.ls_array])
                 self.predict_val.setText(str(self.pred))
         except:
-            self.w = error_window()
+            self.w = error.error_window()
             self.w.errortype.setText("Failed to Predict")
             self.w.show()
 
@@ -119,7 +103,7 @@ class UI(QMainWindow):
                 pickle.dump(self.reg, file)  
             self.user_act.save_file(pkl_filename)  
         except:
-            self.w = error_window()
+            self.w = error.error_window()
             self.w.errortype.setText("Failed to save the file")
             self.w.show()
 
@@ -134,7 +118,7 @@ class UI(QMainWindow):
         
         except:
 
-            self.w =error_window()
+            self.w =error.error_window()
             self.w.errortype.setText("Size Not set")
             self.w.show()
      
@@ -158,7 +142,7 @@ class UI(QMainWindow):
 
         except:
 
-            self.w =error_window()
+            self.w =error.error_window()
             self.w.errortype.setText("First Split your dataset!")
             self.w.show() 
             
@@ -176,6 +160,6 @@ class UI(QMainWindow):
             plt.show()
 
         except:
-            self.w =error_window()
+            self.w =error.error_window()
             self.w.errortype.setText("Train Your Model First!")
             self.w.show() 

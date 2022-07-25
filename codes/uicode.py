@@ -17,24 +17,9 @@ from PyQt5.QtCore import QCoreApplication
 import plotly.express as px 
 import plotly.io as pio
 import plotly.graph_objects as go
+import error
 
 
-class error_window(QMainWindow): #error window class
-    def __init__(self): #constructor
-        super(error_window, self).__init__()        
-        uic.loadUi("ui_files/error.ui", self)
-        self.ExitError = self.findChild(QPushButton, "ExitButtonError") #exit button
-        self.ExitError.clicked.connect(self.exit)
-        self.back = self.findChild(QPushButton,"Back")  
-        self.errortype = self.findChild(QLabel, 'Error_type')     
-        self.back.clicked.connect(self.Backbut) #back button
-        self.show() #show the window
-#  Home Screen class to start our project
-    def exit(self): #exit button
-        sys.exit()  # exit the application
-    def Backbut(self):  #back button
-        self.back.clicked.connect(UI().target)
-        self.close()    # close the window
 
 class home_screen(QDialog):
     def __init__(self):           #initialising the home screen
@@ -55,7 +40,7 @@ class home_screen(QDialog):
             widget.addWidget(help) #adding the help screen to the widget
             widget.setCurrentIndex(widget.currentIndex()+1)     #setting the current index to the next widget
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText(" Some Error Occured Try Again")
                 self.w.show()
 
@@ -176,7 +161,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         try:
             self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
         except:
-            self.w =error_window()
+            self.w =error.error_window()
             self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
             self.w.show()
 
@@ -195,7 +180,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             steps.add_pipeline(self.scaler.currentText(),func_name) #adding the pipeline to the steps
             self.filldetails()  #calling the function to fill the details
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("Select a dataset and target value")
                 self.w.show()
 
@@ -219,7 +204,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
                 self.graphWidget.setBackground('w') #setting the background color to white
                 self.graphWidget.plot(self.df,i)    #plotting the histogram
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("Dataset/Column not selected")
                 self.w.show()
 
@@ -228,7 +213,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             fig= go.Figure(data= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())) 
             return(fig.show())
         except:
-                self.w =error_window()  #calling the error window function
+                self.w =error.error_window()  #calling the error window function
                 self.w.errortype.setText("Dataset/Column not selected")
                 self.w.show()
 
@@ -236,7 +221,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         try:
             data.plot_heatmap(self.df)  #calling the function from data class to plot the heatmap
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("Dataframe not selected")
                 self.w.show()
     def set_target(self):
@@ -245,7 +230,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             steps.add_code("target=data['"+self.target_value+"']")
             self.target_col.setText(self.target_value)
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("Target column not selected")
                 self.w.show()
 
@@ -336,7 +321,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             if(self.filePath!=""):  #if the file path is not empty
                 self.filldetails(0)  #calling the function to fill the details
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("Unable to load file")
                 self.w.show()
     def fillme(self):   #function to fill the missing values
@@ -347,7 +332,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             steps.add_text("No Empty Values")   #adding the text to the steps
             self.filldetails()  #calling the function to fill the details
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("String values cannot be filled")
                 self.w.show()
     def dropc(self):    #function to drop the columns
@@ -360,7 +345,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             steps.add_text("Column "+ self.dropcolumns.currentText()+ " dropped")   #adding the text to the steps
             self.filldetails()  
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("Target Value of dataset not set")
                 self.w.show()
 
@@ -368,7 +353,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         try:
             data.scatter_plot(df=self.df,x=self.scatter_x.currentText(),y=self.scatter_y.currentText(),c=self.scatter_c.currentText(),marker=self.scatter_mark.currentText())
         except:
-                self.w =error_window()
+                self.w =error.error_window()
                 self.w.errortype.setText("Arguments not selected")
                 self.w.show()
 
@@ -385,22 +370,22 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
                  height =  400)
             fig.show()
         except:
-            self.w =error_window()
+            self.w =error.error_window()
             self.w.errortype.setText("Columns not selected")
             self.w.show()
         
     def train_func(self):   #function to train the model
-        # try:
+        try:
             myDict={ "LinearRegression": linear_reg, "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
         
             if(self.target_value!=""):  #if the target value is not empty
                 self.win = myDict[self.model_select.currentText()].UI(self.df_original, self.df,self.target_value,steps)  #calling the function to train the model
-        # except:
-        #         self.w =error_window()
-        #         self.w.errortype.setText("Select the model")
-        #         self.w.show()
+        except:
+                self.w =error.error_window()
+                self.w.errortype.setText("Select the model")
+                self.w.show()
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen

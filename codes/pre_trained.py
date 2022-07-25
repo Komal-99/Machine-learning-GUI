@@ -1,4 +1,3 @@
-
 import os
 import sys
 import uicode
@@ -16,7 +15,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-
+import error 
 
 
 class UI(QMainWindow):
@@ -86,7 +85,7 @@ class UI(QMainWindow):
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
         self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
     def set_valpred(self):
-        # try:
+        try:
             pred = str(self.list.text())
             if len(pred) == 0:
                 self.error.setText("Enter Values to Predict!")
@@ -99,7 +98,7 @@ class UI(QMainWindow):
                 self.ls_array =  np.array(self.ls_updated)
                 self.pred  =self.model.predict([self.ls_array])
                 self.predict_val.setText(str(self.pred))
-        # except:
-        #     self.w = uicode.error_window()
-        #     self.w.errortype.setText("Failed to Predict")
-        #     self.w.show()
+        except:
+            self.w = error.error_window()
+            self.w.errortype.setText("Failed to Predict")
+            self.w.show()
