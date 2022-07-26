@@ -3,7 +3,7 @@ FROM python:3.7
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
-EXPOSE 8080
+EXPOSE $PORT
 #Start Flask Server
-CMD [ "cd codes","python","uicode.py"]
+CMD python --workers=4 --bind 0.0.0.0:$PORT app:uicode
 #Expose server port
