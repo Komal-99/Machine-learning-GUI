@@ -140,7 +140,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.trained.clicked.connect(self.pretrained)
         self.set=self.findChild(QLabel,"done")
 
-
         self.Browse.clicked.connect(self.getCSV)    #browse button function
         self.Drop_btn.clicked.connect(self.dropc)   #drop button function
         self.scatter_btn.clicked.connect(self.scatter_plot)     #scatter plot button function
