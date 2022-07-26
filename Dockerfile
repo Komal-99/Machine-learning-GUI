@@ -5,5 +5,5 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 EXPOSE 8080
 #Start Flask Server
-CMD [ "python","cd codes","uicode.py"]
+CMD [ "python","/codes/uicode.py"]
 #Expose server port
