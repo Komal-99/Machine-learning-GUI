@@ -5,5 +5,5 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 EXPOSE $PORT
 #Start Flask Server
-CMD python --workers=4 --bind 0.0.0.0:$PORT app:uicode
+CMD python --bind 0.0.0.0:$PORT app:uicode
 #Expose server port
