@@ -402,6 +402,10 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
                 self.w.errortype.setText("Select the model")
                 self.w.show()
 
+
+
+
+
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
 widget = QtWidgets.QStackedWidget() #creating a stacked widget
