@@ -18,10 +18,11 @@ import seaborn as sns
 
 
 class UI(QMainWindow):
-    def __init__(self,df,target_value,pickle_model,path):
+    def __init__(self,df,df_original,target_value,pickle_model,path):
         super(UI, self).__init__()
         uic.loadUi("ui_files/pre_trained.ui", self)
         self.path=path
+        self.df_original = df_original
         global data 
         self.df=df
         self.target_value = target_value
@@ -33,6 +34,7 @@ class UI(QMainWindow):
         self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")
         self.test_size= self.findChild(QLabel,"test_size") 
+        self.Failure_name = self.findChild(QLabel,"Failure_Name")
         self.model=pickle_model      #load the model
         self.conf_mat.clicked.connect(self.conf_matrix)
         self.test.clicked.connect(self.test_model)
@@ -100,4 +102,13 @@ class UI(QMainWindow):
                 self.ls_array =  np.array(self.ls_updated)
                 self.pred  =self.model.predict([self.ls_array])
                 self.predict_val.setText(str(self.pred))
-    
+
+                a = str(self.target_value)
+                self.df2 = pd.DataFrame(self.df_original[a].copy())
+                self.df_original[a],func_name =data.convert_category(self.df_original,a)
+                print(self.df_original[a])
+                self.dict_val = dict(zip(self.df_original[a],self.df2.iloc[:,0]))
+
+                print(self.dict_val)    # printing the dictionary
+                pred_str = str(self.pred).replace('[','').replace(']','')
+                self.Failure_name.setText(self.dict_val[float(pred_str)])

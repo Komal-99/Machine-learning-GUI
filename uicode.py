@@ -12,8 +12,7 @@ import sys
 script_dir = os.path.dirname( __file__ )
 mymodule_dir = os.path.join( script_dir,'codes' )
 sys.path.append( mymodule_dir )
-for p in sys.path:
-    print(p)
+
 import svm_model,table_display,data_visualise,logistic_reg,RandomForest,linear_reg
 import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -180,7 +179,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
     def pretrained(self):
         # try:
-            self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+            self.testing=pre_trained.UI(self.df,self.df_original,self.target_value,self.pickle_model,self.filePath_pre)
         # except:
         #     self.w =error_window()
         #     self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
@@ -407,6 +406,10 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         #         self.w =error_window()
         #         self.w.errortype.setText("Select the model")
         #         self.w.show()
+
+
+
+
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
