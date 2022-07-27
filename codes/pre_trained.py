@@ -81,14 +81,18 @@ class UI(QMainWindow):
 
     def test_model(self):
 
-        
-        self.pre=self.model.predict(self.df)
-        self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
-        self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
         try:
-            self.accuracy.setText(str(metrics.score(self.X[self.target_value],self.pre)))
+            self.pre=self.model.predict(self.df)
+            self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
+            self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
+            self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
+            x=self.X[self.target_value]
+            self.accuracy.setText(str(metrics.r2_score(x,self.pre)))
         except:
+            self.pre=self.model.predict(self.df)
+            self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
+            self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
+            self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
             self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
     def set_valpred(self):
         
