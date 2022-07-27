@@ -16,7 +16,23 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import common
 from PyQt5.QtCore import QCoreApplication
-import uicode
+
+class error_window(QMainWindow): #error window class
+    def __init__(self): #constructor
+        super(error_window, self).__init__()        
+        uic.loadUi("ui_files/error.ui", self)
+        self.ExitError = self.findChild(QPushButton, "ExitButtonError") #exit button
+        self.ExitError.clicked.connect(self.exit)
+        self.back = self.findChild(QPushButton,"Back")  
+        self.errortype = self.findChild(QLabel, 'Error_type')     
+        self.back.clicked.connect(self.Backbut) #back button
+        self.show() #show the window
+#  Home Screen class to start our project
+    def exit(self): #exit button
+        sys.exit()  # exit the application
+    def Backbut(self):  #back button
+        self.back.clicked.connect(UI().target)
+        self.close()    # close the window
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         
@@ -63,6 +79,7 @@ class UI(QMainWindow):
         self.list=self.findChild(QLineEdit,"list")
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
+       
         self.predict_btn.clicked.connect(self.set_predict)
         
         self.setvalue()
@@ -83,7 +100,7 @@ class UI(QMainWindow):
 
         except:
 
-            self.w =uicode.error_window()
+            self.w =error_window()
             self.w.errortype.setText("Size Not set")
             self.w.show()
 
@@ -101,7 +118,7 @@ class UI(QMainWindow):
 
         except:
 
-            self.w = uicode.error_window()
+            self.w = error_window()
             self.w.errortype.setText("Failed to save the file")
             self.w.show()
 
@@ -134,7 +151,7 @@ class UI(QMainWindow):
 
         except:
 
-            self.w =uicode.error_window()
+            self.w =error_window()
             self.w.errortype.setText("First Split your dataset!")
             self.w.show()
 
@@ -152,7 +169,7 @@ class UI(QMainWindow):
 
         except:
 
-            self.w =uicode.error_window()
+            self.w =error_window()
             self.w.errortype.setText("Train Your Model First!")
             self.w.show() 
 
@@ -174,6 +191,6 @@ class UI(QMainWindow):
 
         except:
 
-            self.w =uicode.error_window()
+            self.w =error_window()
             self.w.errortype.setText("Train Your Model First!")
             self.w.show()
