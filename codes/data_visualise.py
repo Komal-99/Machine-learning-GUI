@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler, PowerTransformer
 import add_steps as add_steps
 
-
 class data_:
 
 	#Reading the csv file

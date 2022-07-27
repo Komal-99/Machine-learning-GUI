@@ -7,12 +7,14 @@ from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
-# import os
+import os
 import sys
-# script_dir = os.path.dirname( __file__ )
-# mymodule_dir = os.path.join( script_dir,'codes' )
-# sys.path.append( mymodule_dir )
-
+script_dir = os.path.dirname( __file__ )
+mymodule_dir = os.path.join( script_dir,'codes' )
+sys.path.append( mymodule_dir )
+script_dir = os.path.dirname( __file__ )
+mymodule_dir = os.path.join( script_dir,'codes' )
+sys.path.append( mymodule_dir )
 import svm_model,table_display,data_visualise,logistic_reg,RandomForest,linear_reg
 import KNN,pre_trained,add_steps as add_steps, pred_mtnc
 
