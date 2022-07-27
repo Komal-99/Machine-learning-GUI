@@ -50,7 +50,7 @@ class UI(QMainWindow):
     def exit(self):
         sys.exit()
     def setvalue(self):
-        self.target.setText(self.target_value)
+        self.target.setText(str(self.target_value))
         self.columns.addItems(self.column_list)
         self.data_shape.setText(str(self.df.shape))
       
@@ -111,4 +111,4 @@ class UI(QMainWindow):
 
                 print(self.dict_val)    # printing the dictionary
                 pred_str = str(self.pred).replace('[','').replace(']','')
-                self.Failure_name.setText(self.dict_val[float(pred_str)])
+                self.Failure_name.setText(self.dict_val[str(pred_str)])
