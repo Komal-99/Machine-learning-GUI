@@ -7,9 +7,11 @@ from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
-
+import os
 import sys
-sys.path.append('C:/Users/Sandeep/OneDrive/Desktop/UTS Summer Intern/UTS-Project/codes')
+script_dir = os.path.dirname( __file__ )
+mymodule_dir = os.path.join( script_dir,'codes' )
+sys.path.append( mymodule_dir )
 
 import svm_model,table_display,data_visualise,logistic_reg,RandomForest,linear_reg
 import KNN,pre_trained,add_steps, pred_mtnc
@@ -176,12 +178,12 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
 
     def pretrained(self):
-        try:
+        # try:
             self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
-        except:
-            self.w =error_window()
-            self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
-            self.w.show()
+        # except:
+        #     self.w =error_window()
+        #     self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
+        #     self.w.show()
 
     def exit(self):
         sys.exit()
@@ -404,6 +406,10 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         #         self.w =error_window()
         #         self.w.errortype.setText("Select the model")
         #         self.w.show()
+
+
+
+
 
 app = QApplication(sys.argv)    #creating an application
 welcome = home_screen() #creating an object of the home screen
