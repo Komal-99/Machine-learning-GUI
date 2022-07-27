@@ -33,6 +33,7 @@ class error_window(QMainWindow): #error window class
     def Backbut(self):  #back button
         self.back.clicked.connect(UI().target)
         self.close()    # close the window
+        
 class UI(QMainWindow):
     def __init__(self,df_original,df,target,user_actions):
         
