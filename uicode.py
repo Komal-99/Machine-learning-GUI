@@ -179,7 +179,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
     def pretrained(self):
         # try:
-            self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+            self.testing=pre_trained.UI(self.df,self.df_original,self.target_value,self.pickle_model,self.filePath_pre)
         # except:
         #     self.w =error_window()
         #     self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
