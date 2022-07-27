@@ -12,8 +12,7 @@ import sys
 script_dir = os.path.dirname( __file__ )
 mymodule_dir = os.path.join( script_dir,'codes' )
 sys.path.append( mymodule_dir )
-for p in sys.path:
-    print(p)
+
 import svm_model,table_display,data_visualise,logistic_reg,RandomForest,linear_reg
 import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
