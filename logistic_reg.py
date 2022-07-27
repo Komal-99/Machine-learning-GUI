@@ -14,7 +14,7 @@ import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-import common
+import common as common
 from PyQt5.QtCore import QCoreApplication
 
 class error_window(QMainWindow): #error window class

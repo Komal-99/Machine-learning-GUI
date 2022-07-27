@@ -4,7 +4,7 @@ from turtle import goto
 from PyQt5.QtWidgets import *
 from os import system
 import re,pickle
-import data_visualise,common
+import data_visualise,common as common
 
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 

@@ -15,7 +15,7 @@ from sklearn.metrics import accuracy_score
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import accuracy_score
-import common
+import common as common
 class error_window(QMainWindow): #error window class
     def __init__(self): #constructor
         super(error_window, self).__init__()        

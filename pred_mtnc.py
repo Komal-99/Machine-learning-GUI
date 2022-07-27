@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import common
+import common as common
 import time
 import plotly.express as px
 import plotly.io as pio

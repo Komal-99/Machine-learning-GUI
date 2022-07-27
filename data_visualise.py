@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler, PowerTransformer
-import add_steps
+import add_steps as add_steps
 
 
 class data_:
