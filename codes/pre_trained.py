@@ -1,5 +1,6 @@
 import os
 import sys
+from turtle import goto
 from PyQt5.QtWidgets import *
 from os import system
 import re,pickle
@@ -86,10 +87,11 @@ class UI(QMainWindow):
         self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
         self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
-        try:
-            self.accuracy.setText(str(metrics.score(self.X[self.target_value],self.pre)))
-        except:
-            self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
+        
+        self.accuracy.setText(str(metrics.score(self.X[self.target_value],self.pre)))
+            
+        # except:
+            # self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
     def set_valpred(self):
         
             pred = str(self.list.text())
