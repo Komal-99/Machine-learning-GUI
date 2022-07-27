@@ -1,5 +1,6 @@
 import os
 import sys
+from turtle import goto
 from PyQt5.QtWidgets import *
 from os import system
 import re,pickle
@@ -81,6 +82,7 @@ class UI(QMainWindow):
 
     def test_model(self):
 
+<<<<<<< HEAD:pre_trained.py
         try:
             self.pre=self.model.predict(self.df)
             self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
@@ -94,6 +96,18 @@ class UI(QMainWindow):
             self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
             self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
             self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
+=======
+        
+        self.pre=self.model.predict(self.df)
+        self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
+        self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
+        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
+        
+        self.accuracy.setText(str(metrics.score(self.X[self.target_value],self.pre)))
+            
+        # except:
+            # self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
+>>>>>>> ba735af70aacfb12efc8e8f2b5a88cc4a5275d3f:codes/pre_trained.py
     def set_valpred(self):
         
             pred = str(self.list.text())
