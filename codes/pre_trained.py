@@ -49,7 +49,6 @@ class UI(QMainWindow):
         sys.exit()
     def setvalue(self):
         self.target.setText(self.target_value)
-        self.columns.clear()
         self.columns.addItems(self.column_list)
         self.data_shape.setText(str(self.df.shape))
       
