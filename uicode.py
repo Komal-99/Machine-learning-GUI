@@ -1,12 +1,16 @@
 #importing Libraries
 
 from PyQt5.QtWidgets import *
-import sys,pickle
+import pickle
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
+
+import sys
+sys.path.append('C:/Users/Sandeep/OneDrive/Desktop/UTS Summer Intern/UTS-Project/codes')
+
 import svm_model,table_display,data_visualise,logistic_reg,RandomForest,linear_reg
 import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
