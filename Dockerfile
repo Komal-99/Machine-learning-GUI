@@ -5,5 +5,5 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 EXPOSE 8080
 #Start Flask Server
-CMD ["cd c:/Users/Sandeep/OneDrive/Desktop/UTS Summer Intern/UTS-Project/codes/"]
+
 CMD ["python","uicode.py"]
