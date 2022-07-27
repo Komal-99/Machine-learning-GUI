@@ -1,4 +1,3 @@
-
 import os
 import sys
 from PyQt5.QtWidgets import *
@@ -38,7 +37,11 @@ class UI(QMainWindow):
         self.conf_mat.clicked.connect(self.conf_matrix)
         self.test.clicked.connect(self.test_model)
         self.exitbutton = self.findChild(QPushButton,"ExitButton")
-        
+        self.list=self.findChild(QLineEdit,"list")
+        self.predict_btn=self.findChild(QPushButton,"predict")
+        self.predict_val =self.findChild(QLabel,"predict_val")
+        self.predict_btn.clicked.connect(self.set_valpred)
+        self.target=self.findChild(QLabel,"target_2")
         self.exitbutton.clicked.connect(self.exit)
         self.setvalue()
         self.show()
@@ -83,4 +86,19 @@ class UI(QMainWindow):
         self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
         self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
+
+    def set_valpred(self):
+        
+            pred = str(self.list.text())
+            if len(pred) == 0:
+                self.error.setText("Enter Values to Predict!")
+            else:
+                self.a = self.list.text() 
+                self.ls = self.a.split(",")
+                self.target.setText(str(self.target_value))
+        
+                self.ls_updated = [float(x) for x in self.ls]
+                self.ls_array =  np.array(self.ls_updated)
+                self.pred  =self.model.predict([self.ls_array])
+                self.predict_val.setText(str(self.pred))
     

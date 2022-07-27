@@ -15,8 +15,22 @@ import common
 import time
 import plotly.express as px
 import plotly.io as pio
-# from uicode import *
-import uicode
+class error_window(QMainWindow): #error window class
+    def __init__(self): #constructor
+        super(error_window, self).__init__()        
+        uic.loadUi("ui_files/error.ui", self)
+        self.ExitError = self.findChild(QPushButton, "ExitButtonError") #exit button
+        self.ExitError.clicked.connect(self.exit)
+        self.back = self.findChild(QPushButton,"Back")  
+        self.errortype = self.findChild(QLabel, 'Error_type')     
+        self.back.clicked.connect(self.Backbut) #back button
+        self.show() #show the window
+#  Home Screen class to start our project
+    def exit(self): #exit button
+        sys.exit()  # exit the application
+    def Backbut(self):  #back button
+        self.back.clicked.connect(UI().target)
+        self.close()    # close the window
 
 class UI(QMainWindow): # inheriting QMainWindow class
     def __init__(self,df_original,df,target,user_actions):  # constructor
@@ -100,21 +114,21 @@ class UI(QMainWindow): # inheriting QMainWindow class
             print(self.y_test.shape)    
             self.split_done.setText(str("Split Done"))  # setting the text of the label
         except:
-                self.w =uicode.error_window()
+                self.w =error_window()
                 self.w.errortype.setText(" Size not set")
                 self.w.show()
 
     def download_model(self):   # function to download the model
-        # try:
+        try:
             name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
             pkl_filename = name[0]  # getting the file name
             with open(pkl_filename, 'wb') as file:  # opening the file
                 pickle.dump(self.classification.best_model(type='model'), file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)   # calling the function to save the file
-        # except:
-        #         self.w =uicode.error_window()
-        #         self.w.errortype.setText("Failed to save the file")
-        #         self.w.show()
+        except:
+                self.w =error_window()
+                self.w.errortype.setText("Failed to save the file")
+                self.w.show()
 
     def training(self): # function to train the model
         try:
@@ -151,7 +165,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             classifier.append('Decision Tree')
             imported_as.append('dt')
         except:
-                self.w =uicode.error_window()
+                self.w =error_window()
                 self.w.errortype.setText("First Split your dataset!")
                 self.w.show()
 
@@ -249,20 +263,12 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.df2 = pd.DataFrame(self.df_original[a].copy())
         self.df_original[a],func_name =data.convert_category(self.df_original,a)
         print(self.df_original[a])
-        # print(self.df2)
-        # print(self.df2[a])
         self.dict_val = dict(zip(self.df_original[a],self.df2.iloc[:,0]))
         
         print(self.dict_val)    # printing the dictionary
         pred_str = str(self.pred).replace('[','').replace(']','')
         self.Failure_name.setText(self.dict_val[float(pred_str)])
 
-        # self.dict_val  = UI.decode()    # decoding the values
-        # except:
-        #   self.w =error_window()
-        #   self.w.errortype.setText("Error! Try Again")
-        #   self.w.show()
-        
     
     
 
@@ -273,7 +279,7 @@ class UI(QMainWindow): # inheriting QMainWindow class
             fig= px.scatter_3d(data_frame= self.df, x= self.X_combo.currentText(), y=self.Y_combo.currentText(), z=self.Z_combo.currentText(), color=self.color_combo.currentText())
             return(pio.show(fig))   # returning the 3D graph
         except:
-                self.w =uicode.error_window()
+                self.w =error_window()
                 self.w.errortype.setText("Columns not selected")
                 self.w.show()
 
@@ -290,6 +296,6 @@ class UI(QMainWindow): # inheriting QMainWindow class
 
         except:
 
-            self.w =uicode.error_window()
+            self.w =error_window()
             self.w.errortype.setText("Train Your Model First!")
             self.w.show()

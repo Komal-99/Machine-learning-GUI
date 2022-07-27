@@ -1,12 +1,19 @@
 #importing Libraries
 
 from PyQt5.QtWidgets import *
-import sys,pickle
+import pickle
 from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 from sklearn.preprocessing import LabelEncoder
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QDialog,QLineEdit,QLabel
 from PyQt5 import QtWidgets
+import os
+import sys
+script_dir = os.path.dirname( __file__ )
+mymodule_dir = os.path.join( script_dir,'codes' )
+sys.path.append( mymodule_dir )
+for p in sys.path:
+    print(p)
 import svm_model,table_display,data_visualise,logistic_reg,RandomForest,linear_reg
 import KNN,pre_trained,add_steps, pred_mtnc
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -139,7 +146,6 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         self.upload.clicked.connect(self.uploadfile)
         self.trained.clicked.connect(self.pretrained)
         self.set=self.findChild(QLabel,"done")
-
 
         self.Browse.clicked.connect(self.getCSV)    #browse button function
         self.Drop_btn.clicked.connect(self.dropc)   #drop button function
@@ -390,17 +396,17 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
         
     def train_func(self):   #function to train the model
-        try:
+        # try:
             myDict={ "LinearRegression": linear_reg, "SVM":svm_model, "Logistic Regression":logistic_reg ,"Random Forest":RandomForest,
             "K-Nearest Neighbour":KNN ,"Predictive Maintenance":pred_mtnc}   #creating a dictionary with the model names and the functions
 
         
             if(self.target_value!=""):  #if the target value is not empty
                 self.win = myDict[self.model_select.currentText()].UI(self.df_original, self.df,self.target_value,steps)  #calling the function to train the model
-        except:
-                self.w =error_window()
-                self.w.errortype.setText("Select the model")
-                self.w.show()
+        # except:
+        #         self.w =error_window()
+        #         self.w.errortype.setText("Select the model")
+        #         self.w.show()
 
 
 
