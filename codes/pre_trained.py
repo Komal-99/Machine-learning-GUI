@@ -81,8 +81,6 @@ class UI(QMainWindow):
         plt.show()
 
     def test_model(self):
-
-<<<<<<< HEAD:pre_trained.py
         try:
             self.pre=self.model.predict(self.df)
             self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
@@ -96,18 +94,6 @@ class UI(QMainWindow):
             self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
             self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
             self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
-=======
-        
-        self.pre=self.model.predict(self.df)
-        self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
-        self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
-        self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
-        
-        self.accuracy.setText(str(metrics.score(self.X[self.target_value],self.pre)))
-            
-        # except:
-            # self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
->>>>>>> ba735af70aacfb12efc8e8f2b5a88cc4a5275d3f:codes/pre_trained.py
     def set_valpred(self):
         
             pred = str(self.list.text())
@@ -122,13 +108,3 @@ class UI(QMainWindow):
                 self.ls_array =  np.array(self.ls_updated)
                 self.pred  =self.model.predict([self.ls_array])
                 self.predict_val.setText(str(self.pred))
-
-                # a = str(self.target_value)
-                # self.df2 = pd.DataFrame(self.df_original[a].copy())
-                # self.df_original[a],func_name =data.convert_category(self.df_original,a)
-                # print(self.df_original[a])
-                # self.dict_val = dict(zip(self.df_original[a],self.df2.iloc[:,0]))
-
-                # print(self.dict_val)    # printing the dictionary
-                # pred_str = str(self.pred).replace('[','').replace(']','')
-                # self.Failure_name.setText(self.dict_val[float(pred_str)])
