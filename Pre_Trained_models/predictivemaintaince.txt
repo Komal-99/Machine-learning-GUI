@@ -1,1 +1,1 @@
-RandomForestClassifier()
+RandomForestClassifier(max_features='auto')
