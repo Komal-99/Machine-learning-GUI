@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import data_visualise   
 import pandas as pd
-import common
+import common as common
 from sklearn.preprocessing import OrdinalEncoder
 
 class error_window(QMainWindow): #error window class
