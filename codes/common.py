@@ -22,7 +22,7 @@ class common_steps:
 
         original=sys.stdout
         sys.stdout = open('report.txt', 'w')
-        print(classification_report(y_true,y_pred))
+        print(classification_report(y_true,y_pred,zero_division=1))
         sys.stdout=original
         text=open('report.txt').read()
         os.remove('report.txt')
