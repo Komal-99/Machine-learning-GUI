@@ -170,7 +170,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
         try:
             self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', '',"pkl(*.pkl)")    #opening the file dialog
             with open(self.filePath_pre, 'rb') as file:
-                self.pickle_model = pickle.load(file)   #loading the pickle file
+                self.pickle_model, self.accuracy = pickle.load(file)   #loading the pickle file
             self.set.setText("Model Loaded")
             print(self.filePath_pre)
         except:
@@ -180,7 +180,7 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
 
     def pretrained(self):
         # try:
-            self.testing=pre_trained.UI(self.df,self.df_original,self.target_value,self.pickle_model,self.filePath_pre)
+            self.testing=pre_trained.UI(self.df,self.df_original,self.target_value,self.pickle_model,self.accuracy, self.filePath_pre)
         # except:
         #     self.w =error_window()
         #     self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
@@ -222,12 +222,13 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             AllItems = [self.hist_column_add.itemText(i) for i in range(self.hist_column_add.count())]
             for i in AllItems:  #iterating through the columns to plot the histogram
                 data.plot_histogram(self.df,i)  #calling the function from data class to plot the histogram
-                self.graphWidget.setBackground('w') #setting the background color to white
-                self.graphWidget.plot(self.df,i)    #plotting the histogram
+                # self.graphWidget.setBackground('w') #setting the background color to white
+                # self.graphWidget.plot(self.df,i)    #plotting the histogram
         except:
-                self.w =error_window()
-                self.w.errortype.setText("Dataset/Column not selected")
-                self.w.show()
+            pass
+                # self.w =error_window()
+                # self.w.errortype.setText("Dataset/Column not selected")
+                # self.w.show()
 
     def plt3d(self): #3d plot function   
         try:  

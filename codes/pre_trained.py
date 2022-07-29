@@ -37,7 +37,7 @@ class error_window(QMainWindow): #error window class
 
 
 class UI(QMainWindow):
-    def __init__(self,df,df_original,target_value,pickle_model,path):
+    def __init__(self,df,df_original,target_value,pickle_model,accuracy_score,path):
         super(UI, self).__init__()
         uic.loadUi("ui_files/pre_trained.ui", self)
         self.path=path
@@ -46,6 +46,7 @@ class UI(QMainWindow):
         self.df=df
         self.target_value = target_value
         print(self.target_value)
+        self.accuracy_score= accuracy_score
 
         data=data_visualise.data_()
         steps=common.common_steps(self.df,self.target_value)
@@ -117,7 +118,8 @@ class UI(QMainWindow):
                 self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
                 self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
                 self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
-                self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
+                # self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
+                self.accuracy.setText(str(self.accuracy_score))
         except:
             self.w =error_window()
             self.error.setText("Error while printing data values")

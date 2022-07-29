@@ -123,7 +123,8 @@ class UI(QMainWindow): # inheriting QMainWindow class
             name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
             pkl_filename = name[0]  # getting the file name
             with open(pkl_filename, 'wb') as file:  # opening the file
-                pickle.dump(self.classification.best_model(type='model'), file)  # this will dump the object to a file
+                model= (self.classification.best_model(type='model'), self.classification.best_model_accuracy())
+                pickle.dump(model, file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)   # calling the function to save the file
         except:
                 self.w =error_window()
