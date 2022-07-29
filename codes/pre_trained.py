@@ -63,7 +63,6 @@ class UI(QMainWindow):
         self.predict_btn=self.findChild(QPushButton,"predict")
         self.predict_val =self.findChild(QLabel,"predict_val")
         self.predict_btn.clicked.connect(self.set_valpred)
-        self.target=self.findChild(QLabel,"target_2")
         self.exitbutton.clicked.connect(self.exit)
         self.setvalue()
         self.show()

@@ -1,0 +1,7 @@
+
+File G:/My Drive/PCA TEST/predictive_maintenance.csv read
+Column UDI dropped
+Column Product_ID dropped
+Column Target dropped
+Column Failure_Type converted using LabelEncoder
+Column Type converted using LabelEncoder

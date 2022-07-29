@@ -14,7 +14,7 @@ from mlxtend.plotting import plot_decision_regions
 import pandas as pd
 import seaborn as sns
 # from uicode import *
-from sklearn.metrics import roc_curve
+from sklearn.metrics import accuracy_score, roc_curve
 from sklearn.metrics import auc
 
 import common
@@ -55,6 +55,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 		self.gamma=self.findChild(QComboBox,"gamma")
 		self.split_done= self.findChild(QLabel,"split")
 		self.target=self.findChild(QLabel,"target")
+		self.accuracy = self.findChild(QLabel,"accuracy")
 		
 		self.coef=self.findChild(QLineEdit,"coef")
 		self.max_iter=self.findChild(QLineEdit,"max_iter")
@@ -98,7 +99,9 @@ class UI(QMainWindow): # inherit from QMainWindow
 			name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','Pre_Trained_models',"pickle(*.pkl)")
 			pkl_filename = name[0]
 			with open(pkl_filename, 'wb') as file:	# open the file in write model
-				pickle.dump(self.svc_model, file)  	# dump the model in the file
+				model= (self.svc_model, accuracy_score(self.pre,self.y_test))
+				pickle.dump(model, file) 
+
 
 			self.user_act.save_file(pkl_filename)	# call the function to save the file
 		except:
@@ -155,6 +158,7 @@ class UI(QMainWindow): # inherit from QMainWindow
 			self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))
 			self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))	# set the text in the label
 			self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))	
+			self.accuracy.setText(str(accuracy_score(self.pre,self.y_test)))	# set the text in the label
 			text=steps.classification_(self.y_test,self.pre)	# get the classification report
 			self.report.setPlainText(text)
 		except:

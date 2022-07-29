@@ -119,10 +119,11 @@ class UI(QDialog): # QDialog is the base class  of all user interface objects in
 
         try:
 
-            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")  # Get the file name
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/Desktop',"pickle(*.pkl)")  # Get the file name
             pkl_filename = name[0]  # Get the file name
             with open(pkl_filename, 'wb') as file:  # Open the file
-                pickle.dump(self.knn, file)     # Write the model to the file
+                model= (self.knn, accuracy_score(self.pre,self.y_test))
+                pickle.dump(model, file) 
 
             self.user_act.save_file(pkl_filename)   # Save the file  
 

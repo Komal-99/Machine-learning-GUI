@@ -94,7 +94,7 @@ class UI(QMainWindow):  # inherit from QMainWindow
         self.ls_updated = [float(x) for x in self.ls]   # converting the list to float
         self.ls_array =  np.array(self.ls_updated)  # converting the list to array
 
-        self.pred  =self.lr.predict([self.ls_array])    # pred is the predicted value
+        self.pred  =self.rf.predict([self.ls_array])    # pred is the predicted value
         self.predict_val.setText(str(self.pred))    # set the predicted value
 
 
@@ -106,10 +106,12 @@ class UI(QMainWindow):  # inherit from QMainWindow
 
         try:
 
-            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','/home/akshay/Desktop',"pickle(*.pkl)")
+            name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','',"pickle(*.pkl)")
             pkl_filename = name[0]      # pkl_filename is the name of the file
             with open(pkl_filename, 'wb') as file:  # open the file
-                pickle.dump(self.lr, file)      # dump the model in the file
+                model= (self.rf, accuracy_score(self.pre,self.y_test))
+                pickle.dump(model, file) 
+
 
             self.user_act.save_file(pkl_filename)  
 
@@ -138,11 +140,11 @@ class UI(QMainWindow):  # inherit from QMainWindow
 
         try:
 
-            self.lr = RFC(n_estimators=int(self.estimators.text()),criterion=self.criterion.currentText(),max_depth=None,min_samples_split=int(self.min_sample_split.text()),bootstrap=self.bootstrap.currentText()=='True',random_state=1) # create the model of Randomm forest
+            self.rf = RFC(n_estimators=int(self.estimators.text()),criterion=self.criterion.currentText(),max_depth=None,min_samples_split=int(self.min_sample_split.text()),bootstrap=self.bootstrap.currentText()=='True',random_state=1) # create the model of Randomm forest
 
-            self.lr.fit(self.x_train,self.y_train)  # fit the model
+            self.rf.fit(self.x_train,self.y_train)  # fit the model
             
-            self.pre=self.lr.predict(self.x_test)   # predict the value
+            self.pre=self.rf.predict(self.x_test)   # predict the value
             self.mae.setText(str(metrics.mean_absolute_error(self.y_test,self.pre)))    # set the mae
             self.mse.setText(str(metrics.mean_squared_error(self.y_test,self.pre)))   # set the mse
             self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.y_test,self.pre))))   # set the rmse

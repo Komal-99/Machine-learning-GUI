@@ -116,7 +116,8 @@ class UI(QMainWindow):
             name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File','',"pickle(*.pkl)")
             pkl_filename = name[0]
             with open(pkl_filename, 'wb') as file:
-                pickle.dump(self.reg, file)  
+                model= (self.reg, self.reg.score(self.x_test,self.y_test))
+                pickle.dump(model, file)  # this will dump the object to a file
             self.user_act.save_file(pkl_filename)  
         except:
             self.w = error_window()

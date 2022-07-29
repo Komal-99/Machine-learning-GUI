@@ -113,7 +113,8 @@ class UI(QMainWindow):
         
             pkl_filename = name[0]
             with open(pkl_filename, 'wb') as file:
-                pickle.dump(self.lr, file)  
+                model= (self.lr, accuracy_score(self.pre,self.y_test))
+                pickle.dump(model, file)  # this will dump the object to a file
             
             self.user_act.save_file(pkl_filename)  
 
@@ -148,7 +149,7 @@ class UI(QMainWindow):
             self.accuracy_score.setText(str(accuracy_score(self.pre,self.y_test)))
             self.text=steps.classification_(self.y_test,self.pre)
             self.report.setPlainText(self.text)
-            self.accuracy_score.setText(str(self.lr.score(self.x_test,self.y_test)))
+            # self.accuracy_score.setText(str(self.lr.score(self.x_test,self.y_test)))
 
         except:
 
