@@ -524,7 +524,7 @@ color: rgb(255, 255, 255);
      <rect>
       <x>670</x>
       <y>330</y>
-      <width>51</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -550,27 +550,6 @@ color: rgb(255, 255, 255);
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Failure_Name">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>330</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>MS Shell Dlg 2</family>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>

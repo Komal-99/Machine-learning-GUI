@@ -47,11 +47,8 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.target = self.findChild(QLabel,"target")
         self.Failure_name = self.findChild(QLabel,"Failure_Name")
         self.columns= self.findChild(QListWidget,"columns")
-        self.solver=self.findChild(QComboBox,"solver")        
    
-        self.max_iter=self.findChild(QLineEdit,"max_iter")
         self.random_state=self.findChild(QLineEdit,"randomstate")
-        self.fit_inter=self.findChild(QComboBox,"fit_inter")  
         self.multi_class=self.findChild(QComboBox,"multi_class")
         self.train_btn=self.findChild(QPushButton,"train")
         self.exitbutton = self.findChild(QPushButton,"pushButton")
@@ -248,27 +245,31 @@ class UI(QMainWindow): # inheriting QMainWindow class
         self.report.setPlainText(text)  # displaying the classification report
 
     def set_predict(self):  # function to predict the test data
-        # try:
+        try:
 
-        self.a = self.list.text()   # storing the value of the list
-        self.ls = self.a.split(",") # splitting the value of the list
-        self.target.setText(str(self.target_value))
-        self.ls_updated = [float(x) for x in self.ls]   # converting the values of the list to float
-        self.ls_array =  np.array(self.ls_updated)  # converting the values of the list to array
-        self.pred = self.classification.best_predict([self.ls_array])   # predicting the test data
-        # print(self.df)
-        
-        self.predict_val.setText(str(self.pred))    # displaying the prediction
-        a = str(self.target_value)
-        # print(a)
-        self.df2 = pd.DataFrame(self.df_original[a].copy())
-        self.df_original[a],func_name =data.convert_category(self.df_original,a)
-        print(self.df_original[a])
-        self.dict_val = dict(zip(self.df_original[a],self.df2.iloc[:,0]))
-        
-        print(self.dict_val)    # printing the dictionary
-        pred_str = str(self.pred).replace('[','').replace(']','')
-        self.Failure_name.setText(self.dict_val[float(pred_str)])
+            self.a = self.list.text()   # storing the value of the list
+            self.ls = self.a.split(",") # splitting the value of the list
+            self.target.setText(str(self.target_value))
+            self.ls_updated = [float(x) for x in self.ls]   # converting the values of the list to float
+            self.ls_array =  np.array(self.ls_updated)  # converting the values of the list to array
+            self.pred = self.classification.best_predict([self.ls_array])   # predicting the test data
+            # print(self.df)
+
+            self.predict_val.setText(str(self.pred))    # displaying the prediction
+            a = str(self.target_value)
+            # print(a)
+            self.df2 = pd.DataFrame(self.df_original[a].copy())
+            self.df_original[a],func_name =data.convert_category(self.df_original,a)
+            print(self.df_original[a])
+            self.dict_val = dict(zip(self.df_original[a],self.df2.iloc[:,0]))
+
+            print(self.dict_val)    # printing the dictionary
+            pred_str = str(self.pred).replace('[','').replace(']','')
+            self.Failure_name.setText(self.dict_val[float(pred_str)])
+        except:
+            self.w =error_window()
+            self.w.errortype.setText("Enter values in the list")
+            self.w.show()
 
     
     

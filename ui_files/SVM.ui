@@ -853,7 +853,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="text">
-     <string>Decission Regions</string>
+     <string>Decision Regions</string>
     </property>
    </widget>
    <widget class="QLabel" name="split">

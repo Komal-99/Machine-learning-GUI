@@ -33,25 +33,6 @@
      <string>3-D Plot</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_22">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>360</y>
-      <width>61</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Solver:</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="test_size_btn">
     <property name="geometry">
      <rect>
@@ -94,25 +75,6 @@ color: rgb(255, 255, 255);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Hyper Parameters&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_21">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>330</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Fit_intercept:</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
@@ -135,8 +97,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label_19">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>480</y>
+      <x>660</x>
+      <y>470</y>
       <width>121</width>
       <height>21</height>
      </rect>
@@ -151,19 +113,6 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Predicted </string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="max_iter">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>390</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>100</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_17">
@@ -211,9 +160,9 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="predict_val">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>510</y>
-      <width>71</width>
+      <x>660</x>
+      <y>500</y>
+      <width>61</width>
       <height>51</height>
      </rect>
     </property>
@@ -263,50 +212,6 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_23">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>420</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>multi_class:</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="multi_class">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>420</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>auto</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>ovr</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>multinomial</string>
-     </property>
-    </item>
-   </widget>
    <widget class="QPushButton" name="dwnld">
     <property name="geometry">
      <rect>
@@ -336,26 +241,6 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
    </widget>
-   <widget class="QComboBox" name="fit_inter">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>330</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>True</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>False</string>
-     </property>
-    </item>
-   </widget>
    <widget class="QPlainTextEdit" name="report">
     <property name="geometry">
      <rect>
@@ -369,8 +254,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="train">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>460</y>
+      <x>520</x>
+      <y>360</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -467,25 +352,6 @@ color: rgb(255, 255, 255);
     </property>
     <property name="text">
      <string>Y:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>390</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Ubuntu Condensed</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Max_Iter:</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="randomstate">
@@ -636,41 +502,6 @@ color: rgb(255, 255, 255);
      <string/>
     </property>
    </widget>
-   <widget class="QComboBox" name="solver">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>360</y>
-      <width>111</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>lbfgs</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>liblinear</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>sag</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>saga</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>netwon-cg</string>
-     </property>
-    </item>
-   </widget>
    <widget class="QLabel" name="label_16">
     <property name="geometry">
      <rect>
@@ -693,8 +524,8 @@ color: rgb(255, 255, 255);
    <widget class="QPushButton" name="conf_mat">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>470</y>
+      <x>480</x>
+      <y>420</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -813,7 +644,7 @@ color: rgb(255, 255, 255);
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(255, 255, 255)</string>
+     <string notr="true">background-color:rgb(255, 255, 255); font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="text">
      <string/>
@@ -824,7 +655,7 @@ color: rgb(255, 255, 255);
      <rect>
       <x>250</x>
       <y>520</y>
-      <width>471</width>
+      <width>401</width>
       <height>31</height>
      </rect>
     </property>
@@ -901,10 +732,10 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="Failure_Name">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>530</y>
-      <width>151</width>
-      <height>31</height>
+      <x>730</x>
+      <y>500</y>
+      <width>281</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
