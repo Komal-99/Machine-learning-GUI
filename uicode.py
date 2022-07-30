@@ -179,12 +179,12 @@ class UI(QMainWindow):  #UI class for main window which do data processing and c
             self.w.show()
 
     def pretrained(self):
-        # try:
+        try:
             self.testing=pre_trained.UI(self.df,self.df_original,self.target_value,self.pickle_model,self.accuracy, self.filePath_pre)
-        # except:
-        #     self.w =error_window()
-        #     self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
-        #     self.w.show()
+        except:
+            self.w =error_window()
+            self.w.errortype.setText("select a dataset on which \n you have to use pre trained model")
+            self.w.show()
 
     def exit(self):
         sys.exit()
