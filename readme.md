@@ -19,7 +19,7 @@ The reader is assumed to have a technical background in software design and deve
 Python, pyqt5, Machine Learning, Predictive Maintenance
 Setup and Instructions
 1.	Install python 3.7 and above version as per your system  configuration 32/64x bit
-2.	Git clone the repository https://github.com/Komal-99/UTS-Project or unzip the file
+2.	Git clone the repository https://github.com/Komal-99/Machine-learning-GUI or unzip the file
 3.	Open the project directory in your vs code or any python code compiler
 4.	Run the command “pip install -r requirements.txt”
 5.	After successful installation of all the packages.
